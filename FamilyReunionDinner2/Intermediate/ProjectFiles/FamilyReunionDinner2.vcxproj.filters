@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\FamilyReunionDinner2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{16EA1D2F-2C26-4AC3-AEA7-960E643CFC27}</UniqueIdentifier>
+      <UniqueIdentifier>{CEBE4323-5975-4CA2-A0C0-EDF57D509C3A}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\FamilyReunionDinner2.Target.cs">
       <Filter>Source</Filter>
@@ -11,8 +11,11 @@
     <None Include="..\..\Source\FamilyReunionDinner2Editor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\Source\FamilyReunionDinner2Server.Target.cs">
+      <Filter>Source</Filter>
+    </None>
     <Filter Include="Config">
-      <UniqueIdentifier>{EFE87980-309F-44C9-9019-42F661F00BCA}</UniqueIdentifier>
+      <UniqueIdentifier>{7C7A657E-D168-479A-B5B8-1D42FC456F56}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -30,7 +33,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\FamilyReunionDinner2">
-      <UniqueIdentifier>{725816AE-B93E-4195-8DE5-90D53B980455}</UniqueIdentifier>
+      <UniqueIdentifier>{D83DD8DD-B345-40C1-9AFE-E4F9159CA7AE}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.Build.cs">
       <Filter>Source\FamilyReunionDinner2</Filter>
@@ -63,12 +66,6 @@
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Projectile.h">
-      <Filter>Source\FamilyReunionDinner2</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\FamilyReunionDinner2\MyActorTest.cpp">
-      <Filter>Source\FamilyReunionDinner2</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\MyActorTest.h">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClInclude>
   </ItemGroup>
