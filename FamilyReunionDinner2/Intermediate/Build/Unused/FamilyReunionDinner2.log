@@ -1,0 +1,19 @@
+﻿  Using 'git status' to determine working set for adaptive non-unity build (D:\I\Sousaku\FamilyReunionDinner).
+  Creating makefile for FamilyReunionDinner2Editor (no existing makefile)
+  
+  Unhandled Exception: System.ArgumentException: Path fragment '"FamilyReunionDinner/Content/Assets/NewFolder/\347\237\263\345\244\264.uasset"' contains invalid directory separators.
+     at Tools.DotNETCommon.FileSystemReference.CombineStrings(DirectoryReference BaseDirectory, String[] Fragments) in D:\Build\++UE4\Sync\Engine\Saved\CsTools\Engine\Source\Programs\DotNETCommon\DotNETUtilities\FileSystemReference.cs:line 90
+     at UnrealBuildTool.GitSourceFileWorkingSet.AddPath(String Path) in D:\Build\++UE4\Sync\Engine\Source\Programs\UnrealBuildTool\System\SourceFileWorkingSet.cs:line 275
+     at System.Diagnostics.Process.OutputReadNotifyUser(String data)
+     at System.Diagnostics.AsyncStreamReader.FlushMessageQueue()
+     at System.Diagnostics.AsyncStreamReader.GetLinesFromStringBuilder()
+     at System.Diagnostics.AsyncStreamReader.ReadBuffer(IAsyncResult ar)
+     at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+     at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+     at System.IO.Stream.ReadWriteTask.System.Threading.Tasks.ITaskCompletionAction.Invoke(Task completingTask)
+     at System.Threading.Tasks.Task.FinishContinuations()
+     at System.Threading.Tasks.Task.Finish(Boolean bUserDelegateExecuted)
+     at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+     at System.Threading.Tasks.Task.ExecuteEntry(Boolean bPreventDoubleExecution)
+     at System.Threading.ThreadPoolWorkQueue.Dispatch()
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.MakeFile.Targets(45,5): error MSB3073: The command ""C:\Program Files\Epic Games\UE_4.27\Engine\Build\BatchFiles\Build.bat" FamilyReunionDinner2Editor Win64 DebugGame -Project="D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild" exited with code -532462766.

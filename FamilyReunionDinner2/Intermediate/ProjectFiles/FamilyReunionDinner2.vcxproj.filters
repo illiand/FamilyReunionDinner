@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\FamilyReunionDinner2.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{16EA1D2F-2C26-4AC3-AEA7-960E643CFC27}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\FamilyReunionDinner2.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\FamilyReunionDinner2Editor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{EFE87980-309F-44C9-9019-42F661F00BCA}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\FamilyReunionDinner2">
+      <UniqueIdentifier>{725816AE-B93E-4195-8DE5-90D53B980455}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.Build.cs">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Character.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Character.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2GameMode.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2GameMode.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2HUD.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2HUD.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Projectile.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Projectile.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\MyActorTest.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\MyActorTest.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

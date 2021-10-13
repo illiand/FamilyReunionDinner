@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "FamilyReunionDinner2",
+			"Path": "D:\\I\\Sousaku\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "FamilyReunionDinner2Editor",
+			"Path": "D:\\I\\Sousaku\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2Editor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
