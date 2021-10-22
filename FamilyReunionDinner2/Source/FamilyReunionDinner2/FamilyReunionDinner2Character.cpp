@@ -136,6 +136,71 @@ void AFamilyReunionDinner2Character::SetupPlayerInputComponent(class UInputCompo
 	PlayerInputComponent->BindAxis("TurnRate", this, &AFamilyReunionDinner2Character::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AFamilyReunionDinner2Character::LookUpAtRate);
+
+	PlayerInputComponent->BindAction("TestAction", IE_Released, this, &AFamilyReunionDinner2Character::useSpecialAction);
+}
+
+void AFamilyReunionDinner2Character::useSpecialAction() 
+{
+	GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, TEXT("Test Action"));
+	moveActor();
+}
+
+void AFamilyReunionDinner2Character::moveActor_Implementation()
+{
+	moveActorRA();
+}
+
+void AFamilyReunionDinner2Character::moveActorAnother_Implementation()
+{
+	TArray<AActor*> allActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AActor::StaticClass(), allActors);
+	//UGameplayStatics::GetAllActorsWithTag(GetWorld(), TEXT("Rock"), AllActors);
+
+	AActor* testObject = NULL;
+
+	for (size_t i = 0; i < allActors.Num(); i++)
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("rock is %d"), allActors[i]->ActorHasTag("Rock"));
+
+		if (allActors[i]->GetName() == "Rock")
+		{
+			testObject = allActors[i];
+		}
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("something runs"));
+
+	testObject->SetReplicates(true);
+
+	GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, FString::Printf(TEXT("rock is %s"), *testObject->Tags[0].ToString()));
+	testObject->SetActorLocation(FVector(0, 0, testObject->GetActorLocation().Z + 10));
+}
+
+void AFamilyReunionDinner2Character::moveActorRA_Implementation()
+{
+	TArray<AActor*> allActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AActor::StaticClass(), allActors);
+	//UGameplayStatics::GetAllActorsWithTag(GetWorld(), TEXT("Rock"), AllActors);
+
+	AActor* testObject = NULL;
+
+	for (size_t i = 0; i < allActors.Num(); i++)
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("rock is %d"), allActors[i]->ActorHasTag("Rock"));
+
+		if (allActors[i]->GetName() == "Rock")
+		{
+			testObject = allActors[i];
+		}
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("something runs"));
+
+	testObject->SetReplicates(true);
+
+	GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, FString::Printf(TEXT("rock is %s"), *testObject->Tags[0].ToString()));
+	testObject->SetActorLocation(FVector(0, 0, testObject->GetActorLocation().Z + 10));
 }
 
 void AFamilyReunionDinner2Character::OnFire()

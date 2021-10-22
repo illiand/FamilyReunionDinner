@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\FamilyReunionDinner2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{B74897D6-0ADB-49B6-9551-9CB12DD7ED47}</UniqueIdentifier>
+      <UniqueIdentifier>{56B0897D-F54C-4C80-8003-A8F66632CF00}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\FamilyReunionDinner2.Target.cs">
       <Filter>Source</Filter>
@@ -16,7 +16,7 @@
     </None>
     <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{7C159015-3DD0-496C-B81A-FC7FE99FBDD2}</UniqueIdentifier>
+      <UniqueIdentifier>{158222DC-A3C0-4FB9-8AE2-7ACD32F9ED6B}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -34,7 +34,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\FamilyReunionDinner2">
-      <UniqueIdentifier>{023CD98F-7A47-41D3-83EB-9748F39E23B2}</UniqueIdentifier>
+      <UniqueIdentifier>{B5AF6A0F-72D7-422F-BF5E-C6EDA0917063}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.Build.cs">
       <Filter>Source\FamilyReunionDinner2</Filter>
