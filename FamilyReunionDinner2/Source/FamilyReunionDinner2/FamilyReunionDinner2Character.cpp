@@ -143,6 +143,10 @@ void AFamilyReunionDinner2Character::SetupPlayerInputComponent(class UInputCompo
 void AFamilyReunionDinner2Character::useSpecialAction() 
 {
 	GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, TEXT("Test Action"));
+	TArray<TSharedPtr<FJsonObject>> test = UAPIClass::readFile(TEXT("RecipeCardData.txt"));
+
+	UE_LOG(LogTemp, Warning, TEXT("name is %s"), *test[3]->GetStringField("Name"));
+	
 	moveActor();
 }
 

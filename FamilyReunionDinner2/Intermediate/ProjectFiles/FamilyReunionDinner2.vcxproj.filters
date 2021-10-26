@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\FamilyReunionDinner2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{56B0897D-F54C-4C80-8003-A8F66632CF00}</UniqueIdentifier>
+      <UniqueIdentifier>{05C3E3C3-2FAB-4E16-BCAC-A4E832090408}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\FamilyReunionDinner2.Target.cs">
       <Filter>Source</Filter>
@@ -16,7 +16,7 @@
     </None>
     <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{158222DC-A3C0-4FB9-8AE2-7ACD32F9ED6B}</UniqueIdentifier>
+      <UniqueIdentifier>{F6B7CF52-17A3-49F5-B068-D6434E930557}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -33,9 +33,18 @@
     <None Include="..\..\Config\DefaultInput.ini">
       <Filter>Config</Filter>
     </None>
+    <None Include="..\..\Config\RecipeCardData.txt">
+      <Filter>Config</Filter>
+    </None>
     <Filter Include="Source\FamilyReunionDinner2">
-      <UniqueIdentifier>{B5AF6A0F-72D7-422F-BF5E-C6EDA0917063}</UniqueIdentifier>
+      <UniqueIdentifier>{BBD11E48-A005-4B85-A2E3-E67BFE912F3B}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\APIClass.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\APIClass.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
     <None Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.Build.cs">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </None>
@@ -67,6 +76,12 @@
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Projectile.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\RecipeCard.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\RecipeCard.h">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClInclude>
   </ItemGroup>

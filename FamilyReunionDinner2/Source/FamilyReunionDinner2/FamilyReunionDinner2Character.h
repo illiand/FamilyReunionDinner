@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "APIClass.h"
 #include "FamilyReunionDinner2Character.generated.h"
 
 class UInputComponent;

@@ -3,5 +3,5 @@
   Using Visual Studio 2017 14.16.27045 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023) and Windows 10.0.17763.0 SDK (C:\Program Files (x86)\Windows Kits\10).
   Building 1 action with 12 processes...
     [1/1] FamilyReunionDinner2Editor.target
-  Total time in Parallel executor: 0.62 seconds
-  Total execution time: 2.68 seconds
+  Total time in Parallel executor: 1.72 seconds
+  Total execution time: 7.59 seconds
