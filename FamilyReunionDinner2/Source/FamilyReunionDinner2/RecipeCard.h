@@ -4,6 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "APIClass.h"
+#include "FamilyReunionDinner2Character.h"
+#include "Components/TextRenderComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "RecipeCard.generated.h"
 
 UCLASS()
@@ -23,13 +27,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere)
-	FString name;
-	FString type;
-	int flavorMin;
-	int flavorMax;
-	int heatMin;
-	int heatMax;
-	int utensilSize;
-	int point;
+	UFUNCTION(Reliable, Server)
+	void created();
+	void created_Implementation();
+
+	UFUNCTION(Reliable, NetMulticast)
+	void assignInfo();
+	void assignInfo_Implementation();
 };

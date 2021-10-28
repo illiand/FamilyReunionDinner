@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "APIClass.h"
+#include "RecipeCard.h"
 #include "FamilyReunionDinner2Character.generated.h"
 
 class UInputComponent;
@@ -72,6 +73,9 @@ public:
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 		TSubclassOf<class AFamilyReunionDinner2Projectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = Card)
+		TSubclassOf<class ARecipeCard> recipeCard;
 
 	/** Sound to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
@@ -158,4 +162,15 @@ public:
 	UFUNCTION(Reliable, NetMulticast)
 	void moveActorRA();
 	void moveActorRA_Implementation();
+
+	UFUNCTION(Reliable, Server)
+	void startGame();
+	void startGame_Implementation();
+
+	UFUNCTION(Reliable, NetMulticast)
+	void changeRecipeCardProperties(ARecipeCard* card, const FString& text);
+	void changeRecipeCardProperties_Implementation(ARecipeCard* card,const FString& text);
+
+	int count = 0;
+	TArray<TSharedPtr<FJsonObject>> fileData;
 };

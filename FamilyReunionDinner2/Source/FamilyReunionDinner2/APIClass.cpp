@@ -48,9 +48,10 @@ TArray<TSharedPtr<FJsonObject>> UAPIClass::FStringToJson(FString data)
 		for (int j = 0; j < types.Num(); j++)
 		{
 			curLineString[j] = curLineString[j].Replace(TEXT("_"), TEXT(" "));
+
 			curData->SetStringField(types[j], curLineString[j]);
 		}
-
+		
 		jsonData.Add(curData);
 	}
 

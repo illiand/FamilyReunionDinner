@@ -142,12 +142,34 @@ void AFamilyReunionDinner2Character::SetupPlayerInputComponent(class UInputCompo
 
 void AFamilyReunionDinner2Character::useSpecialAction() 
 {
-	GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, TEXT("Test Action"));
-	TArray<TSharedPtr<FJsonObject>> test = UAPIClass::readFile(TEXT("RecipeCardData.txt"));
+	//GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, TEXT("Test Action"));
+	//UE_LOG(LogTemp, Warning, TEXT("name is %s"), *test[3]->GetStringField("Name"));
+	//moveActor();
 
-	UE_LOG(LogTemp, Warning, TEXT("name is %s"), *test[3]->GetStringField("Name"));
+	startGame();
+}
+
+void AFamilyReunionDinner2Character::startGame_Implementation() 
+{
+	for (int i = 0; i < 2; i += 1) 
+	{
+		for (int j = 0; j < 4; j += 1)
+		{
+			int index = i * 4 + j;
+			ARecipeCard* card = GetWorld()->SpawnActor<ARecipeCard>(recipeCard, FVector(300 + j * 100, -146 + i * 200, 234), FRotator::ZeroRotator, FActorSpawnParameters());
+
+		}
+	}
+	//card->SetReplicates(true);
+	//UAPIClass::recipeCardID = 0;
+	//UAPIClass::fileData = UAPIClass::readFile(TEXT("RecipeCardData.txt"));
 	
-	moveActor();
+	///UE_LOG(LogTemp, Warning, TEXT("found %d"), UAPIClass::fileData.Num());
+}
+
+void AFamilyReunionDinner2Character::changeRecipeCardProperties_Implementation(ARecipeCard* card, const FString& text)
+{
+	
 }
 
 void AFamilyReunionDinner2Character::moveActor_Implementation()
@@ -173,12 +195,12 @@ void AFamilyReunionDinner2Character::moveActorAnother_Implementation()
 		}
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("something runs"));
-
 	testObject->SetReplicates(true);
 
 	GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, FString::Printf(TEXT("rock is %s"), *testObject->Tags[0].ToString()));
 	testObject->SetActorLocation(FVector(0, 0, testObject->GetActorLocation().Z + 10));
+
+	UE_LOG(LogTemp, Warning, TEXT("%d %d"), testObject->GetActorLocation().X, testObject->GetActorLocation().Z);
 }
 
 void AFamilyReunionDinner2Character::moveActorRA_Implementation()

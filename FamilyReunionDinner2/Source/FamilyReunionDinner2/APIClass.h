@@ -16,7 +16,6 @@ class FAMILYREUNIONDINNER2_API UAPIClass : public UBlueprintFunctionLibrary
 
 public:
 	//read file to get a json array
-	//UFUNCTION(BlueprintCallable, Category = "API")
 	static TArray<TSharedPtr<FJsonObject>> readFile(FString path);
 	static TArray<TSharedPtr<FJsonObject>> FStringToJson(FString data);
 	
