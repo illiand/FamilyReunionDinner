@@ -16,7 +16,6 @@ class FAMILYREUNIONDINNER2_API UAPIClass : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 
 public:
-	static TArray<FRecipeCardStruct> makeRecipeCards(TArray<TSharedPtr<FJsonObject>> data);
-	static TArray<TSharedPtr<FJsonObject>> readFile(FString path);
+	static TArray<FRecipeCardStruct> makeRecipeCards();
 	static TArray<TSharedPtr<FJsonObject>> FStringToJson(FString data);
 };

@@ -121,21 +121,7 @@ void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor)
 
 void AFamilyReunionDinner2Character::startGame_Implementation() 
 {
-	TArray<TSharedPtr<FJsonObject>> data = UAPIClass::readFile(TEXT("RecipeCardData.txt"));
-
-	if (data.Num() == 0) 
-	{
-		FString dir = FPaths::ProjectContentDir() + "DataFile/RecipeCardData.txt";
-		data = UAPIClass::readFile(dir);
-
-		UE_LOG(LogTemp, Warning, TEXT("Reading file end with %d element for dir %s"), data.Num(), *dir);
-	}
-	else 
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Reading file end with %d element"), data.Num());
-	}
-
-	fileData = UAPIClass::makeRecipeCards(data);
+	fileData = UAPIClass::makeRecipeCards();
 
 	for (int i = 0; i < fileData.Num(); i += 1) 
 	{

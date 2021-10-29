@@ -15,8 +15,6 @@ void ARecipeCard::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("name = %s with %d"), *data.name, GetLocalRole());
-
 	assignInfo();
 }
 
@@ -35,17 +33,18 @@ void ARecipeCard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLi
 
 void ARecipeCard::assignInfo_Implementation()
 {
+
 	TArray<UTextRenderComponent*> attributes;
 	GetComponents(attributes);
 
 	for (int i = 0; i < attributes.Num(); i++)
 	{
-		if (attributes[i]->GetName().Equals("name"))
+		if (attributes[i]->GetName().Equals("cardName"))
 		{
 			attributes[i]->SetText(data.name);
 		}
 
-		if (attributes[i]->GetName().Equals("type"))
+		if (attributes[i]->GetName().Equals("curType"))
 		{
 			attributes[i]->SetText(data.type);
 		}
@@ -68,7 +67,7 @@ void ARecipeCard::assignInfo_Implementation()
 			attributes[i]->SetText(prefix.Append(data.size));
 		}
 
-		if (attributes[i]->GetName().Equals("point"))
+		if (attributes[i]->GetName().Equals("bonusPoint"))
 		{
 			attributes[i]->SetText(data.point);
 		}

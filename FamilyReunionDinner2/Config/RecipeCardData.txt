@@ -1,9 +1,12 @@
-Name Type Flavor_Range Heat_Range Utensil_Size Points
-Spicy_Potatoes Spicy 1-2 3 2 2
-Spicy_Tofu_Bowl Spicy 2-3 2-3 2 2
-Spicy_Fries Spicy 3 1-2 2 3
-Thai_Curry Spicy 3-4 3 3 3
-Spicy_Hot_Pot Spicy 4-5 3-4 5 7
-Donuts Sweet 2-3 1-2 1 2
-Sandwich Salty 3 1-2 2 3
-Sour_Fish Sour 3-4 2-3 3 5
+Name	Type	Flavor_Range	Heat_Range	Utensil_Size	Points
+Spicy_Potatoes	Spicy	1-2	3	2	2
+Spicy_Tofu_Bowl	Spicy	2-3	2-3	2	2
+Spicy_Fries	Spicy	3	1-2	2	3
+Thai_Curry	Spicy	3-4	3	3	3
+Spicy_Hot_Pot	Spicy	4-5	3-4	5	7
+
+Donuts	Sweet	2-3	1-2	1	2
+
+Sandwich	Salty	3	1-2	2	3
+
+Sour_Fish	Sour	3-4	2-3	3	5

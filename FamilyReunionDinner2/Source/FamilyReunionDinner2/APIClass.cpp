@@ -3,8 +3,12 @@
 
 #include "APIClass.h"
 
-TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards(TArray<TSharedPtr<FJsonObject>> data) 
+TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards() 
 {
+	FString dataString =
+		"Name Type Flavor_Range Heat_Range Utensil_Size Points\nSpicy_Potatoes Spicy 1-2 3 2 2\nSpicy_Tofu_Bowl Spicy 2-3 2-3 2 2\nSpicy_Fries Spicy 3 1-2 2 3\nThai_Curry Spicy 3-4 3 3 3\nSpicy_Hot_Pot Spicy 4-5 3-4 5 7\n\nDonuts Sweet 2-3 1-2 1 2\n\nSandwich Salty 3 1-2 2 3\n\nSour_Fish Sour 3-4 2-3 3 5\n";
+	TArray<TSharedPtr<FJsonObject>> data = FStringToJson(dataString);
+
 	TArray<FRecipeCardStruct> arr;
 
 	for (int i = 0; i < data.Num(); i += 1) 
@@ -16,7 +20,7 @@ TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards(TArray<TSharedPtr<FJsonObje
 		curData.flavorRange = data[i]->GetStringField(TEXT("Flavor_Range"));
 		curData.heatRange = data[i]->GetStringField(TEXT("Heat_Range"));
 		curData.size = data[i]->GetStringField(TEXT("Utensil_Size"));
-		curData.point = data[i]->GetStringField(TEXT("Points "));
+		curData.point = data[i]->GetStringField(TEXT("Points"));
 
 		arr.Add(curData);
 	}
@@ -24,30 +28,30 @@ TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards(TArray<TSharedPtr<FJsonObje
 	return arr;
 }
 
-TArray<TSharedPtr<FJsonObject>> UAPIClass::readFile(FString path)
-{
-	FString file = FPaths::ProjectConfigDir();
-	file.Append(path);
-
-	IPlatformFile& fileManager = FPlatformFileManager::Get().GetPlatformFile();
-	FString fileContent;
-
-	if (fileManager.FileExists(*file))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("file exists"));
-
-		if (FFileHelper::LoadFileToString(fileContent, *file, FFileHelper::EHashOptions::None))
-		{
-			return FStringToJson(fileContent);
-		}
-	}
-	else 
-	{
-		UE_LOG(LogTemp, Warning, TEXT("read file error"));
-	}
-
-	return TArray<TSharedPtr<FJsonObject>>();
-}
+//TArray<TSharedPtr<FJsonObject>> UAPIClass::readFile(FString path)
+//{
+//	FString file = FPaths::ProjectConfigDir();
+//	file.Append(path);
+//
+//	IPlatformFile& fileManager = FPlatformFileManager::Get().GetPlatformFile();
+//	FString fileContent;
+//
+//	if (fileManager.FileExists(*file))
+//	{
+//		UE_LOG(LogTemp, Warning, TEXT("file exists"));
+//
+//		if (FFileHelper::LoadFileToString(fileContent, *file, FFileHelper::EHashOptions::None))
+//		{
+//			return FStringToJson(fileContent);
+//		}
+//	}
+//	else 
+//	{
+//		UE_LOG(LogTemp, Warning, TEXT("read file error"));
+//	}
+//
+//	return TArray<TSharedPtr<FJsonObject>>();
+//}
 
 TArray<TSharedPtr<FJsonObject>> UAPIClass::FStringToJson(FString data)
 {
