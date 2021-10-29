@@ -27,11 +27,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(Reliable, Server)
-	void created();
-	void created_Implementation();
+	UPROPERTY(Replicated)
+	FRecipeCardStruct data;
 
-	UFUNCTION(Reliable, NetMulticast)
+	UFUNCTION(Reliable, Client)
 	void assignInfo();
 	void assignInfo_Implementation();
 };

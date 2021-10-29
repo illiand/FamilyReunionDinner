@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "RecipeCardStruct.h"
 #include "APIClass.generated.h"
 
 /**
@@ -15,10 +16,7 @@ class FAMILYREUNIONDINNER2_API UAPIClass : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 
 public:
-	//read file to get a json array
+	static TArray<FRecipeCardStruct> makeRecipeCards(TArray<TSharedPtr<FJsonObject>> data);
 	static TArray<TSharedPtr<FJsonObject>> readFile(FString path);
 	static TArray<TSharedPtr<FJsonObject>> FStringToJson(FString data);
-	
-	UFUNCTION(BlueprintCallable, Category = "API")
-	static TArray<ARecipeCard*> callXRC();
 };
