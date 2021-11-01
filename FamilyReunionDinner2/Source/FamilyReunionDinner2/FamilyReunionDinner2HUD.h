@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
+#include "FamilyReunionDinner2Character.h"
 #include "FamilyReunionDinner2HUD.generated.h"
 
 UCLASS()

@@ -108,13 +108,13 @@ void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor)
 	{
 		ARecipeCard* curCard = Cast<ARecipeCard>(hitActor);
 
-		if (curCard->GetActorLocation().Z == 80)
+		if (curCard->GetActorLocation().Z == 53.5)
 		{
-			curCard->SetActorLocation(FVector(curCard->GetActorLocation().X, curCard->GetActorLocation().Y, 130));
+			curCard->SetActorLocation(FVector(curCard->GetActorLocation().X, curCard->GetActorLocation().Y, 75));
 		}
 		else
 		{
-			curCard->SetActorLocation(FVector(curCard->GetActorLocation().X, curCard->GetActorLocation().Y, 80));
+			curCard->SetActorLocation(FVector(curCard->GetActorLocation().X, curCard->GetActorLocation().Y, 53.5));
 		}
 	}
 }
@@ -125,9 +125,9 @@ void AFamilyReunionDinner2Character::startGame_Implementation()
 
 	for (int i = 0; i < fileData.Num(); i += 1) 
 	{
-		int x = 40 - i / 5 * 200;
-		int y = -320 + i % 5 * 100;
-		ARecipeCard* card = GetWorld()->SpawnActor<ARecipeCard>(recipeCard, FVector(x, y, 80), FRotator(0, 90, 0), FActorSpawnParameters());
+		float x = 40 + i % 5 * 16.5;
+		float y = -28 + i / 5 * 27;
+		ARecipeCard* card = GetWorld()->SpawnActor<ARecipeCard>(recipeCard, FVector(x, y, 53.5), FRotator(0, 0, 0), FActorSpawnParameters());
 		card->data = fileData[i];
 	}
 }

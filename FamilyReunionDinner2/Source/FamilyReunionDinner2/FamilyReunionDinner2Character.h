@@ -79,6 +79,7 @@ public:
 	//	int32 test;
 
 public:
+	UFUNCTION(BlueprintCallable)
 	void useSpecialAction();
 
 	UFUNCTION(Reliable, Server)
