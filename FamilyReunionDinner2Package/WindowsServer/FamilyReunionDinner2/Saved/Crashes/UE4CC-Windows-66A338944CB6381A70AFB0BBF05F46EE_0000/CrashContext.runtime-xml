@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FGenericCrashContext>
+<RuntimeProperties>
+<CrashVersion>3</CrashVersion>
+<ExecutionGuid>DD72E22B45A192D20CC860A2A8B7AB7A</ExecutionGuid>
+<CrashGUID>UE4CC-Windows-66A338944CB6381A70AFB0BBF05F46EE_0000</CrashGUID>
+<IsEnsure>false</IsEnsure>
+<IsAssert>false</IsAssert>
+<CrashType>Crash</CrashType>
+<ErrorMessage>Unhandled Exception: 0xe06d7363</ErrorMessage>
+<CrashReporterMessage></CrashReporterMessage>
+<ProcessId>8860</ProcessId>
+<SecondsSinceStart>55</SecondsSinceStart>
+<IsInternalBuild>false</IsInternalBuild>
+<IsPerforceBuild>false</IsPerforceBuild>
+<IsSourceDistribution>false</IsSourceDistribution>
+<GameName>UE4-FamilyReunionDinner2</GameName>
+<ExecutableName>FamilyReunionDinner2Server</ExecutableName>
+<BuildConfiguration>Development</BuildConfiguration>
+<GameSessionID></GameSessionID>
+<Symbols>**UE4*Release-4.27-CL-0-Win64-Development</Symbols>
+<PlatformName>WindowsServer</PlatformName>
+<PlatformNameIni>Windows</PlatformNameIni>
+<EngineMode>Server</EngineMode>
+<EngineModeEx>Unset</EngineModeEx>
+<DeploymentName></DeploymentName>
+<EngineVersion>4.27.1-0+++UE4+Release-4.27</EngineVersion>
+<CommandLine> FamilyReunionDinner2 -log</CommandLine>
+<LanguageLCID>0</LanguageLCID>
+<AppDefaultLocale>en-US</AppDefaultLocale>
+<BuildVersion>++UE4+Release-4.27-CL-0</BuildVersion>
+<IsUE4Release>false</IsUE4Release>
+<IsRequestingExit>false</IsRequestingExit>
+<UserName></UserName>
+<BaseDir>D:/I/Sousaku/FamilyReunionDinner/FamilyReunionDinner2Package/WindowsServer/FamilyReunionDinner2/Binaries/Win64/</BaseDir>
+<RootDir>D:/I/Sousaku/FamilyReunionDinner/FamilyReunionDinner2Package/WindowsServer/</RootDir>
+<MachineId>A36D40C043B5DDAA553BEE8C9F91C413</MachineId>
+<LoginId>a36d40c043b5ddaa553bee8c9f91c413</LoginId>
+<EpicAccountId>6c0ba2b7800749a2ab13c15e50c2397e</EpicAccountId>
+<SourceContext></SourceContext>
+<UserDescription></UserDescription>
+<UserActivityHint></UserActivityHint>
+<CrashDumpMode>0</CrashDumpMode>
+<GameStateName></GameStateName>
+<Misc.NumberOfCores>6</Misc.NumberOfCores>
+<Misc.NumberOfCoresIncludingHyperthreads>12</Misc.NumberOfCoresIncludingHyperthreads>
+<Misc.Is64bitOperatingSystem>1</Misc.Is64bitOperatingSystem>
+<Misc.CPUVendor>GenuineIntel</Misc.CPUVendor>
+<Misc.CPUBrand>Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz</Misc.CPUBrand>
+<Misc.PrimaryGPUBrand>Intel(R) UHD Graphics 630</Misc.PrimaryGPUBrand>
+<Misc.OSVersionMajor>Windows 10 (Release 2004)</Misc.OSVersionMajor>
+<Misc.OSVersionMinor></Misc.OSVersionMinor>
+<MemoryStats.TotalPhysical>34145370112</MemoryStats.TotalPhysical>
+<MemoryStats.TotalVirtual>140737488224256</MemoryStats.TotalVirtual>
+<MemoryStats.PageSize>4096</MemoryStats.PageSize>
+<MemoryStats.TotalPhysicalGB>32</MemoryStats.TotalPhysicalGB>
+<MemoryStats.AvailablePhysical>0</MemoryStats.AvailablePhysical>
+<MemoryStats.AvailableVirtual>0</MemoryStats.AvailableVirtual>
+<MemoryStats.UsedPhysical>0</MemoryStats.UsedPhysical>
+<MemoryStats.PeakUsedPhysical>0</MemoryStats.PeakUsedPhysical>
+<MemoryStats.UsedVirtual>0</MemoryStats.UsedVirtual>
+<MemoryStats.PeakUsedVirtual>0</MemoryStats.PeakUsedVirtual>
+<MemoryStats.bIsOOM>0</MemoryStats.bIsOOM>
+<MemoryStats.OOMAllocationSize>0</MemoryStats.OOMAllocationSize>
+<MemoryStats.OOMAllocationAlignment>0</MemoryStats.OOMAllocationAlignment>
+<NumMinidumpFramesToIgnore>0</NumMinidumpFramesToIgnore>
+<CallStack></CallStack>
+<PCallStack>
+KERNELBASE                  0x00007ffef3b00000 + 34f99           
+VCRUNTIME140                0x00007ffedd3d0000 + 6480            
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1915592         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1918052         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1fe5a59         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 2273f6c         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4bb0f4e         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4ffb6ca         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4ff9c87         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f92ac6         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f99fe6         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f9dddb         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f9d2e0         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f9d927         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 534c526         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 534e025         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 164ff30         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 5385ef0         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 24ef09e         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 524981b         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 50a6ef2         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 9596ec          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 96e17f          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 96e24a          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 97026c          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 97e4f4          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 6de7232         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</PCallStack>
+<PCallStackHash>0FF2655579FEFE0981D2EFE6932451ACE28B87DE</PCallStackHash>
+<Threads><Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e6c7cd         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 6df13de         
+VCRUNTIME140                0x00007ffedd3d0000 + ecd0            
+ntdll                       0x00007ffef6210000 + a20cf           
+ntdll                       0x00007ffef6210000 + 51454           
+ntdll                       0x00007ffef6210000 + 511a5           
+KERNELBASE                  0x00007ffef3b00000 + 34f99           
+VCRUNTIME140                0x00007ffedd3d0000 + 6480            
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1915592         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1918052         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1fe5a59         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 2273f6c         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4bb0f4e         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4ffb6ca         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4ff9c87         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f92ac6         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f99fe6         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f9dddb         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f9d2e0         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 4f9d927         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 534c526         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 534e025         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 164ff30         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 5385ef0         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 24ef09e         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 524981b         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 50a6ef2         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 9596ec          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 96e17f          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 96e24a          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 97026c          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 97e4f4          
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 6de7232         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>true</IsCrashed>
+<Registers></Registers>
+<ThreadID>23224</ThreadID>
+<ThreadName>GameThread</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196c6e7         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196dca0         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1974ff5         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>57144</ThreadID>
+<ThreadName>TaskGraphThreadNP 0</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196c6e7         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196dca0         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1974ff5         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>27576</ThreadID>
+<ThreadName>TaskGraphThreadNP 1</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196c6e7         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196dca0         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1974ff5         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>47948</ThreadID>
+<ThreadName>TaskGraphThreadNP 2</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196c6e7         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196dca0         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1974ff5         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>36500</ThreadID>
+<ThreadName>TaskGraphThreadNP 3</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196d4b2         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 196dc0e         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1c85fcd         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>27880</ThreadID>
+<ThreadName>StatsThread</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>24504</ThreadID>
+<ThreadName>PoolThread 0</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>48020</ThreadID>
+<ThreadName>PoolThread 1</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9d3f4           
+KERNELBASE                  0x00007ffef3b00000 + 4967e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1bc50e5         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>13344</ThreadID>
+<ThreadName>FAsyncWriter_FamilyReunionDinner2</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9d3f4           
+KERNELBASE                  0x00007ffef3b00000 + 4967e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 23010f0         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>27428</ThreadID>
+<ThreadName>HttpManagerThread</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 15a0e26         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>48716</ThreadID>
+<ThreadName>OnlineAsyncTaskThreadNull DefaultInstance(1)</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>56336</ThreadID>
+<ThreadName>PoolThread 2</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>48508</ThreadID>
+<ThreadName>PoolThread 3</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 53b1995         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>42464</ThreadID>
+<ThreadName>ODSCThread</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 28ba75a         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>10632</ThreadID>
+<ThreadName>FMessageBus.DefaultBus.Router</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9d3f4           
+KERNELBASE                  0x00007ffef3b00000 + 4967e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8a992         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 17b8b9a         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>43368</ThreadID>
+<ThreadName>LiveLinkMessageBusDiscoveryManager</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 6384782         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>43932</ThreadID>
+<ThreadName>FFileTransferRunnable</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>61680</ThreadID>
+<ThreadName>PoolThread 4</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>45244</ThreadID>
+<ThreadName>PoolThread 5</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>48552</ThreadID>
+<ThreadName>PoolThread 6</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>1412</ThreadID>
+<ThreadName>PoolThread 7</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>3592</ThreadID>
+<ThreadName>PoolThread 8</ThreadName>
+</Thread>
+<Thread><CallStack>ntdll                       0x00007ffef6210000 + 9cdf4           
+KERNELBASE                  0x00007ffef3b00000 + 21a8e           
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e8cdab         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1a91561         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e89d8f         
+FamilyReunionDinner2Server  0x00007ff71ccb0000 + 1e817c0         
+KERNEL32                    0x00007ffef5730000 + 17034           
+ntdll                       0x00007ffef6210000 + 52651           
+</CallStack>
+<IsCrashed>false</IsCrashed>
+<Registers></Registers>
+<ThreadID>43404</ThreadID>
+<ThreadName>PoolThread 9</ThreadName>
+</Thread>
+</Threads>
+</RuntimeProperties>
+<PlatformProperties>
+<PlatformIsRunningWindows>1</PlatformIsRunningWindows>
+<IsRunningOnBattery>true</IsRunningOnBattery>
+<PlatformCallbackResult>0</PlatformCallbackResult>
+</PlatformProperties>
+<EngineData>
+<RHI.RHIName>NullRHI</RHI.RHIName>
+<DeviceProfile.Name>WindowsServer</DeviceProfile.Name>
+</EngineData>
+<GameData>
+</GameData>
+</FGenericCrashContext>
