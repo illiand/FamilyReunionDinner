@@ -41,9 +41,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseLookUpRate;
 
-	UPROPERTY(EditDefaultsOnly, Category = Card)
-		TSubclassOf<class ARecipeCard> recipeCard;
-
 protected:
 	/**
 	 * Called via input to turn at a given rate.
