@@ -23,8 +23,13 @@ void AFamilyReunionDinner2GameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
 
-	int currentPlayerCount = Cast<AMyGameStateBase>(GameState)->PlayerArray.Num();
+	int currentPlayerCount = GameState->PlayerArray.Num();
 	Cast<AFamilyReunionDinner2Character>(NewPlayer->GetPawn())->setLocationByIndex(currentPlayerCount);
+
+	if (currentPlayerCount == 1) 
+	{
+		Cast<AMyPlayerState>(GameState->PlayerArray[0])->inTurn = true;
+	}
 }
 
 void AFamilyReunionDinner2GameMode::Logout(AController* Exiting)

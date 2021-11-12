@@ -19,3 +19,17 @@ void AMyGameStateBase::initGame()
 		recipes.Add(card);
 	}
 }
+
+void AMyGameStateBase::nextTurn() 
+{
+	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->inTurn = false;
+	currentTurnIndex += 1;
+
+	if (currentTurnIndex == PlayerArray.Num()) 
+	{
+		currentTurnIndex = 0;
+	}
+
+	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->inTurn = true;
+
+}

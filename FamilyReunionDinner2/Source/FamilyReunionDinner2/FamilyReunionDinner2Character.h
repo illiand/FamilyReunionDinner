@@ -2,10 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "APIClass.h"
 #include "RecipeCard.h"
-#include "CookingCard.h"
-#include "Net/UnrealNetwork.h"
 #include "FamilyReunionDinner2Character.generated.h"
 
 class UInputComponent;
@@ -65,19 +62,16 @@ public:
 	void setLocationByIndex(int index);
 
 public:
-	UPROPERTY(Replicated)
-	TArray<ACookingCard*> cookingCards = TArray<ACookingCard*>();
-
-	UPROPERTY(Replicated)
-	FString monsterPreference;
-
-public:
 	UFUNCTION(BlueprintCallable)
 	void useSpecialAction();
 
 	UFUNCTION(Reliable, Server)
 	void startGame();
 	void startGame_Implementation();
+
+	UFUNCTION(Reliable, Server, BlueprintCallable)
+	void endTurn();
+	void endTurn_Implementation();
 
 	UFUNCTION(Reliable, Server)
 	void moveToDeck(AActor* hitActor);

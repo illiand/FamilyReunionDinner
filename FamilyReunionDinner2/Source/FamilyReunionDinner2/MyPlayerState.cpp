@@ -2,3 +2,12 @@
 
 
 #include "MyPlayerState.h"
+
+void AMyPlayerState::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AMyPlayerState, cookingCards);
+	DOREPLIFETIME(AMyPlayerState, monsterPreference);
+	DOREPLIFETIME(AMyPlayerState, inTurn);
+}

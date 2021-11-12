@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
+#include "Net/UnrealNetwork.h"
+#include "CookingCard.h"
 #include "MyPlayerState.generated.h"
 
 /**
@@ -14,5 +16,15 @@ class FAMILYREUNIONDINNER2_API AMyPlayerState : public APlayerState
 {
 	GENERATED_BODY()
 	
+public:
+	float notificationCount;
 
+	UPROPERTY(Replicated)
+	TArray<ACookingCard*> cookingCards = TArray<ACookingCard*>();
+
+	UPROPERTY(Replicated)
+	FString monsterPreference;
+
+	UPROPERTY(Replicated, BlueprintReadOnly)
+	bool inTurn = false;
 };

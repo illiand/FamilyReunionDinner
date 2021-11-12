@@ -79,18 +79,15 @@ void AFamilyReunionDinner2Character::SetupPlayerInputComponent(class UInputCompo
 	PlayerInputComponent->BindAction("MoveToDeck", IE_Released, this, &AFamilyReunionDinner2Character::pickFromEye);
 }
 
-void AFamilyReunionDinner2Character::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	
-	DOREPLIFETIME(AFamilyReunionDinner2Character, cookingCards);
-	DOREPLIFETIME(AFamilyReunionDinner2Character, monsterPreference);
-}
-
 void AFamilyReunionDinner2Character::useSpecialAction() 
 {
 	//UE_LOG(LogTemp, Warning, TEXT("name is %s"), *test[3]->GetStringField("Name"));
 	startGame();
+}
+
+void AFamilyReunionDinner2Character::endTurn_Implementation() 
+{
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->nextTurn();
 }
 
 void AFamilyReunionDinner2Character::pickFromEye()

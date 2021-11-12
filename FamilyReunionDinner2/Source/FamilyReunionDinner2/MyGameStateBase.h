@@ -24,4 +24,8 @@ public:
 
 public:
 	void initGame();
+	void nextTurn();
+
+private:
+	int currentTurnIndex = 0;
 };
