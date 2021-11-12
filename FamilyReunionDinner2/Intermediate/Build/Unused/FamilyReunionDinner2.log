@@ -1,16 +1,23 @@
-﻿  Using 'git status' to determine working set for adaptive non-unity build (D:\I\Sousaku\FamilyReunionDinner).
-  Parsing headers for FamilyReunionDinner2Editor
-    Running UnrealHeaderTool "D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\FamilyReunionDinner2.uproject" "D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Intermediate\Build\Win64\FamilyReunionDinner2Editor\Development\FamilyReunionDinner2Editor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="D:\G\User\Tools\UnrealEngine-release2\Engine\Programs\UnrealBuildTool\Log_UHT.txt"
-  LogInit: Display: Loading text-based GConfig....
-LogCompile : error : Circular dependency detected for filename D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Source\FamilyReunionDinner2\FamilyReunionDinner2Character.h!
-  Reflection code generated for FamilyReunionDinner2Editor in 4.6594609 seconds
+﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\hhpat\Documents\GitHub Repo\FamilyReunionDinner).
+  Creating makefile for FamilyReunionDinner2Editor (no existing makefile)
   Creating makefile for ShaderCompileWorker (no existing makefile)
   Building FamilyReunionDinner2Editor and ShaderCompileWorker...
-  Using Visual Studio 2017 14.16.27045 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023) and Windows 10.0.17763.0 SDK (C:\Program Files (x86)\Windows Kits\10).
-  Building 6 actions with 12 processes...
-    [1/6] FamilyReunionDinner2HUD.cpp
-D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Source\FamilyReunionDinner2\FamilyReunionDinner2HUD.cpp(38): error C3867: 'AFamilyReunionDinner2Character::useSpecialAction': non-standard syntax; use '&' to create a pointer to member
-D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Source\FamilyReunionDinner2\FamilyReunionDinner2HUD.cpp(38): error C2672: 'TBaseDynamicMulticastDelegate<FWeakObjectPtr,void>::__Internal_AddDynamic': no matching overloaded function found
-    [2/6] FamilyReunionDinner2HUD.gen.cpp
-    [3/6] FamilyReunionDinner2GameMode.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.MakeFile.Targets(44,5): error MSB3073: The command "D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Build.bat -Target="FamilyReunionDinner2Editor Win64 Development -Project=\"D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\FamilyReunionDinner2.uproject\"" -Target="ShaderCompileWorker Win64 Development -Quiet" -WaitMutex -FromMsBuild" exited with code 6.
+  Using Visual Studio 2019 14.29.30136 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133) and Windows 10.0.16299.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  Building 13 actions with 16 processes...
+    [1/13] FamilyReunionDinner2.init.gen.cpp
+    [2/13] FamilyReunionDinner2.cpp
+    [3/13] FamilyReunionDinner2Projectile.cpp
+    [4/13] FamilyReunionDinner2GameMode.cpp
+    [5/13] FamilyReunionDinner2HUD.cpp
+    [6/13] FamilyReunionDinner2Projectile.gen.cpp
+    [7/13] FamilyReunionDinner2GameMode.gen.cpp
+    [8/13] FamilyReunionDinner2Character.gen.cpp
+    [9/13] FamilyReunionDinner2HUD.gen.cpp
+    [10/13] FamilyReunionDinner2Character.cpp
+    [11/13] UE4Editor-FamilyReunionDinner2.lib
+       Creating library C:\Users\hhpat\Documents\GitHub Repo\FamilyReunionDinner\FamilyReunionDinner2\Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\UE4Editor-FamilyReunionDinner2.lib and object C:\Users\hhpat\Documents\GitHub Repo\FamilyReunionDinner\FamilyReunionDinner2\Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\UE4Editor-FamilyReunionDinner2.exp
+    [12/13] UE4Editor-FamilyReunionDinner2.dll
+       Creating library C:\Users\hhpat\Documents\GitHub Repo\FamilyReunionDinner\FamilyReunionDinner2\Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\UE4Editor-FamilyReunionDinner2.suppressed.lib and object C:\Users\hhpat\Documents\GitHub Repo\FamilyReunionDinner\FamilyReunionDinner2\Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\UE4Editor-FamilyReunionDinner2.suppressed.exp
+    [13/13] FamilyReunionDinner2Editor.target
+  Total time in Parallel executor: 6.23 seconds
+  Total execution time: 10.49 seconds

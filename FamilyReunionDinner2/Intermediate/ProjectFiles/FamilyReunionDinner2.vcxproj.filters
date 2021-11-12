@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\FamilyReunionDinner2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{346913C6-8B6C-4A65-90B3-510C0C47B80A}</UniqueIdentifier>
+      <UniqueIdentifier>{619499A7-EF7A-4190-8D47-4120383B6965}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\FamilyReunionDinner2.Target.cs">
       <Filter>Source</Filter>
@@ -16,7 +16,7 @@
     </None>
     <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{727B9151-1896-4973-A317-32CA46D6358C}</UniqueIdentifier>
+      <UniqueIdentifier>{8C9FD2E2-ED56-4CB5-B63A-ED72BA400795}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -37,7 +37,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\FamilyReunionDinner2">
-      <UniqueIdentifier>{FC3D5397-8A2B-4F26-8A32-02FEE69BAD15}</UniqueIdentifier>
+      <UniqueIdentifier>{7003D1A8-9008-4D20-8E59-28EA5A5549F1}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\APIClass.cpp">
       <Filter>Source\FamilyReunionDinner2</Filter>
@@ -82,12 +82,6 @@
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Projectile.h">
-      <Filter>Source\FamilyReunionDinner2</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\FamilyReunionDinner2\MyClass.cpp">
-      <Filter>Source\FamilyReunionDinner2</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\MyClass.h">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\MyGameStateBase.cpp">
