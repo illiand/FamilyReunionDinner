@@ -81,3 +81,8 @@ TArray<TSharedPtr<FJsonObject>> UAPIClass::FStringToJson(FString data)
 
 	return jsonData;
 }
+
+TArray<APlayerState*> UAPIClass::getPlayerControllersInGame(UWorld* world) 
+{
+	return Cast<AMyGameStateBase>(world->GetGameState())->PlayerArray;
+}

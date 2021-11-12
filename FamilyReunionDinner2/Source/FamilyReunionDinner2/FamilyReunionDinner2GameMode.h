@@ -13,6 +13,10 @@ class AFamilyReunionDinner2GameMode : public AGameModeBase
 
 public:
 	AFamilyReunionDinner2GameMode();
+
+public:
+	virtual void PostLogin(APlayerController* NewPlayer);
+	virtual void Logout(AController* Exiting);
 };
 
 

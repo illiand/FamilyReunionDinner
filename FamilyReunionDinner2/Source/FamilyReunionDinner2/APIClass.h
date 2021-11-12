@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "RecipeCardStruct.h"
+#include "FamilyReunionDinner2GameMode.h"
+#include "MyGameStateBase.h"
+#include "MyPlayerState.h"
 #include "APIClass.generated.h"
 
 /**
@@ -18,4 +21,5 @@ class FAMILYREUNIONDINNER2_API UAPIClass : public UBlueprintFunctionLibrary
 public:
 	static TArray<FRecipeCardStruct> makeRecipeCards();
 	static TArray<TSharedPtr<FJsonObject>> FStringToJson(FString data);
+	static TArray<APlayerState*> getPlayerControllersInGame(UWorld* world);
 };

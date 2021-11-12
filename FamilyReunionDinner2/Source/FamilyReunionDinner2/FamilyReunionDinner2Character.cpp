@@ -22,7 +22,7 @@ AFamilyReunionDinner2Character::AFamilyReunionDinner2Character()
 	// set our turn rates for input
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
-
+	
 	// Create a CameraComponent	
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
@@ -36,6 +36,29 @@ void AFamilyReunionDinner2Character::BeginPlay()
 	Super::BeginPlay();
 }
 
+void AFamilyReunionDinner2Character::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+void AFamilyReunionDinner2Character::setLocationByIndex(int index)
+{
+	switch (index)
+	{
+	case 1:
+		SetActorLocation(FVector(-10, 0, 40));
+		break;
+
+	case 2:
+		SetActorLocation(FVector(60, 60, 40));
+		break;
+
+	case 3:
+		SetActorLocation(FVector(60, -90, 40));
+		break;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
@@ -43,14 +66,6 @@ void AFamilyReunionDinner2Character::SetupPlayerInputComponent(class UInputCompo
 {
 	// set up gameplay key bindings
 	check(PlayerInputComponent);
-
-	// Bind jump events
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-
-	// Bind movement events
-	PlayerInputComponent->BindAxis("MoveForward", this, &AFamilyReunionDinner2Character::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AFamilyReunionDinner2Character::MoveRight);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
@@ -68,15 +83,13 @@ void AFamilyReunionDinner2Character::GetLifetimeReplicatedProps(TArray< FLifetim
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	
-	DOREPLIFETIME(AFamilyReunionDinner2Character, fileData);
+	DOREPLIFETIME(AFamilyReunionDinner2Character, cookingCards);
+	DOREPLIFETIME(AFamilyReunionDinner2Character, monsterPreference);
 }
 
 void AFamilyReunionDinner2Character::useSpecialAction() 
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, TEXT("Test Action"));
 	//UE_LOG(LogTemp, Warning, TEXT("name is %s"), *test[3]->GetStringField("Name"));
-	//moveActor();
-	UE_LOG(LogTemp, Warning, TEXT("found %d"), GetLocalRole());
 	startGame();
 }
 
@@ -99,7 +112,6 @@ void AFamilyReunionDinner2Character::pickFromEye()
 	{
 		moveToDeck(hit.GetActor());
 	}
-
 }
 
 void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor) 
@@ -121,90 +133,7 @@ void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor)
 
 void AFamilyReunionDinner2Character::startGame_Implementation() 
 {
-	fileData = UAPIClass::makeRecipeCards();
-
-	for (int i = 0; i < fileData.Num(); i += 1) 
-	{
-		float x = 40 + i % 5 * 16.5;
-		float y = -28 + i / 5 * 27;
-		ARecipeCard* card = GetWorld()->SpawnActor<ARecipeCard>(recipeCard, FVector(x, y, 53.5), FRotator(0, 0, 0), FActorSpawnParameters());
-		card->data = fileData[i];
-	}
-}
-
-void AFamilyReunionDinner2Character::moveActor_Implementation()
-{
-	moveActorRA();
-}
-
-void AFamilyReunionDinner2Character::moveActorAnother_Implementation()
-{
-	TArray<AActor*> allActors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AActor::StaticClass(), allActors);
-	//UGameplayStatics::GetAllActorsWithTag(GetWorld(), TEXT("Rock"), AllActors);
-
-	AActor* testObject = NULL;
-
-	for (size_t i = 0; i < allActors.Num(); i++)
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("rock is %d"), allActors[i]->ActorHasTag("Rock"));
-
-		if (allActors[i]->GetName() == "Rock")
-		{
-			testObject = allActors[i];
-		}
-	}
-
-	testObject->SetReplicates(true);
-
-	GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, FString::Printf(TEXT("rock is %s"), *testObject->Tags[0].ToString()));
-	testObject->SetActorLocation(FVector(0, 0, testObject->GetActorLocation().Z + 10));
-
-	UE_LOG(LogTemp, Warning, TEXT("%d %d"), testObject->GetActorLocation().X, testObject->GetActorLocation().Z);
-}
-
-void AFamilyReunionDinner2Character::moveActorRA_Implementation()
-{
-	TArray<AActor*> allActors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AActor::StaticClass(), allActors);
-	//UGameplayStatics::GetAllActorsWithTag(GetWorld(), TEXT("Rock"), AllActors);
-
-	AActor* testObject = NULL;
-
-	for (size_t i = 0; i < allActors.Num(); i++)
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("rock is %d"), allActors[i]->ActorHasTag("Rock"));
-
-		if (allActors[i]->GetName() == "Rock")
-		{
-			testObject = allActors[i];
-		}
-	}
-
-	UE_LOG(LogTemp, Warning, TEXT("something runs"));
-
-	testObject->SetReplicates(true);
-
-	GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, FString::Printf(TEXT("rock is %s"), *testObject->Tags[0].ToString()));
-	testObject->SetActorLocation(FVector(0, 0, testObject->GetActorLocation().Z + 10));
-}
-
-void AFamilyReunionDinner2Character::MoveForward(float Value)
-{
-	if (Value != 0.0f)
-	{
-		// add movement in that direction
-		AddMovementInput(GetActorForwardVector(), Value);
-	}
-}
-
-void AFamilyReunionDinner2Character::MoveRight(float Value)
-{
-	if (Value != 0.0f)
-	{
-		// add movement in that direction
-		AddMovementInput(GetActorRightVector(), Value);
-	}
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->initGame();
 }
 
 void AFamilyReunionDinner2Character::TurnAtRate(float Rate)

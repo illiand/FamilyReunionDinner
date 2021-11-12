@@ -4,6 +4,7 @@
 #include "GameFramework/Character.h"
 #include "APIClass.h"
 #include "RecipeCard.h"
+#include "CookingCard.h"
 #include "Net/UnrealNetwork.h"
 #include "FamilyReunionDinner2Character.generated.h"
 
@@ -29,6 +30,7 @@ public:
 
 protected:
 	virtual void BeginPlay();
+	virtual void Tick(float DeltaTime) override;
 
 public:
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
@@ -43,12 +45,6 @@ public:
 		TSubclassOf<class ARecipeCard> recipeCard;
 
 protected:
-	/** Handles moving forward/backward */
-	void MoveForward(float Val);
-
-	/** Handles stafing movement, left and right */
-	void MoveRight(float Val);
-
 	/**
 	 * Called via input to turn at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
@@ -69,41 +65,27 @@ protected:
 public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
+	void setLocationByIndex(int index);
 
 public:
 	UPROPERTY(Replicated)
-	TArray<FRecipeCardStruct> fileData;
+	TArray<ACookingCard*> cookingCards = TArray<ACookingCard*>();
 
-
-	//UPROPERTY(replicated)
-	//	int32 test;
+	UPROPERTY(Replicated)
+	FString monsterPreference;
 
 public:
 	UFUNCTION(BlueprintCallable)
 	void useSpecialAction();
 
 	UFUNCTION(Reliable, Server)
-		void moveActor();
-	void moveActor_Implementation();
-	//void moveActor_Validate();
-
-	UFUNCTION(Reliable, Server)
-		void moveActorAnother();
-	void moveActorAnother_Implementation();
-
-	UFUNCTION(Reliable, NetMulticast)
-		void moveActorRA();
-	void moveActorRA_Implementation();
-
-	UFUNCTION(Reliable, Server)
-		void startGame();
+	void startGame();
 	void startGame_Implementation();
 
 	UFUNCTION(Reliable, Server)
-		void moveToDeck(AActor* hitActor);
+	void moveToDeck(AActor* hitActor);
 	void moveToDeck_Implementation(AActor* hitActor);
 
 private:
 	void pickFromEye();
-
 };
