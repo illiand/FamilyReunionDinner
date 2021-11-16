@@ -7,21 +7,21 @@
 /**
  * 
  */
-USTRUCT(Blueprintable)
+USTRUCT(BlueprintType)
 struct FRecipeCardStruct
 {
 	GENERATED_USTRUCT_BODY()
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	FString name;
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	FString type;
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	FString flavorRange;
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	FString heatRange;
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	FString size;
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	FString point;
 };

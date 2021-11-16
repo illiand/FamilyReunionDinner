@@ -1,0 +1,58 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "GameMenuGameMode.h"
+#include "GameMenuGameStateBase.h"
+#include "GameMenuPlayerState.h"
+#include "GameMenuCharacter.h"
+
+AGameMenuGameMode::AGameMenuGameMode()
+	: Super()
+{
+	// set default pawn class to our Blueprinted character
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/FirstPersonCPP/Blueprints/MyGameMenuCharacter"));
+	DefaultPawnClass = PlayerPawnClassFinder.Class;
+	GameStateClass = AGameMenuGameStateBase::StaticClass();
+	PlayerStateClass = AGameMenuPlayerState::StaticClass();
+}
+
+void AGameMenuGameMode::PostLogin(APlayerController* NewPlayer)
+{
+	Super::PostLogin(NewPlayer);
+
+	Cast<AGameMenuPlayerState>(NewPlayer->GetPawn()->GetPlayerState())->serverInfo = serverInfo;
+	Cast<AGameMenuPlayerState>(NewPlayer->GetPawn()->GetPlayerState())->FamilyReunionDinner2PlayerID = FMath::RandRange(10000000, 99999999);
+}
+
+void AGameMenuGameMode::openServer(int index)
+{
+	FString execPath = FPaths::ProjectDir() + TEXT("Binaries/Win64/FamilyReunionDinner2Server.exe");
+	FString args = TEXT("/Game/FirstPersonCPP/Maps/FirstPersonExampleMap -log");
+
+	UE_LOG(LogTemp, Warning, TEXT("Current server path = %s"), *FPaths::ConvertRelativePathToFull(execPath));
+
+	FProcHandle serverHandle = FPlatformProcess::CreateProc(*FPaths::ConvertRelativePathToFull(execPath), *(args + FString::Printf(TEXT(" -ClientProcID=%u"), FPlatformProcess::GetCurrentProcessId())), true, true, false, NULL, 0, NULL, NULL);
+
+	if (serverHandle.IsValid()) 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Server created"));
+		serverHandles.Add(serverHandle);
+	
+		for (int i = 0; i < serverInfo[index].currentPlayers.Num(); i += 1) 
+		{
+			serverInfo[index].currentPlayers[i]->enterSession(7777 + serverHandles.Num());
+		}
+
+		serverInfo.RemoveAt(index);
+		
+		for (int i = 0; i < GameState->PlayerArray.Num(); i++)
+		{
+			Cast<AGameMenuPlayerState>(GameState->PlayerArray[i])->serverInfo = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo;
+			Cast<AGameMenuPlayerState>(GameState->PlayerArray[i])->serverListNeedUpdate = true;
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Server created failed"));
+	}
+}

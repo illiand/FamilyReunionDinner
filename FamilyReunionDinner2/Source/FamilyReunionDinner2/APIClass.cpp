@@ -86,3 +86,27 @@ TArray<APlayerState*> UAPIClass::getPlayerControllersInGame(UWorld* world)
 {
 	return Cast<AMyGameStateBase>(world->GetGameState())->PlayerArray;
 }
+
+bool UAPIClass::checkServerListEqual(TArray<FServerInfoStruct> serverInfo1, TArray<FServerInfoStruct> serverInfo2)
+{
+	if (serverInfo1.Num() != serverInfo2.Num()) 
+	{
+		return false;
+	}
+
+	for (int i = 0; i < serverInfo1.Num(); i += 1)
+	{
+		if (serverInfo1[i].currentPlayers.Num() != serverInfo2[i].currentPlayers.Num())
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+FString UAPIClass::getIPAddress() 
+{
+	return TEXT("127.0.0.1");
+}

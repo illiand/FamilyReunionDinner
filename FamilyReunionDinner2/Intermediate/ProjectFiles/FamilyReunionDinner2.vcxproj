@@ -460,292 +460,292 @@
     <PropertyPageSchema Include="$(LOCALAPPDATA)\Microsoft\VisualStudio\MagicLeap\debugger.xaml" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Editor|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Debug|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Debug_Editor|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Debug_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='IOS_Debug|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TVOS_Debug|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame_Editor|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_DebugGame|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_DebugGame_Editor|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_DebugGame_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='IOS_DebugGame|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TVOS_DebugGame|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development_Editor|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Development|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Development_Editor|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Development_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='IOS_Development|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TVOS_Development|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Shipping|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Shipping_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='IOS_Shipping|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TVOS_Shipping|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Test|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Test_Server|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='IOS_Test|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TVOS_Test|arm64'" Label="Configuration">
-		<AppContainerApplication>true</AppContainerApplication>
-		<ApplicationType>Windows Store</ApplicationType>
-		<ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-		<WindowsAppContainer>true</WindowsAppContainer>
-		<AppxPackage>true</AppxPackage>
-		<WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackage>true</AppxPackage>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Invalid|Win32'" Label="Configuration">
@@ -1317,21 +1317,21 @@
     <NMakeReBuildCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Rebuild.bat FamilyReunionDinner2 HoloLens Debug -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Clean.bat FamilyReunionDinner2 HoloLens Debug -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeCleanCommandLine>
     <NMakeOutput>..\..\Binaries\HoloLens\FamilyReunionDinner2-HoloLens-Debug.exe</NMakeOutput>
-		<AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
-		<NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
-		<NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
-		<NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
+    <AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
+    <NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
+    <NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
   </PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|arm64'">
-		<RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
-		<LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
-		<AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
-	</PropertyGroup>
-    <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|arm64'">
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
-    </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|arm64'">
+    <RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
+    <LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
+    <AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|arm64'">
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
+  </ItemGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -1518,21 +1518,21 @@
     <NMakeReBuildCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Rebuild.bat FamilyReunionDinner2 HoloLens DebugGame -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Clean.bat FamilyReunionDinner2 HoloLens DebugGame -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeCleanCommandLine>
     <NMakeOutput>..\..\Binaries\HoloLens\FamilyReunionDinner2-HoloLens-DebugGame.exe</NMakeOutput>
-		<AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
-		<NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
-		<NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
-		<NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
+    <AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
+    <NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
+    <NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
   </PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame|arm64'">
-		<RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
-		<LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
-		<AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
-	</PropertyGroup>
-    <ItemGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame|arm64'">
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
-    </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame|arm64'">
+    <RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
+    <LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
+    <AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='DebugGame|arm64'">
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
+  </ItemGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Mac_DebugGame|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -1719,21 +1719,21 @@
     <NMakeReBuildCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Rebuild.bat FamilyReunionDinner2 HoloLens Development -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Clean.bat FamilyReunionDinner2 HoloLens Development -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeCleanCommandLine>
     <NMakeOutput>..\..\Binaries\HoloLens\FamilyReunionDinner2.exe</NMakeOutput>
-		<AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
-		<NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
-		<NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
-		<NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
+    <AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
+    <NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
+    <NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
   </PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|arm64'">
-		<RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
-		<LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
-		<AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
-	</PropertyGroup>
-    <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Development|arm64'">
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
-    </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|arm64'">
+    <RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
+    <LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
+    <AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Development|arm64'">
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
+  </ItemGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Development|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -1903,21 +1903,21 @@
     <NMakeReBuildCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Rebuild.bat FamilyReunionDinner2 HoloLens Shipping -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Clean.bat FamilyReunionDinner2 HoloLens Shipping -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeCleanCommandLine>
     <NMakeOutput>..\..\Binaries\HoloLens\FamilyReunionDinner2-HoloLens-Shipping.exe</NMakeOutput>
-		<AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
-		<NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
-		<NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
-		<NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
+    <AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
+    <NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
+    <NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
   </PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|arm64'">
-		<RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
-		<LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
-		<AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
-	</PropertyGroup>
-    <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|arm64'">
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
-    </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|arm64'">
+    <RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
+    <LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
+    <AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|arm64'">
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
+  </ItemGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Shipping|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -2070,21 +2070,21 @@
     <NMakeReBuildCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Rebuild.bat FamilyReunionDinner2 HoloLens Test -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>D:\G\User\Tools\UnrealEngine-release2\Engine\Build\BatchFiles\Clean.bat FamilyReunionDinner2 HoloLens Test -Project="$(SolutionDir)FamilyReunionDinner2.uproject" -WaitMutex -FromMsBuild</NMakeCleanCommandLine>
     <NMakeOutput>..\..\Binaries\HoloLens\FamilyReunionDinner2-HoloLens-Test.exe</NMakeOutput>
-		<AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
-		<NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
-		<NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
-		<NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
+    <AdditionalOptions>/ZW /ZW:nostdlib</AdditionalOptions>
+    <NMakePreprocessorDefinitions>$(NMakePreprocessorDefinitions);PLATFORM_HOLOLENS=1;HOLOLENS=1;</NMakePreprocessorDefinitions>
+    <NMakeAssemblySearchPath>$(NMakeAssemblySearchPath);C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x86\Store\references</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies>$(NMakeForcedUsingAssemblies);C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd;C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd;platform.winmd</NMakeForcedUsingAssemblies>
   </PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|arm64'">
-		<RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
-		<LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
-		<AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
-	</PropertyGroup>
-    <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Test|arm64'">
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
-		<PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
-    </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|arm64'">
+    <RemoveExtraDeployFiles>false</RemoveExtraDeployFiles>
+    <LayoutDir>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\AppX</LayoutDir>
+    <AppxPackageRecipe>D:\I\Sousaku\FamilyReunionDinner\FamilyReunionDinner2\Binaries\HoloLens\FamilyReunionDinner2.build.appxrecipe</AppxPackageRecipe>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Test|arm64'">
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Local.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Simulator.xml" />
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
+  </ItemGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Mac_Test|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -2161,80 +2161,106 @@
     <AdditionalOptions>/std:c++14</AdditionalOptions>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="..\..\FamilyReunionDinner2.uproject"/>
-    <None Include="..\..\Source\FamilyReunionDinner2.Target.cs"/>
-    <None Include="..\..\Source\FamilyReunionDinner2Editor.Target.cs"/>
-    <None Include="..\..\Source\FamilyReunionDinner2Server.Target.cs"/>
-    <None Include="..\..\.gitignore"/>
-    <None Include="..\..\Config\DefaultEditor.ini"/>
-    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini"/>
-    <None Include="..\..\Config\DefaultEngine.ini"/>
-    <None Include="..\..\Config\DefaultGame.ini"/>
-    <None Include="..\..\Config\DefaultInput.ini"/>
-    <None Include="..\..\Config\RecipeCardData.txt"/>
+    <None Include="..\..\FamilyReunionDinner2.uproject" />
+    <None Include="..\..\Source\FamilyReunionDinner2.Target.cs" />
+    <None Include="..\..\Source\FamilyReunionDinner2Editor.Target.cs" />
+    <None Include="..\..\Source\FamilyReunionDinner2Server.Target.cs" />
+    <None Include="..\..\.gitignore" />
+    <None Include="..\..\Config\DefaultEditor.ini" />
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini" />
+    <None Include="..\..\Config\DefaultEngine.ini" />
+    <None Include="..\..\Config\DefaultGame.ini" />
+    <None Include="..\..\Config\DefaultInput.ini" />
+    <None Include="..\..\Config\RecipeCardData.txt" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\APIClass.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\APIClass.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\APIClass.h" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\CookingCard.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\CookingCard.h"/>
-    <None Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.Build.cs"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\CookingCard.h" />
+    <None Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.Build.cs" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2.h" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Character.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Character.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Character.h" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2GameMode.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2GameMode.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2GameMode.h" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2HUD.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2HUD.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2HUD.h" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Projectile.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Projectile.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\FamilyReunionDinner2Projectile.h" />
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\GameMenuCharacter.cpp">
+      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\GameMenuCharacter.h" />
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\GameMenuGameMode.cpp">
+      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\GameMenuGameMode.h" />
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\GameMenuGameStateBase.cpp">
+      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\GameMenuGameStateBase.h" />
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\GameMenuPlayerState.cpp">
+      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\GameMenuPlayerState.h" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\MyGameStateBase.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\MyGameStateBase.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\MyGameStateBase.h" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\MyPlayerState.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\MyPlayerState.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\MyPlayerState.h" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\RecipeCard.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\RecipeCard.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\RecipeCard.h" />
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\RecipeCardStruct.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FamilyReunionDinner2\RecipeCardStruct.h"/>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\RecipeCardStruct.h" />
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\ServerInfoStruct.cpp">
+      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\G\User\Tools\UnrealEngine-release2\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\G\User\Tools\UnrealEngine-release2\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\FamilyReunionDinner2\Definitions.FamilyReunionDinner2.h</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\ServerInfoStruct.h" />
   </ItemGroup>
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <PropertyGroup>
     <CleanDependsOn> $(CleanDependsOn); </CleanDependsOn>
-    <CppCleanDependsOn></CppCleanDependsOn>
+    <CppCleanDependsOn>
+    </CppCleanDependsOn>
   </PropertyGroup>
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
