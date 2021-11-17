@@ -26,6 +26,4 @@ public:
 
 	TArray<FProcHandle> serverHandles;
 	void openServer(int index);
-
-	void notifyServerListUpdate();
 };

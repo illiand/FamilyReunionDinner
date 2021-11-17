@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\FamilyReunionDinner2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{F00E023F-7BE7-4933-93D2-7F5463EEFB9D}</UniqueIdentifier>
+      <UniqueIdentifier>{FED65408-D37E-4635-8D1C-1E9C8D6A1A62}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\FamilyReunionDinner2.Target.cs">
       <Filter>Source</Filter>
@@ -16,7 +16,7 @@
     </None>
     <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{D12CAB89-C676-4AD8-95BB-8A14359C3CAE}</UniqueIdentifier>
+      <UniqueIdentifier>{C0F469F1-4F5E-4445-BEA3-BF3D4834BD60}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -37,7 +37,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\FamilyReunionDinner2">
-      <UniqueIdentifier>{8F9436D8-01D2-4EE1-A950-E05AA73B79E3}</UniqueIdentifier>
+      <UniqueIdentifier>{7808467A-F3E9-4751-95DB-2670D2DFE6B5}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\APIClass.cpp">
       <Filter>Source\FamilyReunionDinner2</Filter>
@@ -100,6 +100,12 @@
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\FamilyReunionDinner2\GameMenuGameStateBase.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\GameMenuLevelScriptActor.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\GameMenuLevelScriptActor.h">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\GameMenuPlayerState.cpp">

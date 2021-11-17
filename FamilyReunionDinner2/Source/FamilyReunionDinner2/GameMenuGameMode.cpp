@@ -19,9 +19,6 @@ AGameMenuGameMode::AGameMenuGameMode()
 void AGameMenuGameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
-
-	Cast<AGameMenuPlayerState>(NewPlayer->GetPawn()->GetPlayerState())->serverInfo = serverInfo;
-	Cast<AGameMenuPlayerState>(NewPlayer->GetPawn()->GetPlayerState())->FamilyReunionDinner2PlayerID = FMath::RandRange(10000000, 99999999);
 }
 
 void AGameMenuGameMode::openServer(int index)
