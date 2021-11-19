@@ -4,6 +4,7 @@
 #include "GameMenuPlayerState.h"
 #include "Net/UnrealNetwork.h"
 #include "Misc/OutputDeviceNull.h"
+#include "GameMenuGameMode.h"
 #include "GameMenuLevelScriptActor.h"
 
 void AGameMenuPlayerState::BeginPlay() 
@@ -13,20 +14,8 @@ void AGameMenuPlayerState::BeginPlay()
 	if (GetLocalRole() != 3 && GetOwner() != NULL)
 	{
 		this->generateFamilyReunionDinner2UserID();
+		this->requestServerInfo();
 	}
-}
-
-void AGameMenuPlayerState::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(AGameMenuPlayerState, serverListNeedUpdate);
-	DOREPLIFETIME(AGameMenuPlayerState, serverInfo);
-}
-
-void AGameMenuPlayerState::updateComplete_Implementation() 
-{
-	serverListNeedUpdate = false;
 }
 
 void AGameMenuPlayerState::generateFamilyReunionDinner2UserID_Implementation()
@@ -50,4 +39,70 @@ void AGameMenuPlayerState::call_createMainMenu()
 		AGameMenuLevelScriptActor* levelBluePrint = Cast<AGameMenuLevelScriptActor>(GetLevel()->GetLevelScriptActor());
 		levelBluePrint->CallFunctionByNameWithArguments(TEXT("initMainMenu"), ar, NULL, true);
 	}	
+}
+
+void AGameMenuPlayerState::updateServerInfoUpdate_Implementation(const TArray<FServerListInfoStruct>& data)
+{
+	for (int i = 0; i < data.Num(); i += 1) 
+	{
+		handleServerCreateEvent_Implementation(data[i]);
+	}
+}
+
+void AGameMenuPlayerState::requestServerInfo_Implementation() 
+{
+	TArray<FServerListInfoStruct> data;
+
+	for (int i = 0; i < Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo.Num(); i++)
+	{
+		data.Add(Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[i].serverInfo);
+	}
+
+	sendServerInfo(data);
+}
+
+void AGameMenuPlayerState::sendServerInfo_Implementation(const TArray<FServerListInfoStruct>& data)
+{
+	for (int i = 0; i < data.Num(); i += 1)
+	{
+		handleServerCreateEvent_Implementation(data[i]);
+	}
+}
+
+void AGameMenuPlayerState::updateRoomInfoUpdate_Implementation(const TArray<FRoomPlayerInfoStruct>& data)
+{
+	for (int i = 0; i < data.Num(); i += 1)
+	{
+		handlePlayerJoinRoomEvent_Implementation(data[i]);
+	}
+}
+
+void AGameMenuPlayerState::handlePlayerJoinRoomEvent_Implementation(FRoomPlayerInfoStruct data)
+{
+	Cast<AGameMenuCharacter>(GetPawn())->GameMenuUI->addRoomPlayerUI(data.ID, data.name);
+}
+
+void AGameMenuPlayerState::handlePlayerLeaveRoomEvent_Implementation(int id)
+{
+	Cast<AGameMenuCharacter>(GetPawn())->GameMenuUI->removeRoomPlayerUI(id);
+}
+
+void AGameMenuPlayerState::handleRoomPlayerChangedEvent_Implementation(int curNum, int maxNum)
+{
+	Cast<AGameMenuCharacter>(GetPawn())->GameMenuUI->roomPlayerChangedUI(curNum, maxNum);
+}
+
+void AGameMenuPlayerState::handleServerListRoomPlayerChangedEvent_Implementation(int id, int curNum, int maxNum)
+{
+	Cast<AGameMenuCharacter>(GetPawn())->GameMenuUI->serverListRoomPlayerChangedUI(id, curNum, maxNum);
+}
+
+void AGameMenuPlayerState::handleServerCreateEvent_Implementation(FServerListInfoStruct data)
+{
+	Cast<AGameMenuCharacter>(GetPawn())->GameMenuUI->addServerListUI(data.ID, data.name, data.curPlayerNum, data.maxPlayerNum);
+}
+
+void AGameMenuPlayerState::handleServerDeleteEvent_Implementation(int id)
+{
+	Cast<AGameMenuCharacter>(GetPawn())->GameMenuUI->removeServerListUI(id);
 }

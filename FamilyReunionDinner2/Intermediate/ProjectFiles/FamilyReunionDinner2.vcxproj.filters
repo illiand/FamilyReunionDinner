@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\FamilyReunionDinner2.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{FED65408-D37E-4635-8D1C-1E9C8D6A1A62}</UniqueIdentifier>
+      <UniqueIdentifier>{DBB01E72-8B24-4DF9-9847-3B7F03E6CEC8}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\FamilyReunionDinner2.Target.cs">
       <Filter>Source</Filter>
@@ -16,7 +16,7 @@
     </None>
     <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{C0F469F1-4F5E-4445-BEA3-BF3D4834BD60}</UniqueIdentifier>
+      <UniqueIdentifier>{84197A32-9E87-47B6-8A53-29207FCD21A1}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -37,7 +37,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\FamilyReunionDinner2">
-      <UniqueIdentifier>{7808467A-F3E9-4751-95DB-2670D2DFE6B5}</UniqueIdentifier>
+      <UniqueIdentifier>{ADFE212F-E8F4-422E-BE7B-D85067934B4D}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\APIClass.cpp">
       <Filter>Source\FamilyReunionDinner2</Filter>
@@ -126,6 +126,12 @@
     <ClInclude Include="..\..\Source\FamilyReunionDinner2\MyPlayerState.h">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\MyUserWidget.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\MyUserWidget.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\RecipeCard.cpp">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClCompile>
@@ -138,10 +144,22 @@
     <ClInclude Include="..\..\Source\FamilyReunionDinner2\RecipeCardStruct.h">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\RoomPlayerInfoStruct.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\RoomPlayerInfoStruct.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\FamilyReunionDinner2\ServerInfoStruct.cpp">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\FamilyReunionDinner2\ServerInfoStruct.h">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FamilyReunionDinner2\ServerListInfoStruct.cpp">
+      <Filter>Source\FamilyReunionDinner2</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FamilyReunionDinner2\ServerListInfoStruct.h">
       <Filter>Source\FamilyReunionDinner2</Filter>
     </ClInclude>
   </ItemGroup>

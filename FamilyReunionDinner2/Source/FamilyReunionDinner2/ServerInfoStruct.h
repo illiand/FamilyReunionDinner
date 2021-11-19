@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameMenuCharacter.h"
+#include "ServerListInfoStruct.h"
 #include "ServerInfoStruct.generated.h"
 /**
  *
@@ -13,10 +14,6 @@ struct FServerInfoStruct
 {
 	GENERATED_USTRUCT_BODY()
 
-	UPROPERTY(BlueprintReadOnly)
-	FString name;
-	UPROPERTY(BlueprintReadOnly)
+	FServerListInfoStruct serverInfo;
 	TArray<AGameMenuCharacter*> currentPlayers;
-	UPROPERTY(BlueprintReadOnly)
-	int maxPlayerNum;
 };
