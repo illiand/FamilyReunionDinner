@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
 #include "RecipeCardStruct.h"
-#include "APIClass.h"
 #include "RecipeCard.h"
 #include "IngredientCardStruct.h"
 #include "IngredientCard.h"
@@ -22,10 +21,13 @@ class FAMILYREUNIONDINNER2_API AMyGameStateBase : public AGameStateBase
 	GENERATED_BODY()
 	
 public:
-	TArray<AActor*> recipes = TArray<AActor*>();
-	TArray<AActor*> ingredients = TArray<AActor*>();
-	TArray<AActor*> cooking = TArray<AActor*>();
+	TArray<FRecipeCardStruct> recipeCardFileData = TArray<FRecipeCardStruct>();
+	TArray<FIngredientCardStruct> ingredientCardFileData = TArray<FIngredientCardStruct>();
+	TArray<FCookingCardStruct> cookingCardFileData = TArray<FCookingCardStruct>();
 
+	TArray<FRecipeCardStruct> recipeCardOnTableFileData = TArray<FRecipeCardStruct>();
+	TArray<FIngredientCardStruct> ingredientCardOnTableFileData = TArray<FIngredientCardStruct>();
+	
 public:
 	void initGame();
 	void nextTurn();

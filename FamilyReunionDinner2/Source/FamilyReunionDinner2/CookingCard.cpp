@@ -15,8 +15,6 @@ ACookingCard::ACookingCard()
 void ACookingCard::BeginPlay()
 {
 	Super::BeginPlay();
-
-	assignInfo();
 }
 
 // Called every frame
@@ -25,14 +23,7 @@ void ACookingCard::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ACookingCard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(ACookingCard, data);
-}
-
-void ACookingCard::assignInfo_Implementation()
+void ACookingCard::assignInfo()
 {
 
 	TArray<UTextRenderComponent*> attributes;

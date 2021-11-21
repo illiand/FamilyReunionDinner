@@ -4,6 +4,7 @@
 #include "APIClass.h"
 #include "MyGameStateBase.h"
 #include "FamilyReunionDinner2GameMode.h"
+#include "MyPlayerState.h"
 
 TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards() 
 {

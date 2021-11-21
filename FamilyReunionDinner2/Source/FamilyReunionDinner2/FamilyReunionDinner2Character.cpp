@@ -118,6 +118,10 @@ void AFamilyReunionDinner2Character::pickFromEye()
 
 void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor) 
 {
+	UE_LOG(LogTemp, Warning, TEXT("find: %d %d"), hitActor, true);
+
+	if (true)return;
+
 	if (hitActor->Tags.Num() > 0 && hitActor->Tags[0] == TEXT("card"))
 	{
 		ARecipeCard* curCard = Cast<ARecipeCard>(hitActor);

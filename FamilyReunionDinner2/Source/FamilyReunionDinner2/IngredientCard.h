@@ -26,10 +26,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(Replicated)
-		FIngredientCardStruct data;
+	FIngredientCardStruct data;
 
-	UFUNCTION(Reliable, Client)
-		void assignInfo();
-	void assignInfo_Implementation();
+	void assignInfo();
 };

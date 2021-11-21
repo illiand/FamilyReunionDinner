@@ -29,6 +29,7 @@ void AFamilyReunionDinner2GameMode::PostLogin(APlayerController* NewPlayer)
 	if (currentPlayerCount == 1) 
 	{
 		Cast<AMyPlayerState>(GameState->PlayerArray[0])->inTurn = true;
+		Cast<AMyPlayerState>(GameState->PlayerArray[0])->setTurn(true);
 	}
 }
 

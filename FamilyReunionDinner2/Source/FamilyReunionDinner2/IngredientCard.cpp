@@ -15,8 +15,6 @@ AIngredientCard::AIngredientCard()
 void AIngredientCard::BeginPlay()
 {
 	Super::BeginPlay();
-
-	assignInfo();
 }
 
 // Called every frame
@@ -25,16 +23,8 @@ void AIngredientCard::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AIngredientCard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const
+void AIngredientCard::assignInfo()
 {
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(AIngredientCard, data);
-}
-
-void AIngredientCard::assignInfo_Implementation()
-{
-
 	TArray<UTextRenderComponent*> attributes;
 	GetComponents(attributes);
 
