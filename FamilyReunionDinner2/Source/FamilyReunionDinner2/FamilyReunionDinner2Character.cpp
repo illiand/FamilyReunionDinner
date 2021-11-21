@@ -47,15 +47,19 @@ void AFamilyReunionDinner2Character::setLocationByIndex(int index)
 	switch (index)
 	{
 	case 1:
-		SetActorLocation(FVector(-10, 0, 40));
-		break;
-
-	case 2:
 		SetActorLocation(FVector(60, 60, 40));
 		break;
 
-	case 3:
+	case 2:
 		SetActorLocation(FVector(60, -90, 40));
+		break;
+
+	case 3:
+		SetActorLocation(FVector(180, -90, 40));
+		break;
+	
+	case 4:
+		SetActorLocation(FVector(180, 60, 40));
 		break;
 	}
 }
