@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameMenuPlayerState.h"
 #include "GameMenuGameMode.h"
+#include "GameMenuGameStateBase.h"
 #include "APIClass.h"
 
 
