@@ -2,6 +2,7 @@
 
 #include "IngredientCard.h"
 #include "Components/BoxComponent.h"
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
 AIngredientCard::AIngredientCard()

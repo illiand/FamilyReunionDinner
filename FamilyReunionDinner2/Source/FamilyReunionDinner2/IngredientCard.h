@@ -4,8 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "APIClass.h"
-#include "FamilyReunionDinner2Character.h"
+#include "IngredientCardStruct.h"
 #include "Components/TextRenderComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "IngredientCard.generated.h"
