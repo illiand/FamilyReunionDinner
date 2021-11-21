@@ -143,7 +143,7 @@ void AGameMenuCharacter::leaveRoomRequest_Implementation()
 {	
 	int roomID = Cast<AGameMenuPlayerState>(GetPlayerState())->playerRoomID;
 	int roomIndex = findRoomIndexByID(roomID);
-
+	
 	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Remove(this);
 	int curPlayerNum = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Num();
 	int maxPlayerNum = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].serverInfo.maxPlayerNum;

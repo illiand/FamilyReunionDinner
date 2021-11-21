@@ -74,7 +74,7 @@ public:
 	UFUNCTION(Client, Reliable)
 	void handleRoomPlayerChangedEvent(int curNum, int maxNum);
 	void handleRoomPlayerChangedEvent_Implementation(int curNum, int maxNum);
-
+	
 	UFUNCTION(Client, Reliable)
 	void handleServerListRoomPlayerChangedEvent(int id, int curNum, int maxNum);
 	void handleServerListRoomPlayerChangedEvent_Implementation(int id, int curNum, int maxNum);
