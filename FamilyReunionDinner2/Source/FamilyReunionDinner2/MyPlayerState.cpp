@@ -3,11 +3,17 @@
 
 #include "MyPlayerState.h"
 
-void AMyPlayerState::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+void AMyPlayerState::setCookingCards_Implementation(const TArray<ACookingCard*>& data)
 {
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	cookingCards = data;
+}
 
-	DOREPLIFETIME(AMyPlayerState, cookingCards);
-	DOREPLIFETIME(AMyPlayerState, monsterPreference);
-	DOREPLIFETIME(AMyPlayerState, inTurn);
+void AMyPlayerState::setMonsterPreferenceUI_Implementation(const FString& path)
+{
+
+}
+
+void AMyPlayerState::setTurn_Implementation(bool ifTurn)
+{
+	inTurn = ifTurn;
 }

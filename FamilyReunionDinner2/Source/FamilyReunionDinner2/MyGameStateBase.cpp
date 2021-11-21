@@ -47,6 +47,7 @@ void AMyGameStateBase::initGame()
 void AMyGameStateBase::nextTurn() 
 {
 	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->inTurn = false;
+	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->setTurn(false);
 	currentTurnIndex += 1;
 
 	if (currentTurnIndex == PlayerArray.Num()) 
@@ -55,5 +56,5 @@ void AMyGameStateBase::nextTurn()
 	}
 
 	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->inTurn = true;
-
+	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->setTurn(true);
 }

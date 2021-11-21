@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
-#include "Net/UnrealNetwork.h"
 #include "CookingCard.h"
 #include "MyPlayerState.generated.h"
 
@@ -18,13 +17,21 @@ class FAMILYREUNIONDINNER2_API AMyPlayerState : public APlayerState
 	
 public:
 	float notificationCount;
-
-	UPROPERTY(Replicated)
 	TArray<ACookingCard*> cookingCards = TArray<ACookingCard*>();
 
-	UPROPERTY(Replicated)
-	FString monsterPreference;
-
-	UPROPERTY(Replicated, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	bool inTurn = false;
+
+public:
+	UFUNCTION(Reliable, Client)
+	void setCookingCards(const TArray<ACookingCard*>& data);
+	void setCookingCards_Implementation(const TArray<ACookingCard*>& data);
+
+	UFUNCTION(Reliable, Client)
+	void setMonsterPreferenceUI(const FString& path);
+	void setMonsterPreferenceUI_Implementation(const FString& path);
+
+	UFUNCTION(Reliable, Client)
+	void setTurn(bool ifTurn);
+	void setTurn_Implementation(bool ifTurn);
 };
