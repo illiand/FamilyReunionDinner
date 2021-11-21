@@ -27,8 +27,6 @@ void AGameMenuCharacter::BeginPlay()
 void AGameMenuCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	//UE_LOG(LogTemp, Warning, TEXT("bug?"));
 }
 
 // Called to bind functionality to input
@@ -38,27 +36,41 @@ void AGameMenuCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 }
 
-void AGameMenuCharacter::createGame_Implementation(AActor* host, const FString& serverName, int maxPlayerNum)
+void AGameMenuCharacter::createGame_Implementation(const FString& serverName, int maxPlayerNum)
 {
-	FServerInfoStruct newServerInfo;
-	newServerInfo.name = serverName;
-	newServerInfo.maxPlayerNum = maxPlayerNum;
-	newServerInfo.currentPlayers.Add(Cast<AGameMenuCharacter>(host));
+	FServerInfoStruct newServerListInfo;
 
-	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo.Add(newServerInfo);
+	FServerListInfoStruct serverInfo;
+	TArray<AGameMenuCharacter*> currentPlayers;
+	serverInfo.ID = FMath::RandRange(10000, 99999);
+	serverInfo.name = serverName;
+	serverInfo.curPlayerNum = 1;
+	serverInfo.maxPlayerNum = maxPlayerNum;
+	currentPlayers.Add(Cast<AGameMenuCharacter>(this));
 	
-	AGameStateBase* gameState = GetWorld()->GetGameState();
+	newServerListInfo.serverInfo = serverInfo;
+	newServerListInfo.currentPlayers = currentPlayers;
 
-	for (int i = 0; i < gameState->PlayerArray.Num(); i++)
+	Cast<AGameMenuPlayerState>(GetPlayerState())->playerRoomID = serverInfo.ID;
+
+	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo.Add(newServerListInfo);
+	
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
 	{
-		Cast<AGameMenuPlayerState>(gameState->PlayerArray[i])->serverInfo = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo;
-		Cast<AGameMenuPlayerState>(gameState->PlayerArray[i])->serverListNeedUpdate = true;
+		Cast<AGameMenuPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->handleServerCreateEvent(serverInfo);
 	}
+
+	FRoomPlayerInfoStruct curRoomInfo;
+	curRoomInfo.ID = Cast<AGameMenuPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID;
+
+	Cast<AGameMenuPlayerState>(GetPlayerState())->handlePlayerJoinRoomEvent(curRoomInfo);
+
+	joinRoomEnd(serverInfo.ID, serverName, 1, maxPlayerNum);
 }
 
-void AGameMenuCharacter::startGame_Implementation(int index) 
+void AGameMenuCharacter::startGame_Implementation(int roomID) 
 {
-	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->openServer(index);
+	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->openServer(findRoomIndexByID(roomID));
 }
 
 void AGameMenuCharacter::enterSession_Implementation(int portNum) 
@@ -67,54 +79,106 @@ void AGameMenuCharacter::enterSession_Implementation(int portNum)
 	UGameplayStatics::OpenLevel(GetWorld(), FName(*target));
 }
 
-int AGameMenuCharacter::getPlayerCurrentRoomIndex() 
+int AGameMenuCharacter::findRoomIndexByID(int roomID) 
 {
-	TArray<FServerInfoStruct> serverInfo = Cast<AGameMenuPlayerState>(GetPlayerState())->serverInfo;
+	TArray<FServerInfoStruct> serverInfo = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo;
 
-	for (int i = 0; i < serverInfo.Num(); i++)
+	for (int i = 0; i < serverInfo.Num(); i += 1)
 	{
-		for (int j = 0; j < serverInfo[i].currentPlayers.Num(); j++)
+		if (serverInfo[i].serverInfo.ID == roomID) 
 		{
-			if(serverInfo[i].currentPlayers[j] == this)
-			{
-				return i;
-			}
+			return i;
 		}
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT("bug?"));
 
 	return -1;
 }
 
-void AGameMenuCharacter::joinRoom_Implementation(int roomIndex) 
+void AGameMenuCharacter::joinRoomRequest_Implementation(int roomID) 
 {
-	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Add(this);
-	AGameStateBase* gameState = GetWorld()->GetGameState();
+	Cast<AGameMenuPlayerState>(GetPlayerState())->playerRoomID = roomID;
+	int roomIndex = findRoomIndexByID(roomID);
 
-	for (int i = 0; i < gameState->PlayerArray.Num(); i++)
+	TArray<FRoomPlayerInfoStruct> curInfo;
+
+	//add existing players for this new joining player to the room
+	for (int i = 0; i < Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Num(); i++)
 	{
-		Cast<AGameMenuPlayerState>(gameState->PlayerArray[i])->serverInfo = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo;
-		Cast<AGameMenuPlayerState>(gameState->PlayerArray[i])->serverListNeedUpdate = true;
+		FRoomPlayerInfoStruct curPlayer;
+		curPlayer.ID = Cast<AGameMenuPlayerState>(Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers[i]->GetPlayerState())->FamilyReunionDinner2PlayerID;
+
+		curInfo.Add(curPlayer);
 	}
+
+	Cast<AGameMenuPlayerState>(GetPlayerState())->updateRoomInfoUpdate(curInfo);
+
+	//add this new player to the room
+	//add this player ui to all players in the room
+	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Add(this);
+	int curPlayerNum = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Num();
+	int maxPlayerNum = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].serverInfo.maxPlayerNum;
+
+	for (int i = 0; i < Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Num(); i += 1)
+	{
+		FRoomPlayerInfoStruct newPlayer;
+		newPlayer.ID = Cast<AGameMenuPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID;
+		Cast<AGameMenuPlayerState>(Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers[i]->GetPlayerState())->handlePlayerJoinRoomEvent(newPlayer);
+		Cast<AGameMenuPlayerState>(Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers[i]->GetPlayerState())->handleRoomPlayerChangedEvent(curPlayerNum, maxPlayerNum);
+	}
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		Cast<AGameMenuPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->handleServerListRoomPlayerChangedEvent(roomID, curPlayerNum, maxPlayerNum);
+	}
+
+	joinRoomEnd(roomID, Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].serverInfo.name, curPlayerNum, maxPlayerNum);
 }
 
-void AGameMenuCharacter::leaveRoom_Implementation()
+void AGameMenuCharacter::joinRoomEnd_Implementation(int id, const FString& name, int curNum, int maxNum)
 {
-	int roomIndex = getPlayerCurrentRoomIndex();
-	
-	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Remove(this);
+	GameMenuUI->createRoomCallback(id, name, curNum, maxNum);
+}
 
+void AGameMenuCharacter::leaveRoomRequest_Implementation()
+{	
+	int roomID = Cast<AGameMenuPlayerState>(GetPlayerState())->playerRoomID;
+	int roomIndex = findRoomIndexByID(roomID);
+
+	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Remove(this);
+	int curPlayerNum = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Num();
+	int maxPlayerNum = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].serverInfo.maxPlayerNum;
+
+	//existing players
+	for (int i = 0; i < Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Num(); i += 1)
+	{
+		Cast<AGameMenuPlayerState>(Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers[i]->GetPlayerState())->handlePlayerLeaveRoomEvent(Cast<AGameMenuPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+		Cast<AGameMenuPlayerState>(Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers[i]->GetPlayerState())->handleRoomPlayerChangedEvent(curPlayerNum, maxPlayerNum);
+	}
+
+	//delete the server if 0
 	if (Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Num() == 0) 
 	{
 		Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo.RemoveAt(roomIndex);
-	}
-	
-	AGameStateBase* gameState = GetWorld()->GetGameState();
 
-	for (int i = 0; i < gameState->PlayerArray.Num(); i++)
-	{
-		Cast<AGameMenuPlayerState>(gameState->PlayerArray[i])->serverInfo = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo;
-		Cast<AGameMenuPlayerState>(gameState->PlayerArray[i])->serverListNeedUpdate = true;
+		for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1) 
+		{
+			Cast<AGameMenuPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->handleServerDeleteEvent(roomID);
+		}
 	}
+	else 
+	{
+		//else update the UI of current players for all users
+		for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+		{
+			Cast<AGameMenuPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->handleServerListRoomPlayerChangedEvent(roomID, curPlayerNum, maxPlayerNum);
+		}
+	}
+
+	//show the serverlist UI
+	playerLeaveRoom();
+}
+
+void AGameMenuCharacter::playerLeaveRoom_Implementation() 
+{
+	GameMenuUI->LeaveRoomCallback();
 }

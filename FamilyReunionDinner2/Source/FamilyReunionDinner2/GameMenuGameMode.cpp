@@ -39,14 +39,13 @@ void AGameMenuGameMode::openServer(int index)
 		{
 			serverInfo[index].currentPlayers[i]->enterSession(7777 + serverHandles.Num());
 		}
-
-		serverInfo.RemoveAt(index);
 		
 		for (int i = 0; i < GameState->PlayerArray.Num(); i++)
 		{
-			Cast<AGameMenuPlayerState>(GameState->PlayerArray[i])->serverInfo = Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo;
-			Cast<AGameMenuPlayerState>(GameState->PlayerArray[i])->serverListNeedUpdate = true;
+			Cast<AGameMenuPlayerState>(GameState->PlayerArray[i])->handleServerDeleteEvent(serverInfo[index].serverInfo.ID);
 		}
+
+		serverInfo.RemoveAt(index);
 	}
 	else
 	{

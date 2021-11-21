@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "MyUserWidget.h"
 #include "GameMenuCharacter.generated.h"
 
 UCLASS()
@@ -21,7 +22,7 @@ protected:
 
 public:
 	UPROPERTY(BlueprintReadWrite)
-	int playerLocation = 0;
+	UMyUserWidget* GameMenuUI;
 
 public:	
 	// Called every frame
@@ -31,23 +32,31 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable)
-	int getPlayerCurrentRoomIndex();
+	int findRoomIndexByID(int roomID);
 
 	UFUNCTION(Reliable, Server, BlueprintCallable)
-	void createGame(AActor* host, const FString& serverName, int maxPlayerNum);
-	void createGame_Implementation(AActor* host, const FString& serverName, int maxPlayerNum);
+	void createGame(const FString& serverName, int maxPlayerNum);
+	void createGame_Implementation(const FString& serverName, int maxPlayerNum);
 
 	UFUNCTION(Reliable, Server, BlueprintCallable)
-	void startGame(int index);
-	void startGame_Implementation(int index);
+	void startGame(int roomID);
+	void startGame_Implementation(int roomID);
 
 	UFUNCTION(Reliable, Server, BlueprintCallable)
-	void joinRoom(int roomIndex);
-	void joinRoom_Implementation(int roomIndex);
+	void joinRoomRequest(int roomID);
+	void joinRoomRequest_Implementation(int roomID);
+
+	UFUNCTION(Reliable, Client)
+	void joinRoomEnd(int id, const FString& name, int curNum, int maxNum);
+	void joinRoomEnd_Implementation(int id, const FString& name, int curNum, int maxNum);
 
 	UFUNCTION(Reliable, Server, BlueprintCallable)
-	void leaveRoom();
-	void leaveRoom_Implementation();
+	void leaveRoomRequest();
+	void leaveRoomRequest_Implementation();
+
+	UFUNCTION(Reliable, Client)
+	void playerLeaveRoom();
+	void playerLeaveRoom_Implementation();
 
 	UFUNCTION(Reliable, Client)
 	void enterSession(int portNum);
