@@ -1,9 +1,9 @@
 {
 	"SourceFiles": [
-		"D:\\I\\Sousaku\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2\\FamilyReunionDinner2.Build.cs",
-		"D:\\I\\Sousaku\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2.Target.cs",
-		"D:\\I\\Sousaku\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2Editor.Target.cs",
-		"D:\\I\\Sousaku\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2Server.Target.cs"
+		"F:\\game projects\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2\\FamilyReunionDinner2.Build.cs",
+		"F:\\game projects\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2.Target.cs",
+		"F:\\game projects\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2Editor.Target.cs",
+		"F:\\game projects\\FamilyReunionDinner\\FamilyReunionDinner2\\Source\\FamilyReunionDinner2Server.Target.cs"
 	],
 	"EngineVersion": "4.27.1"
 }

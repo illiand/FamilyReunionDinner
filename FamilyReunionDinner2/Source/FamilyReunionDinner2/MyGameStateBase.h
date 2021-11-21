@@ -7,6 +7,10 @@
 #include "RecipeCardStruct.h"
 #include "APIClass.h"
 #include "RecipeCard.h"
+#include "IngredientCardStruct.h"
+#include "IngredientCard.h"
+#include "CookingCardStruct.h"
+#include "CookingCard.h"
 #include "MyGameStateBase.generated.h"
 
 /**
