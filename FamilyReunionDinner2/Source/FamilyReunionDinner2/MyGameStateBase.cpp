@@ -14,7 +14,7 @@ void AMyGameStateBase::initGame()
 	cookingCardFileData = UAPIClass::makeCookingCards();
 	TSubclassOf<ACookingCard> cookingCard = LoadClass<ACookingCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyCookingCard.MyCookingCard_C'"));
 	
-	int cookingCardCount = 5;
+	int cookingCardCount = 3;
 	// cookingCardCount = 7 if PlayerArray.Num() = 3/4
 
 	//randomly create replicatable cooking cards
