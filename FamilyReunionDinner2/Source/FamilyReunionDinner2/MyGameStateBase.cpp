@@ -14,19 +14,27 @@ void AMyGameStateBase::initGame()
 	cookingCardFileData = UAPIClass::makeCookingCards();
 	TSubclassOf<ACookingCard> cookingCard = LoadClass<ACookingCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyCookingCard.MyCookingCard_C'"));
 	
+	int cookingCardCount = 3;
+	// cookingCardCount = 7 if PlayerArray.Num() = 3/4
+
 	//randomly create replicatable cooking cards
-	for (int i = 0; i < PlayerArray.Num(); i += 1)
-	{
-		float x = 40 + i % 5 * 16.5;
-		float y = 30 + i / 5 * 27;
-
-		ACookingCard* card = GetWorld()->SpawnActor<ACookingCard>(cookingCard, FVector(x, y, 64.5), FRotator(0, 180, 90), FActorSpawnParameters());
-
-		int curCardIndex = FMath::RandRange(0, cookingCardFileData.Num() - 1);
-		card->data = cookingCardFileData[curCardIndex];
-		cookingCardFileData.RemoveAt(curCardIndex);
-	
-		Cast<AMyPlayerState>(PlayerArray[0])->cookingCards.Add(card);
+	for (int j = 0; j < PlayerArray.Num(); j += 1)
+	{//create cards for each player
+		FVector playerLocation = PlayerArray[j]->GetPawn()->GetActorLocation();
+		UE_LOG(LogTemp, Warning, TEXT("%f %f"), playerLocation.X, playerLocation.Y);
+		for (int i = 0; i < cookingCardCount; i += 1) {
+			float y = 30 + i / 5 * 27;
+			float x = playerLocation.X - 20 + (i % 5 * 16.5);
+			if (j % 2 != 0){
+				y = -(30 + (i / 5 * 27));
+			}
+			UE_LOG(LogTemp, Warning, TEXT("%f"), x);
+			ACookingCard* card = GetWorld()->SpawnActor<ACookingCard>(cookingCard, FVector(x,y, 64.5), FRotator(0, (j-1)*180, 90), FActorSpawnParameters());
+			int curCardIndex = FMath::RandRange(0, cookingCardFileData.Num() - 1);
+			card->data = cookingCardFileData[curCardIndex];
+			cookingCardFileData.RemoveAt(curCardIndex);
+			Cast<AMyPlayerState>(PlayerArray[0])->cookingCards.Add(card);
+		}
 	}
 
 	//pick 4 cards randomly for each
