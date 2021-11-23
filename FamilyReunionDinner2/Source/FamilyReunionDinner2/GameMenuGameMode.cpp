@@ -24,7 +24,7 @@ void AGameMenuGameMode::PostLogin(APlayerController* NewPlayer)
 void AGameMenuGameMode::openServer(int index)
 {
 	FString execPath = FPaths::ProjectDir() + TEXT("Binaries/Win64/FamilyReunionDinner2Server.exe");
-	FString args = TEXT("/Game/FirstPersonCPP/Maps/FirstPersonExampleMap -log");
+	FString args = TEXT("/Game/FirstPersonCPP/Maps/kitchen -log");
 
 	UE_LOG(LogTemp, Warning, TEXT("Current server path = %s"), *FPaths::ConvertRelativePathToFull(execPath));
 

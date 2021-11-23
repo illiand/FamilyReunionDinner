@@ -3,6 +3,7 @@
 
 #include "MyGameStateBase.h"
 #include "APIClass.h"
+#include "CardBorderActor.h"
 #include "MyPlayerState.h"
 
 void AMyGameStateBase::initGame()
@@ -14,6 +15,8 @@ void AMyGameStateBase::initGame()
 	cookingCardFileData = UAPIClass::makeCookingCards();
 	TSubclassOf<ACookingCard> cookingCard = LoadClass<ACookingCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyCookingCard.MyCookingCard_C'"));
 	
+	TSubclassOf<ACardBorderActor> cardBorderClass = LoadClass<ACardBorderActor>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/BP_CardBorder.BP_CardBorder_C'"));
+
 	int cookingCardCount = 3;
 	// cookingCardCount = 7 if PlayerArray.Num() = 3/4
 
@@ -21,19 +24,23 @@ void AMyGameStateBase::initGame()
 	for (int j = 0; j < PlayerArray.Num(); j += 1)
 	{//create cards for each player
 		FVector playerLocation = PlayerArray[j]->GetPawn()->GetActorLocation();
-		UE_LOG(LogTemp, Warning, TEXT("%f %f"), playerLocation.X, playerLocation.Y);
+		
 		for (int i = 0; i < cookingCardCount; i += 1) {
 			float y = 30 + i / 5 * 27;
 			float x = playerLocation.X - 20 + (i % 5 * 16.5);
 			if (j % 2 != 0){
 				y = -(30 + (i / 5 * 27));
 			}
-			UE_LOG(LogTemp, Warning, TEXT("%f"), x);
+			
 			ACookingCard* card = GetWorld()->SpawnActor<ACookingCard>(cookingCard, FVector(x,y, 64.5), FRotator(0, (j-1)*180, 90), FActorSpawnParameters());
 			int curCardIndex = FMath::RandRange(0, cookingCardFileData.Num() - 1);
 			card->data = cookingCardFileData[curCardIndex];
 			cookingCardFileData.RemoveAt(curCardIndex);
-			Cast<AMyPlayerState>(PlayerArray[0])->cookingCards.Add(card);
+			Cast<AMyPlayerState>(PlayerArray[j])->cookingCards.Add(card);
+
+			ACardBorderActor* cardBorder = GetWorld()->SpawnActor<ACardBorderActor>(cardBorderClass, FVector(0, 0, 0), FRotator(0, 0, 0), FActorSpawnParameters());
+
+			cardBorder->appendCard(card);
 		}
 	}
 
