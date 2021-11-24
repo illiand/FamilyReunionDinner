@@ -52,3 +52,10 @@ void AIngredientCard::assignInfo()
 	}
 }
 
+void AIngredientCard::castEffect_Implementation(const FString& name)
+{
+	if (name.Compare("Mutton") == 0) 
+	{
+
+	}
+}

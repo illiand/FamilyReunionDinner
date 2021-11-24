@@ -32,6 +32,17 @@ public:
 	void initGame();
 	void nextTurn();
 
+	void addRecipeCardInGame(int index);
+	void addIngredientCardInGame(int index);
+	void addCookingCardInGame(APlayerState* playerState, int index);
+
+	void castIngredientCardEffect(int cardIndex, int potIndex);
+	void castCookingCardEffect(ACookingCard* card, int potIndex);
+	void castRecipeCardEffect(int potIndex);
+
+	void removeRecipeCardInGame(int index);
+	void removeIngredientCardInGame(int index);
+	void removeCookingCardInGame(APlayerState* playerState, int index);
 private:
 	int currentTurnIndex = 0;
 };

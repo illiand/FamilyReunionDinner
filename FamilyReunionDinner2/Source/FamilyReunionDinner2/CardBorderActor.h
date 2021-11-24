@@ -20,11 +20,13 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	AActor* parent;
+	UMaterialInstanceDynamic* material;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void appendCard(AActor* card);
+	AActor* parent;
+
+	void setBorderColor(float r, float g, float b, float a);
 };

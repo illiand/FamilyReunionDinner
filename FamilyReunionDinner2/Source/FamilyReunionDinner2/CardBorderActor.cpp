@@ -19,25 +19,7 @@ void ACardBorderActor::BeginPlay()
 
 	if (borderMesh != NULL)
 	{
-		UMaterialInstanceDynamic* material = UMaterialInstanceDynamic::Create(borderMesh->GetMaterial(0), NULL);
-
-		FLinearColor newColor;
-		int randValue = FMath::RandRange(0, 2);
-
-		if (randValue == 0) 
-		{
-			newColor.R = 1;
-		}
-		else if (randValue == 1) 
-		{
-			newColor.G = 1;
-		}
-		else 
-		{
-			newColor.B = 1;
-		}
-
-		material->SetVectorParameterValue(TEXT("color"), newColor);
+		material = UMaterialInstanceDynamic::Create(borderMesh->GetMaterial(0), NULL);
 		borderMesh->SetMaterial(0, material);
 	}
 }
@@ -55,7 +37,14 @@ void ACardBorderActor::Tick(float DeltaTime)
 	}
 }
 
-void ACardBorderActor::appendCard(AActor* card) 
+void ACardBorderActor::setBorderColor(float r, float g, float b, float a) 
 {
-	parent = card;
+	FLinearColor newColor;
+	int randValue = FMath::RandRange(0, 2);
+	newColor.R = r;
+	newColor.G = g;
+	newColor.B = b;
+	newColor.A = a;
+
+	material->SetVectorParameterValue(TEXT("color"), newColor);
 }

@@ -29,6 +29,18 @@ void AMyPlayerState::createRecipeCard_Implementation(FRecipeCardStruct data, int
 	setCardRotationBasedOnPlayerLocation(card);
 }
 
+void AMyPlayerState::destroyIngredientCard_Implementation(int index)
+{
+	ingredientCards[index]->Destroy();
+	ingredientCards.RemoveAt(index);
+}
+
+void AMyPlayerState::destroyRecipeCard_Implementation(int index)
+{
+	recipeCards[index]->Destroy();
+	recipeCards.RemoveAt(index);
+}
+
 void AMyPlayerState::setCardRotationBasedOnPlayerLocation(AActor* card) 
 {
 	if (GetPawn()->GetActorLocation().Y == 60) 
@@ -54,4 +66,9 @@ void AMyPlayerState::setMonsterPreferenceUI(const FString& path)
 void AMyPlayerState::setTurn_Implementation(bool ifTurn)
 {
 	inTurn = ifTurn;
+
+	if (inTurn) 
+	{
+		hintShowed = false;
+	}
 }

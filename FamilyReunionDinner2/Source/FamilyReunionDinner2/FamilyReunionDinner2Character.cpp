@@ -3,6 +3,7 @@
 #include "FamilyReunionDinner2Character.h"
 #include "FamilyReunionDinner2Projectile.h"
 #include "MyGameStateBase.h"
+#include "MyPlayerState.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -81,7 +82,8 @@ void AFamilyReunionDinner2Character::SetupPlayerInputComponent(class UInputCompo
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AFamilyReunionDinner2Character::LookUpAtRate);
 
 	PlayerInputComponent->BindAction("TestAction", IE_Released, this, &AFamilyReunionDinner2Character::useSpecialAction);
-	PlayerInputComponent->BindAction("MoveToDeck", IE_Released, this, &AFamilyReunionDinner2Character::pickFromEye);
+	PlayerInputComponent->BindAction("Picking", IE_Pressed, this, &AFamilyReunionDinner2Character::pickingItem);
+	PlayerInputComponent->BindAction("Picking", IE_Released, this, &AFamilyReunionDinner2Character::releaseItem);
 }
 
 void AFamilyReunionDinner2Character::useSpecialAction() 
@@ -95,25 +97,168 @@ void AFamilyReunionDinner2Character::endTurn_Implementation()
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->nextTurn();
 }
 
-void AFamilyReunionDinner2Character::pickFromEye()
+AActor* AFamilyReunionDinner2Character::pickFromEye()
 {
-	FVector CameraLoc = GetFirstPersonCameraComponent()->GetComponentLocation();
-	FRotator CameraRot = GetFirstPersonCameraComponent()->GetComponentRotation();
+	//FVector CameraLoc = GetFirstPersonCameraComponent()->GetComponentLocation();
+	//FRotator CameraRot = GetFirstPersonCameraComponent()->GetComponentRotation();
 
-	FVector Start = CameraLoc;
-	FVector End = CameraLoc + CameraRot.Vector() * 2000;
-
+	//FVector Start = CameraLoc;
+	//FVector End = CameraLoc + CameraRot.Vector() * 2000;
+	
 	FHitResult hit(ForceInit);
-	FCollisionObjectQueryParams objectParams;
-	FCollisionQueryParams params;
-	params.AddIgnoredActor(this);
+	//FCollisionObjectQueryParams objectParams;
+	//FCollisionQueryParams params;
+	//params.AddIgnoredActor(this);
+	//
+	//GetWorld()->LineTraceSingleByObjectType(hit, Start, End, objectParams, params);
 
-	GetWorld()->LineTraceSingleByObjectType(hit, Start, End, objectParams, params);
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, true, hit);
+	
+	return hit.GetActor();
+}
 
-	if (hit.GetActor() != NULL)
+void AFamilyReunionDinner2Character::releaseItem() 
+{
+	puttingItem();
+
+	holdingItem = NULL;
+}
+
+void AFamilyReunionDinner2Character::pickingItem() 
+{
+	MainUI->clearUI();
+
+	AActor* curTarget = pickFromEye();
+
+	if (curTarget != NULL && curTarget->Tags.Num() != 0)
 	{
-		moveToDeck(hit.GetActor());
+		if (curTarget->Tags[0] == TEXT("card"))
+		{
+			//other players' cooking card 
+			if (curTarget->GetLocalRole() != 3 && Cast<AMyPlayerState>(GetPlayerState())->cookingCards.Contains(curTarget))
+			{
+				//show give a hint panal
+				if (!Cast<AMyPlayerState>(GetPlayerState())->hintShowed && Cast<AMyPlayerState>(GetPlayerState())->inTurn)
+				{
+					MainUI->showHintLayout();
+				}
+			}
+			else 
+			{
+				holdingItem = curTarget;
+				//show highlight of the position that can put the card
+				//draw Arrow?
+			}
+		}
+		else if (curTarget->Tags[0] == TEXT("pot") || curTarget->Tags[0] == TEXT("potCard")) 
+		{
+			//show UI of pot
+			ARecipeCard* card = NULL;
+
+			if (curTarget->Tags[0] == TEXT("pot"))
+			{
+				//TODO
+			}
+			else 
+			{
+				card = Cast<ARecipeCard>(curTarget);
+			}
+			
+			MainUI->showPotInfo(TEXT("Texture2D'/Game/Assets/Texture/uv.uv'"), card->curFlavor, card->curHeat, card->curSize, FCString::Atoi(*card->data.size));
+		}
 	}
+}
+
+void AFamilyReunionDinner2Character::puttingItem()
+{
+	if (holdingItem == NULL) 
+	{
+		return;
+	}
+
+	AActor* curTarget = pickFromEye();
+
+	if (curTarget != NULL && curTarget->Tags.Num() != 0)
+	{
+		if (curTarget->Tags[0] == TEXT("pot") || curTarget->Tags[0] == TEXT("potCard")) 
+		{
+			ARecipeCard* card = NULL;
+
+			if (curTarget->Tags[0] == TEXT("pot"))
+			{
+				//TODO
+			}
+			else
+			{
+				card = Cast<ARecipeCard>(curTarget);
+			}
+
+			//find index of recipe card
+			TArray<ARecipeCard*> cardsArray = Cast<AMyPlayerState>(GetPlayerState())->recipeCards;
+
+			for (int i = 0; i < 4; i += 1)
+			{
+				if (cardsArray[i]->data.name == card->data.name) 
+				{
+					if (holdingItem->IsA(ACookingCard::StaticClass())) 
+					{
+						addCookingCardToPot(Cast<ACookingCard>(holdingItem), i);
+					}
+					else 
+					{
+						TArray<AIngredientCard*> cardsArrayInHolding = Cast<AMyPlayerState>(GetPlayerState())->ingredientCards;
+
+						for (int j = 0; j < 4; j++)
+						{
+							if (cardsArrayInHolding[j]->data.name == Cast<AIngredientCard>(holdingItem)->data.name) 
+							{
+								addIngredientCardToPot(j, i);
+
+								break;
+							}
+						}
+					}
+
+					break;
+				}
+			}
+		}
+	}
+}
+
+void AFamilyReunionDinner2Character::drawItemHint() 
+{
+
+}
+
+void AFamilyReunionDinner2Character::addCookingCardToPot_Implementation(ACookingCard* card, int index)
+{
+	AMyGameStateBase* gameState = Cast<AMyGameStateBase>(GetWorld()->GetGameState());
+
+	gameState->castCookingCardEffect(card, index);
+
+	gameState->removeCookingCardInGame(GetPlayerState(), index);
+	gameState->addCookingCardInGame(GetPlayerState(), index);
+}
+
+void AFamilyReunionDinner2Character::addIngredientCardToPot_Implementation(int ingredientCardIndex, int potIndex)
+{
+	AMyGameStateBase* gameState = Cast<AMyGameStateBase>(GetWorld()->GetGameState());
+
+	gameState->castIngredientCardEffect(ingredientCardIndex, potIndex);
+
+	gameState->removeIngredientCardInGame(ingredientCardIndex);
+	gameState->addIngredientCardInGame(ingredientCardIndex);
+}
+
+void AFamilyReunionDinner2Character::finishRecipeCard_Implementation(int index)
+{
+	AMyGameStateBase* gameState = Cast<AMyGameStateBase>(GetWorld()->GetGameState());
+
+	gameState->castRecipeCardEffect(index);
+
+	gameState->removeRecipeCardInGame(index);
+	gameState->addRecipeCardInGame(index);
 }
 
 void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor) 

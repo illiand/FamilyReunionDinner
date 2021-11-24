@@ -22,6 +22,13 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+public:
+	int curFlavor = 0;
+	int curHeat = 0;
+	int curSize = 0;
+
+	AActor* border;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

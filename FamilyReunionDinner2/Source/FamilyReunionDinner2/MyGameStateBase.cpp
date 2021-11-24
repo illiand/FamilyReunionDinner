@@ -40,30 +40,16 @@ void AMyGameStateBase::initGame()
 
 			ACardBorderActor* cardBorder = GetWorld()->SpawnActor<ACardBorderActor>(cardBorderClass, FVector(0, 0, 0), FRotator(0, 0, 0), FActorSpawnParameters());
 
-			cardBorder->appendCard(card);
+			cardBorder->parent = card;
+			card->border = cardBorder;
+			cardBorder->setBorderColor(0, 0, 0, 0);
 		}
 	}
 
-	//pick 4 cards randomly for each
 	for (int i = 0; i < 4; i += 1)
 	{
-		int curCardIndex = FMath::RandRange(0, recipeCardFileData.Num() - 1);
-		recipeCardOnTableFileData.Add(recipeCardFileData[curCardIndex]);
-		recipeCardFileData.RemoveAt(curCardIndex);
-
-		curCardIndex = FMath::RandRange(0, ingredientCardFileData.Num() - 1);
-		ingredientCardOnTableFileData.Add(ingredientCardFileData[curCardIndex]);
-		ingredientCardFileData.RemoveAt(curCardIndex);
-	}
-
-	//send the picking data to all the players
-	for (int i = 0; i < PlayerArray.Num(); i += 1)
-	{
-		for (int j = 0; j < 4; j += 1)
-		{
-			Cast<AMyPlayerState>(PlayerArray[i])->createRecipeCard(recipeCardOnTableFileData[j], j);
-			Cast<AMyPlayerState>(PlayerArray[i])->createIngredientCard(ingredientCardOnTableFileData[j], j);
-		}
+		addRecipeCardInGame(i);
+		addIngredientCardInGame(i);
 	}
 }
 
@@ -79,5 +65,88 @@ void AMyGameStateBase::nextTurn()
 	}
 
 	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->inTurn = true;
+	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->hintShowed = false;
 	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->setTurn(true);
+}
+
+void AMyGameStateBase::addRecipeCardInGame(int index) 
+{
+	if (recipeCardFileData.Num() == 0)
+	{
+		return;
+	}
+
+	int curCardIndex = FMath::RandRange(0, recipeCardFileData.Num() - 1);
+	recipeCardOnTableFileData.Insert(recipeCardFileData[curCardIndex], index);
+	recipeCardFileData.RemoveAt(curCardIndex);
+
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->createRecipeCard(recipeCardOnTableFileData[index], index);
+	}
+}
+
+void AMyGameStateBase::addIngredientCardInGame(int index)
+{
+	if (ingredientCardFileData.Num() == 0)
+	{
+		return;
+	}
+
+	int curCardIndex = FMath::RandRange(0, ingredientCardFileData.Num() - 1);
+	ingredientCardOnTableFileData.Insert(ingredientCardFileData[curCardIndex], index);
+	ingredientCardFileData.RemoveAt(curCardIndex);
+
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->createIngredientCard(ingredientCardOnTableFileData[index], index);
+	}
+}
+
+void AMyGameStateBase::addCookingCardInGame(APlayerState* playerState, int index)
+{
+	if (cookingCardFileData.Num() == 0)
+	{
+		return;
+	}
+	//Cast<AMyPlayerState>(playerState)->cookingCards.Add();
+}
+
+void AMyGameStateBase::removeRecipeCardInGame(int index)
+{
+	recipeCardOnTableFileData.RemoveAt(index);
+
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->destroyRecipeCard(index);
+	}
+}
+
+void AMyGameStateBase::removeIngredientCardInGame(int index)
+{
+	ingredientCardOnTableFileData.RemoveAt(index);
+
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->destroyIngredientCard(index);
+	}
+}
+
+void AMyGameStateBase::removeCookingCardInGame(APlayerState* playerState, int index)
+{
+	Cast<AMyPlayerState>(playerState)->cookingCards.RemoveAt(index);
+}
+
+void AMyGameStateBase::castIngredientCardEffect(int cardIndex, int potIndex)
+{
+	//TODO PARSE EFFECT
+}
+
+void AMyGameStateBase::castCookingCardEffect(ACookingCard* card, int potIndex)
+{
+	
+}
+
+void AMyGameStateBase::castRecipeCardEffect(int index)
+{
 }

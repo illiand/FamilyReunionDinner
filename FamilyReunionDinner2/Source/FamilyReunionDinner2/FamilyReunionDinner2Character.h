@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "RecipeCard.h"
+#include "FamilyReunionDinner2UserWidget.h"
 #include "FamilyReunionDinner2Character.generated.h"
 
 class UInputComponent;
@@ -77,6 +78,30 @@ public:
 	void moveToDeck(AActor* hitActor);
 	void moveToDeck_Implementation(AActor* hitActor);
 
+	UFUNCTION(Reliable, Server)
+	void addCookingCardToPot(ACookingCard* card, int index);
+	void addCookingCardToPot_Implementation(ACookingCard* card, int index);
+
+	UFUNCTION(Reliable, Server)
+	void addIngredientCardToPot(int ingredientCardIndex, int potIndex);
+	void addIngredientCardToPot_Implementation(int ingredientCardIndex, int potIndex);
+
+	UFUNCTION(Reliable, Server)
+	void finishRecipeCard(int index);
+	void finishRecipeCard_Implementation(int index);
+
+public:
+	UPROPERTY(BlueprintReadWrite)
+	UFamilyReunionDinner2UserWidget* MainUI;
+
 private:
-	void pickFromEye();
+	AActor* holdingItem;
+
+private:
+	AActor* pickFromEye();
+	void releaseItem();
+	void pickingItem();
+	void puttingItem();
+
+	void drawItemHint();
 };

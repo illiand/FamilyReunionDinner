@@ -27,6 +27,8 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	bool inTurn = false;
 
+	bool hintShowed = false;
+
 public:
 	void setCardRotationBasedOnPlayerLocation(AActor* card);
 
@@ -38,6 +40,14 @@ public:
 	UFUNCTION(Reliable, Client)
 	void createRecipeCard(FRecipeCardStruct data, int positionIndex);
 	void createRecipeCard_Implementation(FRecipeCardStruct data, int positionIndex);
+
+	UFUNCTION(Reliable, Client)
+	void destroyIngredientCard(int index);
+	void destroyIngredientCard_Implementation(int index);
+
+	UFUNCTION(Reliable, Client)
+	void destroyRecipeCard(int index);
+	void destroyRecipeCard_Implementation(int index);
 
 	UFUNCTION(Reliable, Client)
 	void setMonsterPreference();
