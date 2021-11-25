@@ -4,12 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
+
 #include "RecipeCardStruct.h"
 #include "RecipeCard.h"
 #include "IngredientCardStruct.h"
 #include "IngredientCard.h"
 #include "CookingCardStruct.h"
 #include "CookingCard.h"
+
 #include "MyGameStateBase.generated.h"
 
 /**
@@ -28,6 +30,8 @@ public:
 	TArray<FRecipeCardStruct> recipeCardOnTableFileData = TArray<FRecipeCardStruct>();
 	TArray<FIngredientCardStruct> ingredientCardOnTableFileData = TArray<FIngredientCardStruct>();
 	
+	TArray<FRecipeCardStruct> completedDishFileData = TArray<FRecipeCardStruct>();
+
 public:
 	void initGame();
 	void nextTurn();

@@ -26,10 +26,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(Replicated)
 	AActor* border;
+
+	UPROPERTY(Replicated)
 	FCookingCardStruct data;
 
+	UFUNCTION(Client, Reliable)
 	void assignInfo();
-
-	//void 
+	void assignInfo_Implementation();
 };

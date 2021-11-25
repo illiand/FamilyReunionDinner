@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CookingCardStruct.h"
+#include "IngredientCardStruct.h"
 #include "RecipeCardStruct.generated.h"
 /**
  * 
@@ -24,4 +26,10 @@ struct FRecipeCardStruct
 	FString size;
 	UPROPERTY(BlueprintReadOnly)
 	FString point;
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FCookingCardStruct> addedCookingCards;
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FIngredientCardStruct> addedIngredientCards;
 };

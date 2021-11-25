@@ -16,9 +16,14 @@ class FAMILYREUNIONDINNER2_API UFamilyReunionDinner2UserWidget : public UUserWid
 	
 public:
 	UFUNCTION(BlueprintImplementableEvent)
-	void showPotInfo(const FString& path, int32 currentFlavor, int32 currentHeat, int32 currentSize, int32 maxSize);
+	void showPotInfo(const FString& path, int32 currentFlavor, int32 currentHeat, int32 currentPoint, int32 currentSize, int32 maxSize);
 	UFUNCTION(BlueprintImplementableEvent)
 	void clearUI();
 	UFUNCTION(BlueprintImplementableEvent)
-	void showHintLayout();
+	void showHintLayout(const TArray<FString>& path);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void showFlavorHintPreviewUI(const TArray<int32>& index);
+	UFUNCTION(BlueprintImplementableEvent)
+	void showDegreeHintPreviewUI(const TArray<int32>& index);
 };

@@ -14,10 +14,8 @@ void AMyGameStateBase::initGame()
 	TSubclassOf<AIngredientCard> ingredientCard = LoadClass<AIngredientCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyIngredientCard.MyIngredientCard_C'"));
 	cookingCardFileData = UAPIClass::makeCookingCards();
 	TSubclassOf<ACookingCard> cookingCard = LoadClass<ACookingCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyCookingCard.MyCookingCard_C'"));
-	
-	TSubclassOf<ACardBorderActor> cardBorderClass = LoadClass<ACardBorderActor>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/BP_CardBorder.BP_CardBorder_C'"));
 
-	int cookingCardCount = 3;
+	int cookingCardCount = 6;
 	// cookingCardCount = 7 if PlayerArray.Num() = 3/4
 
 	//randomly create replicatable cooking cards
@@ -37,12 +35,6 @@ void AMyGameStateBase::initGame()
 			card->data = cookingCardFileData[curCardIndex];
 			cookingCardFileData.RemoveAt(curCardIndex);
 			Cast<AMyPlayerState>(PlayerArray[j])->cookingCards.Add(card);
-
-			ACardBorderActor* cardBorder = GetWorld()->SpawnActor<ACardBorderActor>(cardBorderClass, FVector(0, 0, 0), FRotator(0, 0, 0), FActorSpawnParameters());
-
-			cardBorder->parent = card;
-			card->border = cardBorder;
-			cardBorder->setBorderColor(0, 0, 0, 0);
 		}
 	}
 
@@ -139,14 +131,28 @@ void AMyGameStateBase::removeCookingCardInGame(APlayerState* playerState, int in
 
 void AMyGameStateBase::castIngredientCardEffect(int cardIndex, int potIndex)
 {
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->addIngredientCardToPot(ingredientCardOnTableFileData[cardIndex], potIndex);
+	}
+
 	//TODO PARSE EFFECT
 }
 
 void AMyGameStateBase::castCookingCardEffect(ACookingCard* card, int potIndex)
 {
-	
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->addCookingCardToPot(card->data, potIndex);
+	}
 }
 
 void AMyGameStateBase::castRecipeCardEffect(int index)
 {
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->drawFinishedRecipeUI(recipeCardOnTableFileData[index]);
+	}
+	
+	completedDishFileData.Add(recipeCardOnTableFileData[index]);
 }

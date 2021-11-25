@@ -27,6 +27,7 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	bool inTurn = false;
 
+	UPROPERTY(BlueprintReadOnly)
 	bool hintShowed = false;
 
 public:
@@ -40,6 +41,18 @@ public:
 	UFUNCTION(Reliable, Client)
 	void createRecipeCard(FRecipeCardStruct data, int positionIndex);
 	void createRecipeCard_Implementation(FRecipeCardStruct data, int positionIndex);
+
+	UFUNCTION(Reliable, Client)
+	void addIngredientCardToPot(FIngredientCardStruct data, int index);
+	void addIngredientCardToPot_Implementation(FIngredientCardStruct data, int index);
+
+	UFUNCTION(Reliable, Client)
+	void addCookingCardToPot(FCookingCardStruct data, int index);
+	void addCookingCardToPot_Implementation(FCookingCardStruct data, int index);
+
+	UFUNCTION(Reliable, Client)
+	void drawFinishedRecipeUI(FRecipeCardStruct data);
+	void drawFinishedRecipeUI_Implementation(FRecipeCardStruct data);
 
 	UFUNCTION(Reliable, Client)
 	void destroyIngredientCard(int index);

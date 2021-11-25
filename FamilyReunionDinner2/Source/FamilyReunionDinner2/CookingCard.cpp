@@ -15,6 +15,8 @@ ACookingCard::ACookingCard()
 void ACookingCard::BeginPlay()
 {
 	Super::BeginPlay();
+
+	assignInfo();
 }
 
 // Called every frame
@@ -23,9 +25,16 @@ void ACookingCard::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ACookingCard::assignInfo()
+void ACookingCard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
 {
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+	DOREPLIFETIME(ACookingCard, data);
+	DOREPLIFETIME(ACookingCard, border);
+}
+
+void ACookingCard::assignInfo_Implementation()
+{
 	TArray<UTextRenderComponent*> attributes;
 	GetComponents(attributes);
 
@@ -33,16 +42,12 @@ void ACookingCard::assignInfo()
 	{
 		if (attributes[i]->GetName().Equals("cardName"))
 		{
-			attributes[i]->SetText(data.name);
+			attributes[i]->SetText(data.name.Append(" + ").Append(data.degree));
 		}
 
-		if (attributes[i]->GetName().Equals("curType"))
+		if (attributes[i]->GetName().Equals("cardType"))
 		{
 			attributes[i]->SetText(data.type);
-		}
-		if (attributes[i]->GetName().Equals("degree"))
-		{
-			attributes[i]->SetText(data.degree);
 		}
 	}
 }

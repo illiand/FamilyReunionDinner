@@ -26,6 +26,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(Replicated)
 	AActor* parent;
 
 	void setBorderColor(float r, float g, float b, float a);

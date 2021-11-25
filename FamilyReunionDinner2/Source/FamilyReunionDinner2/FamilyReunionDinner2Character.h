@@ -90,12 +90,46 @@ public:
 	void finishRecipeCard(int index);
 	void finishRecipeCard_Implementation(int index);
 
+	UFUNCTION(Reliable, Server)
+	void requestCertainHandInfo(ACookingCard* card);
+	void requestCertainHandInfo_Implementation(ACookingCard* card);
+
+	UFUNCTION(Reliable, Client)
+	void sendCertainHandInfo(const TArray<ACookingCard*>& cards, int focusIndex);
+	void sendCertainHandInfo_Implementation(const TArray<ACookingCard*>& cards, int focusIndex);
+
+	UFUNCTION(Reliable, Server, BlueprintCallable)
+	void giveTypeHint(ACookingCard* card);
+	void giveTypeHint_Implementation(ACookingCard* card);
+
+	UFUNCTION(Reliable, Server, BlueprintCallable)
+	void giveDegreeHint(ACookingCard* card);
+	void giveDegreeHint_Implementation(ACookingCard* card);
+
+	UFUNCTION(Reliable, Client)
+	void clearUI();
+	void clearUI_Implementation();
+
 public:
 	UPROPERTY(BlueprintReadWrite)
 	UFamilyReunionDinner2UserWidget* MainUI;
 
+	UPROPERTY(BlueprintReadOnly)
+	TArray<ACookingCard*> observingCards;
+	UPROPERTY(BlueprintReadOnly)
+	int observingCardIndex = 0;
+
+	/*
+		@return data
+		0: curFlavor
+		1: curHeat
+		2: curPoint
+		3: curSize
+	*/
+	TArray<int> calculateParameter(FRecipeCardStruct data);
 private:
 	AActor* holdingItem;
+	bool UIOn = false;
 
 private:
 	AActor* pickFromEye();
@@ -104,4 +138,9 @@ private:
 	void puttingItem();
 
 	void drawItemHint();
+
+	UFUNCTION(BlueprintCallable)
+	void showFlavorHintPreview(int index);
+	UFUNCTION(BlueprintCallable)
+	void showDegreeHintPreview(int index);
 };

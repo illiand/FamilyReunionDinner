@@ -23,20 +23,13 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	int curFlavor = 0;
-	int curHeat = 0;
-	int curSize = 0;
-
 	AActor* border;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(Replicated)
 	FRecipeCardStruct data;
 
-	UFUNCTION(Reliable, Client)
 	void assignInfo();
-	void assignInfo_Implementation();
 };

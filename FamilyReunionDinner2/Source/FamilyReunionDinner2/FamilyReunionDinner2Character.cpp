@@ -4,6 +4,7 @@
 #include "FamilyReunionDinner2Projectile.h"
 #include "MyGameStateBase.h"
 #include "MyPlayerState.h"
+#include "CardBorderActor.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -128,20 +129,30 @@ void AFamilyReunionDinner2Character::pickingItem()
 {
 	MainUI->clearUI();
 
+	if (UIOn)
+	{
+		UIOn = false;
+
+		return;
+	}
+
 	AActor* curTarget = pickFromEye();
 
 	if (curTarget != NULL && curTarget->Tags.Num() != 0)
 	{
 		if (curTarget->Tags[0] == TEXT("card"))
 		{
+			if (curTarget->IsA(ACardBorderActor::StaticClass())) 
+			{
+				curTarget = Cast<ACardBorderActor>(curTarget)->parent;
+			}
+
 			//other players' cooking card 
-			if (curTarget->GetLocalRole() != 3 && Cast<AMyPlayerState>(GetPlayerState())->cookingCards.Contains(curTarget))
+			if (curTarget->GetLocalRole() != 3 && !Cast<AMyPlayerState>(GetPlayerState())->cookingCards.Contains(curTarget))
 			{
 				//show give a hint panal
-				if (!Cast<AMyPlayerState>(GetPlayerState())->hintShowed && Cast<AMyPlayerState>(GetPlayerState())->inTurn)
-				{
-					MainUI->showHintLayout();
-				}
+				UIOn = true;
+				requestCertainHandInfo(Cast<ACookingCard>(curTarget));
 			}
 			else 
 			{
@@ -164,7 +175,10 @@ void AFamilyReunionDinner2Character::pickingItem()
 				card = Cast<ARecipeCard>(curTarget);
 			}
 			
-			MainUI->showPotInfo(TEXT("Texture2D'/Game/Assets/Texture/uv.uv'"), card->curFlavor, card->curHeat, card->curSize, FCString::Atoi(*card->data.size));
+			TArray<int> parameters = calculateParameter(card->data);
+
+			UIOn = true;
+			MainUI->showPotInfo(TEXT("Texture2D'/Game/Assets/Texture/uv.uv'"), parameters[0], parameters[1], parameters[2], parameters[3], FCString::Atoi(*card->data.size));
 		}
 	}
 }
@@ -226,9 +240,143 @@ void AFamilyReunionDinner2Character::puttingItem()
 	}
 }
 
+void AFamilyReunionDinner2Character::giveTypeHint_Implementation(ACookingCard* card)
+{
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		TArray<ACookingCard*> curCards = Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->cookingCards;
+
+		for (int j = 0; j < curCards.Num(); j += 1)
+		{
+			if (curCards[j]->data.name == card->data.name)
+			{
+				for (int k = 0; k < curCards.Num(); k += 1) 
+				{
+					if (curCards[k]->data.type == card->data.type) 
+					{
+						curCards[k]->data.typeHinted = true;
+
+						TSubclassOf<ACardBorderActor> cardBorderClass = LoadClass<ACardBorderActor>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/BP_CardBorder.BP_CardBorder_C'"));
+						ACardBorderActor* cardBorder = GetWorld()->SpawnActor<ACardBorderActor>(cardBorderClass, FVector(0, 0, 0), FRotator(0, 0, 0), FActorSpawnParameters());
+
+						cardBorder->parent = curCards[k];
+						curCards[k]->border = cardBorder;
+						cardBorder->setBorderColor(0, 1, 0, 1);
+					}
+				}
+
+				clearUI();
+
+				return;
+			}
+		}
+	}
+}
+
+void AFamilyReunionDinner2Character::giveDegreeHint_Implementation(ACookingCard* card)
+{
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		TArray<ACookingCard*> curCards = Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->cookingCards;
+
+		for (int j = 0; j < curCards.Num(); j += 1)
+		{
+			if (curCards[j]->data.name == card->data.name)
+			{
+				for (int k = 0; k < curCards.Num(); k += 1)
+				{
+					if (curCards[k]->data.degree == card->data.degree)
+					{
+						curCards[k]->data.degreeHinted = true;
+
+					}
+				}
+
+				clearUI();
+
+				return;
+			}
+		}
+	}
+}
+
+void AFamilyReunionDinner2Character::clearUI_Implementation() 
+{
+	MainUI->clearUI();
+}
+
+TArray<int> AFamilyReunionDinner2Character::calculateParameter(FRecipeCardStruct data)
+{
+	TArray<int> parameters;
+
+	int flavor = 0;
+	int heat = 0;
+	int point = 0;
+	int size = 0;
+
+	for (int i = 0; i < data.addedCookingCards.Num(); i += 1) 
+	{
+		if (data.addedCookingCards[i].name == "Heat")
+		{
+			heat += FCString::Atoi(*data.addedCookingCards[i].degree);
+		}
+		else 
+		{
+			flavor += FCString::Atoi(*data.addedCookingCards[i].degree);
+		}
+	}
+
+	for (int i = 0; i < data.addedIngredientCards.Num(); i += 1)
+	{
+		//TODO calculate bonus point
+		size += FCString::Atoi(*data.addedIngredientCards[i].size);
+	}
+
+	parameters.Add(flavor);
+	parameters.Add(heat);
+	parameters.Add(point);
+	parameters.Add(size);
+
+	return parameters;
+}
+
 void AFamilyReunionDinner2Character::drawItemHint() 
 {
 
+}
+
+void AFamilyReunionDinner2Character::requestCertainHandInfo_Implementation(ACookingCard* card)
+{
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1) 
+	{
+		TArray<ACookingCard*> curCards = Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->cookingCards;
+
+		for (int j = 0; j < curCards.Num(); j += 1)
+		{
+			if (curCards[j]->data.name == card->data.name) 
+			{
+				sendCertainHandInfo(curCards, j);
+
+				return;
+			}
+		}
+	}
+}
+
+void AFamilyReunionDinner2Character::sendCertainHandInfo_Implementation(const TArray<ACookingCard*>& data, int focusIndex)
+{
+	observingCards = data;
+
+	TArray<FString> pathes;
+
+	for (int i = 0; i < data.Num(); i += 1) 
+	{
+		pathes.Add(TEXT("Texture2D'/Game/Assets/Texture/uv.uv'"));
+	}
+
+	MainUI->showHintLayout(pathes);
+	showFlavorHintPreview(focusIndex);
+	showDegreeHintPreview(focusIndex);
 }
 
 void AFamilyReunionDinner2Character::addCookingCardToPot_Implementation(ACookingCard* card, int index)
@@ -285,6 +433,39 @@ void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor)
 void AFamilyReunionDinner2Character::startGame_Implementation() 
 {
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->initGame();
+}
+
+
+void AFamilyReunionDinner2Character::showFlavorHintPreview(int index)
+{
+	observingCardIndex = index;
+	TArray<int> cardIndexForHint;
+
+	for (int i = 0; i < observingCards.Num(); i += 1) 
+	{
+		if (observingCards[index]->data.type == observingCards[i]->data.type)
+		{
+			cardIndexForHint.Add(i);
+		}
+	}
+
+	MainUI->showFlavorHintPreviewUI(cardIndexForHint);
+}
+
+void AFamilyReunionDinner2Character::showDegreeHintPreview(int index)
+{
+	observingCardIndex = index;
+	TArray<int> cardIndexForHint;
+
+	for (int i = 0; i < observingCards.Num(); i += 1)
+	{
+		if (observingCards[index]->data.degree == observingCards[i]->data.degree)
+		{
+			cardIndexForHint.Add(i);
+		}
+	}
+
+	MainUI->showDegreeHintPreviewUI(cardIndexForHint);
 }
 
 void AFamilyReunionDinner2Character::TurnAtRate(float Rate)

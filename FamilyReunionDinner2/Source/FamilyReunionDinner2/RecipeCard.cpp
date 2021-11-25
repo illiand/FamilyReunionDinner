@@ -25,16 +25,8 @@ void ARecipeCard::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ARecipeCard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+void ARecipeCard::assignInfo()
 {
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(ARecipeCard, data);
-}
-
-void ARecipeCard::assignInfo_Implementation()
-{
-
 	TArray<UTextRenderComponent*> attributes;
 	GetComponents(attributes);
 

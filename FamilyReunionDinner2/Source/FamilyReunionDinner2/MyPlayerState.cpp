@@ -29,6 +29,21 @@ void AMyPlayerState::createRecipeCard_Implementation(FRecipeCardStruct data, int
 	setCardRotationBasedOnPlayerLocation(card);
 }
 
+void AMyPlayerState::addIngredientCardToPot_Implementation(FIngredientCardStruct data, int index) 
+{
+	recipeCards[index]->data.addedIngredientCards.Add(data);
+}
+
+void AMyPlayerState::addCookingCardToPot_Implementation(FCookingCardStruct data, int index)
+{
+	recipeCards[index]->data.addedCookingCards.Add(data);
+}
+
+void AMyPlayerState::drawFinishedRecipeUI_Implementation(FRecipeCardStruct data) 
+{
+
+}
+
 void AMyPlayerState::destroyIngredientCard_Implementation(int index)
 {
 	ingredientCards[index]->Destroy();

@@ -2,6 +2,7 @@
 
 
 #include "CardBorderActor.h"
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
 ACardBorderActor::ACardBorderActor()
@@ -40,11 +41,18 @@ void ACardBorderActor::Tick(float DeltaTime)
 void ACardBorderActor::setBorderColor(float r, float g, float b, float a) 
 {
 	FLinearColor newColor;
-	int randValue = FMath::RandRange(0, 2);
+
 	newColor.R = r;
 	newColor.G = g;
 	newColor.B = b;
 	newColor.A = a;
 
 	material->SetVectorParameterValue(TEXT("color"), newColor);
+}
+
+void ACardBorderActor::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ACardBorderActor, parent);
 }

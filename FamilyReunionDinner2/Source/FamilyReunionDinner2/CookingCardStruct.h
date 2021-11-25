@@ -13,9 +13,14 @@ struct FCookingCardStruct
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(BlueprintReadOnly)
-		FString name;
+	FString name;
 	UPROPERTY(BlueprintReadOnly)
-		FString type;
+	FString type;
 	UPROPERTY(BlueprintReadOnly)
-		FString degree;
+	FString degree;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool typeHinted;
+	UPROPERTY(BlueprintReadOnly)
+	bool degreeHinted;
 };
