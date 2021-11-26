@@ -22,6 +22,7 @@ public:
 	TArray<AIngredientCard*> ingredientCards = TArray<AIngredientCard*>();
 	TArray<ARecipeCard*> recipeCards = TArray<ARecipeCard*>();
 
+	UPROPERTY(Replicated)
 	TArray<ACookingCard*> cookingCards = TArray<ACookingCard*>();
 
 	UPROPERTY(BlueprintReadOnly)
@@ -51,10 +52,6 @@ public:
 	void addCookingCardToPot_Implementation(FCookingCardStruct data, int index);
 
 	UFUNCTION(Reliable, Client)
-	void drawFinishedRecipeUI(FRecipeCardStruct data);
-	void drawFinishedRecipeUI_Implementation(FRecipeCardStruct data);
-
-	UFUNCTION(Reliable, Client)
 	void destroyIngredientCard(int index);
 	void destroyIngredientCard_Implementation(int index);
 
@@ -63,10 +60,8 @@ public:
 	void destroyRecipeCard_Implementation(int index);
 
 	UFUNCTION(Reliable, Client)
-	void setMonsterPreference();
-	void setMonsterPreference_Implementation();
-
 	void setMonsterPreferenceUI(const FString& path);
+	void setMonsterPreferenceUI_Implementation(const FString& path);
 
 	UFUNCTION(Reliable, Client)
 	void setTurn(bool ifTurn);

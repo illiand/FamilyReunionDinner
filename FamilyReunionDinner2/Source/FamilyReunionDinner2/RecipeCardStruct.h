@@ -26,6 +26,8 @@ struct FRecipeCardStruct
 	FString size;
 	UPROPERTY(BlueprintReadOnly)
 	FString point;
+	UPROPERTY(BlueprintReadOnly)
+	FString path;
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<FCookingCardStruct> addedCookingCards;

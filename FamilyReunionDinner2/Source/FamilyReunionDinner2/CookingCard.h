@@ -29,10 +29,17 @@ public:
 	UPROPERTY(Replicated)
 	AActor* border;
 
-	UPROPERTY(Replicated)
+	UPROPERTY(Replicated, BlueprintReadOnly)
 	FCookingCardStruct data;
 
 	UFUNCTION(Client, Reliable)
 	void assignInfo();
 	void assignInfo_Implementation();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void changeDegreeHintStatus(float r, float g, float b, float a);
+	void changeDegreeHintStatus_Implementation(float r, float g, float b, float a);
+
+private:
+	UMaterialInstanceDynamic* hintTextMaterial;
 };

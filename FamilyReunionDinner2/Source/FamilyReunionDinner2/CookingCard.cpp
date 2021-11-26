@@ -52,3 +52,39 @@ void ACookingCard::assignInfo_Implementation()
 	}
 }
 
+void ACookingCard::changeDegreeHintStatus_Implementation(float r, float g, float b, float a)
+{
+	if (hintTextMaterial == NULL)
+	{
+		TArray<UTextRenderComponent*> attributes;
+		GetComponents(attributes);
+
+		for (int i = 0; i < attributes.Num(); i++)
+		{
+			if (attributes[i]->GetName().Equals("degreeHint"))
+			{
+				hintTextMaterial = UMaterialInstanceDynamic::Create(attributes[i]->GetMaterial(0), 0);
+
+				attributes[i]->SetMaterial(0, hintTextMaterial);
+				attributes[i]->SetText(data.degree);
+			}
+		}
+		for (int i = 0; i < attributes.Num(); i++)
+		{
+			if (attributes[i]->GetName().Equals("degreeHintFront"))
+			{
+				attributes[i]->SetMaterial(0, hintTextMaterial);
+				attributes[i]->SetText(data.degree);
+			}
+		}
+	}
+
+	FLinearColor curColor;
+	curColor.R = r;
+	curColor.G = g;
+	curColor.B = b;
+	curColor.A = a;
+
+	hintTextMaterial->SetVectorParameterValue(TEXT("color"), curColor);
+}
+

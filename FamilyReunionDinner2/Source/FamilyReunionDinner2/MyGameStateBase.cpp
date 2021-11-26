@@ -14,6 +14,7 @@ void AMyGameStateBase::initGame()
 	TSubclassOf<AIngredientCard> ingredientCard = LoadClass<AIngredientCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyIngredientCard.MyIngredientCard_C'"));
 	cookingCardFileData = UAPIClass::makeCookingCards();
 	TSubclassOf<ACookingCard> cookingCard = LoadClass<ACookingCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyCookingCard.MyCookingCard_C'"));
+	monsterPreferenceFileData = UAPIClass::makeMonsterPreference();
 
 	int cookingCardCount = 6;
 	// cookingCardCount = 7 if PlayerArray.Num() = 3/4
@@ -42,6 +43,15 @@ void AMyGameStateBase::initGame()
 	{
 		addRecipeCardInGame(i);
 		addIngredientCardInGame(i);
+	}
+
+	for (int i = 0; i < PlayerArray.Num(); i += 1) 
+	{
+		int curCardIndex = FMath::RandRange(0, monsterPreferenceFileData.Num() - 1);
+		monsterPreferenceInGame.Add(monsterPreferenceFileData[curCardIndex]);
+		Cast<AMyPlayerState>(PlayerArray[i])->setMonsterPreferenceUI(monsterPreferenceFileData[curCardIndex].path);
+
+		monsterPreferenceFileData.RemoveAt(curCardIndex);
 	}
 }
 
@@ -95,13 +105,21 @@ void AMyGameStateBase::addIngredientCardInGame(int index)
 	}
 }
 
-void AMyGameStateBase::addCookingCardInGame(APlayerState* playerState, int index)
+void AMyGameStateBase::addCookingCardInGame(APlayerState* playerState, FVector position, FRotator rotation, int index)
 {
 	if (cookingCardFileData.Num() == 0)
 	{
 		return;
 	}
-	//Cast<AMyPlayerState>(playerState)->cookingCards.Add();
+
+	TSubclassOf<ACookingCard> cookingCard = LoadClass<ACookingCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyCookingCard.MyCookingCard_C'"));
+	ACookingCard* card = GetWorld()->SpawnActor<ACookingCard>(cookingCard, position, rotation, FActorSpawnParameters());
+	int curCardIndex = FMath::RandRange(0, cookingCardFileData.Num() - 1);
+
+	card->data = cookingCardFileData[curCardIndex];
+	cookingCardFileData.RemoveAt(curCardIndex);
+
+	Cast<AMyPlayerState>(playerState)->cookingCards.Add(card);
 }
 
 void AMyGameStateBase::removeRecipeCardInGame(int index)
@@ -126,6 +144,12 @@ void AMyGameStateBase::removeIngredientCardInGame(int index)
 
 void AMyGameStateBase::removeCookingCardInGame(APlayerState* playerState, int index)
 {
+	if (Cast<AMyPlayerState>(playerState)->cookingCards[index]->border != NULL) 
+	{
+		Cast<AMyPlayerState>(playerState)->cookingCards[index]->border->Destroy();
+	}
+	
+	Cast<AMyPlayerState>(playerState)->cookingCards[index]->Destroy();
 	Cast<AMyPlayerState>(playerState)->cookingCards.RemoveAt(index);
 }
 
@@ -136,6 +160,8 @@ void AMyGameStateBase::castIngredientCardEffect(int cardIndex, int potIndex)
 		Cast<AMyPlayerState>(PlayerArray[i])->addIngredientCardToPot(ingredientCardOnTableFileData[cardIndex], potIndex);
 	}
 
+	recipeCardOnTableFileData[potIndex].addedIngredientCards.Add(ingredientCardOnTableFileData[cardIndex]);
+
 	//TODO PARSE EFFECT
 }
 
@@ -145,14 +171,11 @@ void AMyGameStateBase::castCookingCardEffect(ACookingCard* card, int potIndex)
 	{
 		Cast<AMyPlayerState>(PlayerArray[i])->addCookingCardToPot(card->data, potIndex);
 	}
+
+	recipeCardOnTableFileData[potIndex].addedCookingCards.Add(card->data);
 }
 
 void AMyGameStateBase::castRecipeCardEffect(int index)
-{
-	for (int i = 0; i < PlayerArray.Num(); i += 1)
-	{
-		Cast<AMyPlayerState>(PlayerArray[i])->drawFinishedRecipeUI(recipeCardOnTableFileData[index]);
-	}
-	
+{	
 	completedDishFileData.Add(recipeCardOnTableFileData[index]);
 }

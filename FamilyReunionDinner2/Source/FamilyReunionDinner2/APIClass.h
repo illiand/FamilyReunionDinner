@@ -8,6 +8,7 @@
 #include "IngredientCardStruct.h"
 #include "CookingCardStruct.h"
 #include "ServerInfoStruct.h"
+#include "MonsterPreferenceStruct.h"
 #include "APIClass.generated.h"
 
 /**
@@ -22,6 +23,8 @@ public:
 	static TArray<FRecipeCardStruct> makeRecipeCards();
 	static TArray<FIngredientCardStruct> makeIngredientCards();
 	static TArray<FCookingCardStruct> makeCookingCards();
+	static TArray<FMonsterPreferenceStruct> makeMonsterPreference();
+
 	static TArray<TSharedPtr<FJsonObject>> FStringToJson(FString data);
 	static TArray<APlayerState*> getPlayerControllersInGame(UWorld* world);
 	static bool checkServerListEqual(TArray<FServerInfoStruct> serverInfo1, TArray<FServerInfoStruct> serverInfo2);

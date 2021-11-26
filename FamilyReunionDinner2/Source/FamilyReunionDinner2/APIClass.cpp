@@ -24,6 +24,7 @@ TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards()
 		curData.heatRange = data[i]->GetStringField(TEXT("Heat_Range"));
 		curData.size = data[i]->GetStringField(TEXT("Utensil_Size"));
 		curData.point = data[i]->GetStringField(TEXT("Points"));
+		curData.path = TEXT("Texture2D'/Game/Assets/Texture/uv.uv'");
 
 		arr.Add(curData);
 	}
@@ -45,6 +46,7 @@ TArray<FIngredientCardStruct> UAPIClass::makeIngredientCards()
 		curData.type = data[i]->GetStringField(TEXT("Type"));
 		curData.size = data[i]->GetStringField(TEXT("Size"));
 		curData.point = data[i]->GetStringField(TEXT("Points"));
+		curData.path = TEXT("Texture2D'/Game/Assets/Texture/uv.uv'");
 
 		arr.Add(curData);
 	}
@@ -65,12 +67,34 @@ TArray<FCookingCardStruct> UAPIClass::makeCookingCards()
 		curData.name = data[i]->GetStringField(TEXT("Name"));
 		curData.type = data[i]->GetStringField(TEXT("Type"));
 		curData.degree = data[i]->GetStringField(TEXT("Degree"));
+		curData.path = TEXT("Texture2D'/Game/Assets/Texture/uv.uv'");
+		curData.typeHinted = false;
+		curData.degreeHinted = false;
 
 		arr.Add(curData);
 	}
 	return arr;
 }
 
+TArray<FMonsterPreferenceStruct> UAPIClass::makeMonsterPreference()
+{
+	FString dataString = "Card_Name Card_Information\nVegetarian No_meat\nSeafood_Allergy No_seafood\nÐÁµ³[¤«¤é¤È¤¦] At_least_finish_1_spicy_dish\nLemon_Squeezer At_least_finish_1_sour_dish\n¸Êµ³[¤¢¤Þ¤È¤¦] At_least_finish_1_sweet_dish\nSupertaster At_least_finish_1_salty_dish\nMouth_Ulcer If_the_dish_is_spicy or sour,_reduce_the_degree_of_flavour_with_1.\nSpitfire_Mouth All dishes¡¯ heat requirement increases by 1 degree.\nRaw_is_healthy All dishes¡¯ heat requirement decreases by 1 degree.\nGo_on_a_diet If_the_dish_is_sweet or salty_reduce_the_degree_of_flavour_with_1.\n";
+	TArray<TSharedPtr<FJsonObject>> data = FStringToJson(dataString);
+
+	TArray<FMonsterPreferenceStruct> arr;
+
+	for (int i = 0; i < data.Num(); i += 1)
+	{
+		FMonsterPreferenceStruct curData;
+
+		curData.name = data[i]->GetStringField(TEXT("Card_Name"));
+		curData.effect = data[i]->GetStringField(TEXT("Card_Information"));
+		curData.path = TEXT("Texture2D'/Game/Assets/Texture/uv.uv'");
+		arr.Add(curData);
+	}
+
+	return arr;
+}
 
 //TArray<TSharedPtr<FJsonObject>> UAPIClass::readFile(FString path)
 //{

@@ -2,6 +2,15 @@
 
 
 #include "MyPlayerState.h"
+#include "FamilyReunionDinner2Character.h"
+#include "Net/UnrealNetwork.h"
+
+void AMyPlayerState::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AMyPlayerState, cookingCards);
+}
 
 void AMyPlayerState::createIngredientCard_Implementation(FIngredientCardStruct data, int positionIndex)
 {
@@ -39,11 +48,6 @@ void AMyPlayerState::addCookingCardToPot_Implementation(FCookingCardStruct data,
 	recipeCards[index]->data.addedCookingCards.Add(data);
 }
 
-void AMyPlayerState::drawFinishedRecipeUI_Implementation(FRecipeCardStruct data) 
-{
-
-}
-
 void AMyPlayerState::destroyIngredientCard_Implementation(int index)
 {
 	ingredientCards[index]->Destroy();
@@ -68,14 +72,9 @@ void AMyPlayerState::setCardRotationBasedOnPlayerLocation(AActor* card)
 	}
 }
 
-void AMyPlayerState::setMonsterPreference_Implementation()
+void AMyPlayerState::setMonsterPreferenceUI_Implementation(const FString& path)
 {
-	
-}
-
-void AMyPlayerState::setMonsterPreferenceUI(const FString& path)
-{
-
+	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setMonsterPreferencePic(path);
 }
 
 void AMyPlayerState::setTurn_Implementation(bool ifTurn)

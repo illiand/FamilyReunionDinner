@@ -20,4 +20,6 @@ struct FIngredientCardStruct
 		FString size;
 	UPROPERTY(BlueprintReadOnly)
 		FString point;
+	UPROPERTY(BlueprintReadOnly)
+		FString path;
 };

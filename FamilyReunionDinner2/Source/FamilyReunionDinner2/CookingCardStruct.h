@@ -18,6 +18,8 @@ struct FCookingCardStruct
 	FString type;
 	UPROPERTY(BlueprintReadOnly)
 	FString degree;
+	UPROPERTY(BlueprintReadOnly)
+	FString path;
 
 	UPROPERTY(BlueprintReadOnly)
 	bool typeHinted;

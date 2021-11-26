@@ -12,6 +12,8 @@
 #include "CookingCardStruct.h"
 #include "CookingCard.h"
 
+#include "MonsterPreferenceStruct.h"
+
 #include "MyGameStateBase.generated.h"
 
 /**
@@ -26,11 +28,14 @@ public:
 	TArray<FRecipeCardStruct> recipeCardFileData = TArray<FRecipeCardStruct>();
 	TArray<FIngredientCardStruct> ingredientCardFileData = TArray<FIngredientCardStruct>();
 	TArray<FCookingCardStruct> cookingCardFileData = TArray<FCookingCardStruct>();
+	TArray<FMonsterPreferenceStruct> monsterPreferenceFileData = TArray<FMonsterPreferenceStruct>();
 
 	TArray<FRecipeCardStruct> recipeCardOnTableFileData = TArray<FRecipeCardStruct>();
 	TArray<FIngredientCardStruct> ingredientCardOnTableFileData = TArray<FIngredientCardStruct>();
 	
 	TArray<FRecipeCardStruct> completedDishFileData = TArray<FRecipeCardStruct>();
+
+	TArray<FMonsterPreferenceStruct> monsterPreferenceInGame = TArray<FMonsterPreferenceStruct>();
 
 public:
 	void initGame();
@@ -38,7 +43,7 @@ public:
 
 	void addRecipeCardInGame(int index);
 	void addIngredientCardInGame(int index);
-	void addCookingCardInGame(APlayerState* playerState, int index);
+	void addCookingCardInGame(APlayerState* playerState, FVector position, FRotator rotation, int index);
 
 	void castIngredientCardEffect(int cardIndex, int potIndex);
 	void castCookingCardEffect(ACookingCard* card, int potIndex);

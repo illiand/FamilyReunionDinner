@@ -156,7 +156,11 @@ void AFamilyReunionDinner2Character::pickingItem()
 			}
 			else 
 			{
-				holdingItem = curTarget;
+				if (Cast<AMyPlayerState>(GetPlayerState())->inTurn) 
+				{
+					holdingItem = curTarget;
+				}
+				
 				//show highlight of the position that can put the card
 				//draw Arrow?
 			}
@@ -174,11 +178,32 @@ void AFamilyReunionDinner2Character::pickingItem()
 			{
 				card = Cast<ARecipeCard>(curTarget);
 			}
+
+			for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards.Num(); i += 1)
+			{
+				if (card->data.name == Cast<AMyPlayerState>(GetPlayerState())->recipeCards[i]->data.name)
+				{
+					observingPotIndex = i;
+
+					break;
+				}
+			}
+
+			TArray<FString> addedItemPath;
+
+			for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards[observingPotIndex]->data.addedCookingCards.Num(); i += 1)
+			{
+				addedItemPath.Add(Cast<AMyPlayerState>(GetPlayerState())->recipeCards[observingPotIndex]->data.addedCookingCards[i].path);
+			}
+			for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards[observingPotIndex]->data.addedIngredientCards.Num(); i += 1)
+			{
+				addedItemPath.Add(Cast<AMyPlayerState>(GetPlayerState())->recipeCards[observingPotIndex]->data.addedIngredientCards[i].path);
+			}
 			
 			TArray<int> parameters = calculateParameter(card->data);
 
 			UIOn = true;
-			MainUI->showPotInfo(TEXT("Texture2D'/Game/Assets/Texture/uv.uv'"), parameters[0], parameters[1], parameters[2], parameters[3], FCString::Atoi(*card->data.size));
+			MainUI->showPotInfo(card->data.path, parameters[0], parameters[1], parameters[2], parameters[3], FCString::Atoi(*card->data.size), addedItemPath);
 		}
 	}
 }
@@ -266,6 +291,7 @@ void AFamilyReunionDinner2Character::giveTypeHint_Implementation(ACookingCard* c
 				}
 
 				clearUI();
+				setHintShowed(true);
 
 				return;
 			}
@@ -288,11 +314,12 @@ void AFamilyReunionDinner2Character::giveDegreeHint_Implementation(ACookingCard*
 					if (curCards[k]->data.degree == card->data.degree)
 					{
 						curCards[k]->data.degreeHinted = true;
-
+						curCards[k]->changeDegreeHintStatus(1, 0, 0, 1);
 					}
 				}
 
 				clearUI();
+				setHintShowed(true);
 
 				return;
 			}
@@ -300,9 +327,15 @@ void AFamilyReunionDinner2Character::giveDegreeHint_Implementation(ACookingCard*
 	}
 }
 
+void AFamilyReunionDinner2Character::setHintShowed_Implementation(bool showed)
+{
+	Cast<AMyPlayerState>(GetPlayerState())->hintShowed = showed;
+}
+
 void AFamilyReunionDinner2Character::clearUI_Implementation() 
 {
 	MainUI->clearUI();
+	UIOn = false;
 }
 
 TArray<int> AFamilyReunionDinner2Character::calculateParameter(FRecipeCardStruct data)
@@ -316,7 +349,7 @@ TArray<int> AFamilyReunionDinner2Character::calculateParameter(FRecipeCardStruct
 
 	for (int i = 0; i < data.addedCookingCards.Num(); i += 1) 
 	{
-		if (data.addedCookingCards[i].name == "Heat")
+		if (data.addedCookingCards[i].type == "heat")
 		{
 			heat += FCString::Atoi(*data.addedCookingCards[i].degree);
 		}
@@ -385,8 +418,19 @@ void AFamilyReunionDinner2Character::addCookingCardToPot_Implementation(ACooking
 
 	gameState->castCookingCardEffect(card, index);
 
-	gameState->removeCookingCardInGame(GetPlayerState(), index);
-	gameState->addCookingCardInGame(GetPlayerState(), index);
+	for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->cookingCards.Num(); i += 1) 
+	{
+		if (card->data.name == Cast<AMyPlayerState>(GetPlayerState())->cookingCards[i]->data.name) 
+		{
+			FVector targetPosition = card->GetActorLocation();
+			FRotator targetRotation = card->GetActorRotation();
+
+			gameState->removeCookingCardInGame(GetPlayerState(), i);
+			gameState->addCookingCardInGame(GetPlayerState(), targetPosition, targetRotation, i);
+
+			return;
+		}
+	}
 }
 
 void AFamilyReunionDinner2Character::addIngredientCardToPot_Implementation(int ingredientCardIndex, int potIndex)
@@ -407,6 +451,8 @@ void AFamilyReunionDinner2Character::finishRecipeCard_Implementation(int index)
 
 	gameState->removeRecipeCardInGame(index);
 	gameState->addRecipeCardInGame(index);
+
+	clearUI();
 }
 
 void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor) 

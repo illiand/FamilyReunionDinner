@@ -86,7 +86,7 @@ public:
 	void addIngredientCardToPot(int ingredientCardIndex, int potIndex);
 	void addIngredientCardToPot_Implementation(int ingredientCardIndex, int potIndex);
 
-	UFUNCTION(Reliable, Server)
+	UFUNCTION(Reliable, Server, BlueprintCallable)
 	void finishRecipeCard(int index);
 	void finishRecipeCard_Implementation(int index);
 
@@ -107,6 +107,10 @@ public:
 	void giveDegreeHint_Implementation(ACookingCard* card);
 
 	UFUNCTION(Reliable, Client)
+	void setHintShowed(bool showed);
+	void setHintShowed_Implementation(bool showed);
+
+	UFUNCTION(Reliable, Client)
 	void clearUI();
 	void clearUI_Implementation();
 
@@ -118,6 +122,9 @@ public:
 	TArray<ACookingCard*> observingCards;
 	UPROPERTY(BlueprintReadOnly)
 	int observingCardIndex = 0;
+
+	UPROPERTY(BlueprintReadOnly)
+	int observingPotIndex = 0;
 
 	/*
 		@return data

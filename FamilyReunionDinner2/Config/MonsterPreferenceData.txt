@@ -1,0 +1,11 @@
+Card_Name	Card_Information
+Vegetarian	No_meat
+Seafood_Allergy	No_seafood
+辛党[からとう]	At_least_finish_1_spicy_dish
+Lemon_Squeezer	At_least_finish_1_sour_dish
+甘党[あまとう]	At_least_finish_1_sweet_dish
+Supertaster	At_least_finish_1_salty_dish
+Mouth_Ulcer	If_the_dish_is_spicy or sour,_reduce_the_degree_of_flavour_with_1.
+Spitfire_Mouth	All dishes’ heat requirement increases by 1 degree.
+Raw_is_healthy	All dishes’ heat requirement decreases by 1 degree.
+Go_on_a_diet	If_the_dish_is_sweet or salty_reduce_the_degree_of_flavour_with_1.
