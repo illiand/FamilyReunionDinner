@@ -86,3 +86,61 @@ void AMyPlayerState::setTurn_Implementation(bool ifTurn)
 		hintShowed = false;
 	}
 }
+
+void AMyPlayerState::setReaction_Implementation(bool ifReaction)
+{
+	inReaction = ifReaction;
+}
+
+
+void AMyPlayerState::setReactionComplete_Implementation(bool ifReactionComplete)
+{
+	reactionComplete = ifReactionComplete;
+}
+
+void AMyPlayerState::turnTimerRun()
+{
+	turnTimeRemaining -= GetWorldTimerManager().GetTimerRate(turnTimer);
+	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setTurnTimerUI(turnTimeRemaining, 90);
+}
+
+void AMyPlayerState::reactionTimerRun()
+{
+	actionTimerRemaining -= GetWorldTimerManager().GetTimerRate(reactionTimer);
+	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setTurnTimerUI(actionTimerRemaining, 10);
+}
+
+void AMyPlayerState::activeTurnTimer_Implementation()
+{
+	turnTimeRemaining = 90;
+	GetWorldTimerManager().ClearTimer(turnTimer);
+
+	GetWorldTimerManager().SetTimer(turnTimer, this, &AMyPlayerState::turnTimerRun, 0.0167f, true, 0);
+}
+
+void AMyPlayerState::activeReactionTimer_Implementation()
+{
+	GetWorldTimerManager().PauseTimer(turnTimer);
+
+	actionTimerRemaining = 10;
+	GetWorldTimerManager().ClearTimer(reactionTimer);
+
+	if (reactionComplete) 
+	{
+		Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setWaitingText(TEXT("Waiting other' Reaction..."));
+	}
+	else 
+	{
+		Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setWaitingText(TEXT("Choose If Using Reaction"));
+	}
+	
+	GetWorldTimerManager().SetTimer(reactionTimer, this, &AMyPlayerState::reactionTimerRun, 0.0167f, true, 0);
+}
+
+void AMyPlayerState::destroyReactionTimer_Implementation() 
+{
+	GetWorldTimerManager().ClearTimer(reactionTimer);
+	GetWorldTimerManager().UnPauseTimer(turnTimer);
+
+	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setWaitingText(inTurnPlayerName.Append(TEXT("'s Turn")));
+}

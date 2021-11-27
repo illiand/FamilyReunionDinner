@@ -127,6 +127,11 @@ void AFamilyReunionDinner2Character::releaseItem()
 
 void AFamilyReunionDinner2Character::pickingItem() 
 {
+	if (Cast<AMyPlayerState>(GetPlayerState())->inReaction) 
+	{
+		return;
+	}
+
 	MainUI->clearUI();
 
 	if (UIOn)
@@ -189,27 +194,18 @@ void AFamilyReunionDinner2Character::pickingItem()
 				}
 			}
 
-			TArray<FString> addedItemPath;
-
-			for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards[observingPotIndex]->data.addedCookingCards.Num(); i += 1)
-			{
-				addedItemPath.Add(Cast<AMyPlayerState>(GetPlayerState())->recipeCards[observingPotIndex]->data.addedCookingCards[i].path);
-			}
-			for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards[observingPotIndex]->data.addedIngredientCards.Num(); i += 1)
-			{
-				addedItemPath.Add(Cast<AMyPlayerState>(GetPlayerState())->recipeCards[observingPotIndex]->data.addedIngredientCards[i].path);
-			}
-			
-			TArray<int> parameters = calculateParameter(card->data);
-
-			UIOn = true;
-			MainUI->showPotInfo(card->data.path, parameters[0], parameters[1], parameters[2], parameters[3], FCString::Atoi(*card->data.size), addedItemPath);
+			sendReactionRequest_Implementation(observingPotIndex, card->data.path, TEXT("Finish Dish"), FVector(0, 1, 0));
 		}
 	}
 }
 
 void AFamilyReunionDinner2Character::puttingItem()
 {
+	if (Cast<AMyPlayerState>(GetPlayerState())->inReaction)
+	{
+		return;
+	}
+
 	if (holdingItem == NULL) 
 	{
 		return;
@@ -404,7 +400,7 @@ void AFamilyReunionDinner2Character::sendCertainHandInfo_Implementation(const TA
 
 	for (int i = 0; i < data.Num(); i += 1) 
 	{
-		pathes.Add(TEXT("Texture2D'/Game/Assets/Texture/uv.uv'"));
+		pathes.Add(data[i]->data.path);
 	}
 
 	MainUI->showHintLayout(pathes);
@@ -443,16 +439,99 @@ void AFamilyReunionDinner2Character::addIngredientCardToPot_Implementation(int i
 	gameState->addIngredientCardInGame(ingredientCardIndex);
 }
 
-void AFamilyReunionDinner2Character::finishRecipeCard_Implementation(int index)
+void AFamilyReunionDinner2Character::finishRecipeCardRequest_Implementation(int index)
 {
-	AMyGameStateBase* gameState = Cast<AMyGameStateBase>(GetWorld()->GetGameState());
-
-	gameState->castRecipeCardEffect(index);
-
-	gameState->removeRecipeCardInGame(index);
-	gameState->addRecipeCardInGame(index);
-
 	clearUI();
+
+	Cast<AMyPlayerState>(GetPlayerState())->inReaction = true;
+	Cast<AMyPlayerState>(GetPlayerState())->reactionComplete = true;
+
+	Cast<AMyPlayerState>(GetPlayerState())->setReaction(true);
+	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);
+
+	FRecipeCardStruct data = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[index];
+	TArray<int> parameters = calculateParameter(data);
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1) 
+	{
+		if (GetPlayerState() != GetWorld()->GetGameState()->PlayerArray[i])
+		{
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->inReaction = true;
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete = false;
+
+			Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->sendReactionRequest(index, data.path, TEXT("Stop->Finishing Dish"), FVector(1, 0, 0));
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setReaction(true);
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setReactionComplete(false);
+		}
+	}
+
+	GetWorldTimerManager().PauseTimer(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->turnTimer);
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction = true;
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->activeCompleteDishTimer(index);
+}
+
+void AFamilyReunionDinner2Character::replyRecipeFinishAction_Implementation()
+{
+	clearUI();
+
+	Cast<AMyPlayerState>(GetPlayerState())->reactionComplete = true;
+	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);
+
+	FRecipeCardStruct data = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex];
+	TArray<int> parameters = calculateParameter(data);
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (!Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete) 
+		{
+			break;
+		}
+
+		if (i == GetWorld()->GetGameState()->PlayerArray.Num() - 1) 
+		{
+			Cast<AMyGameStateBase>(GetWorld()->GetGameState())->reactionTimeUpWithCompleteDish(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex);
+
+			return;
+		}
+	}
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (!Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete)
+		{			
+			if (Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction)
+			{
+				Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->sendReactionRequest(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex, data.path, TEXT("Stop->Finishing Dish"), FVector(1, 0, 0));
+			}
+			else
+			{
+				Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->sendReactionRequest(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex, data.path, TEXT("Counter->Stop Finishing Dish"), FVector(1, 0, 0));
+			}
+		}
+	}
+
+	GetWorldTimerManager().PauseTimer(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->turnTimer);
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction = !Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction;
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->activeCompleteDishTimer(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex);
+}
+
+void AFamilyReunionDinner2Character::sendReactionRequest_Implementation(int potIndex, const FString& actionPath, const FString& actionDes, FVector actionColor)
+{
+	FRecipeCardStruct data = Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data;
+	TArray<int> parameters = calculateParameter(data);
+
+	TArray<FString> addedItemPath;
+
+	for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data.addedCookingCards.Num(); i += 1)
+	{
+		addedItemPath.Add(Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data.addedCookingCards[i].path);
+	}
+	for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data.addedIngredientCards.Num(); i += 1)
+	{
+		addedItemPath.Add(Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data.addedIngredientCards[i].path);
+	}
+
+	MainUI->showPotInfo(data.path, parameters[0], parameters[1], parameters[2], parameters[3], FCString::Atoi(*data.size), addedItemPath, actionPath, actionDes, actionColor);
 }
 
 void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor) 
@@ -512,6 +591,11 @@ void AFamilyReunionDinner2Character::showDegreeHintPreview(int index)
 	}
 
 	MainUI->showDegreeHintPreviewUI(cardIndexForHint);
+}
+
+void AFamilyReunionDinner2Character::setWaitingTextUI_Implementation(const FString& text)
+{
+	MainUI->setWaitingText(text);
 }
 
 void AFamilyReunionDinner2Character::TurnAtRate(float Rate)

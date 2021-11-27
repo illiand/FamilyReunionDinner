@@ -38,6 +38,14 @@ public:
 	TArray<FMonsterPreferenceStruct> monsterPreferenceInGame = TArray<FMonsterPreferenceStruct>();
 
 public:
+	FTimerHandle turnTimer;
+	FTimerHandle actionTimer;
+
+	int inActionPotIndex = 0;
+	int inActionPotItemIndex = -1;
+	bool succussAction = false;
+
+public:
 	void initGame();
 	void nextTurn();
 
@@ -52,6 +60,13 @@ public:
 	void removeRecipeCardInGame(int index);
 	void removeIngredientCardInGame(int index);
 	void removeCookingCardInGame(APlayerState* playerState, int index);
+
+	void turnTimeUp();
+
+	void activeCompleteDishTimer(int index);
+	void reactionTimeUpWithCompleteDish(int index);
+	void activeMoveItemInPotTimer(int index, int potIndex);
+	void reactionTimeUpWithMoveItemInPot(int index, int potIndex);
 private:
 	int currentTurnIndex = 0;
 };

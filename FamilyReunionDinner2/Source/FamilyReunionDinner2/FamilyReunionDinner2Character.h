@@ -87,8 +87,8 @@ public:
 	void addIngredientCardToPot_Implementation(int ingredientCardIndex, int potIndex);
 
 	UFUNCTION(Reliable, Server, BlueprintCallable)
-	void finishRecipeCard(int index);
-	void finishRecipeCard_Implementation(int index);
+	void finishRecipeCardRequest(int index);
+	void finishRecipeCardRequest_Implementation(int index);
 
 	UFUNCTION(Reliable, Server)
 	void requestCertainHandInfo(ACookingCard* card);
@@ -109,6 +109,18 @@ public:
 	UFUNCTION(Reliable, Client)
 	void setHintShowed(bool showed);
 	void setHintShowed_Implementation(bool showed);
+
+	UFUNCTION(Reliable, Client)
+	void sendReactionRequest(int potIndex, const FString& actionPath, const FString& actionDes, FVector actionColor);
+	void sendReactionRequest_Implementation(int potIndex, const FString& actionPath, const FString& actionDes, FVector actionColor);
+
+	UFUNCTION(Reliable, Server, BlueprintCallable)
+	void replyRecipeFinishAction();
+	void replyRecipeFinishAction_Implementation();
+
+	UFUNCTION(Reliable, Client)
+	void setWaitingTextUI(const FString& text);
+	void setWaitingTextUI_Implementation(const FString& text);
 
 	UFUNCTION(Reliable, Client)
 	void clearUI();

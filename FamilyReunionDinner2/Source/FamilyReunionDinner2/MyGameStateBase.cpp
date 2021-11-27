@@ -4,6 +4,7 @@
 #include "MyGameStateBase.h"
 #include "APIClass.h"
 #include "CardBorderActor.h"
+#include "FamilyReunionDinner2Character.h"
 #include "MyPlayerState.h"
 
 void AMyGameStateBase::initGame()
@@ -16,7 +17,7 @@ void AMyGameStateBase::initGame()
 	TSubclassOf<ACookingCard> cookingCard = LoadClass<ACookingCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyCookingCard.MyCookingCard_C'"));
 	monsterPreferenceFileData = UAPIClass::makeMonsterPreference();
 
-	int cookingCardCount = 6;
+	int cookingCardCount = 3;
 	// cookingCardCount = 7 if PlayerArray.Num() = 3/4
 
 	//randomly create replicatable cooking cards
@@ -53,6 +54,13 @@ void AMyGameStateBase::initGame()
 
 		monsterPreferenceFileData.RemoveAt(curCardIndex);
 	}
+
+	GetWorldTimerManager().SetTimer(turnTimer, this, &AMyGameStateBase::turnTimeUp, 1, false, 90);
+
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->activeTurnTimer();
+	}
 }
 
 void AMyGameStateBase::nextTurn() 
@@ -69,6 +77,23 @@ void AMyGameStateBase::nextTurn()
 	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->inTurn = true;
 	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->hintShowed = false;
 	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->setTurn(true);
+
+	GetWorldTimerManager().ClearTimer(turnTimer);
+	GetWorldTimerManager().SetTimer(turnTimer, this, &AMyGameStateBase::turnTimeUp, 1, false, 90);
+
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->activeTurnTimer();
+
+		if (i != currentTurnIndex) 
+		{
+			Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->setWaitingTextUI(TEXT("Other's Turn"));
+		}
+		else 
+		{
+			Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->setWaitingTextUI(TEXT("Your Turn"));
+		}
+	}
 }
 
 void AMyGameStateBase::addRecipeCardInGame(int index) 
@@ -178,4 +203,57 @@ void AMyGameStateBase::castCookingCardEffect(ACookingCard* card, int potIndex)
 void AMyGameStateBase::castRecipeCardEffect(int index)
 {	
 	completedDishFileData.Add(recipeCardOnTableFileData[index]);
+}
+
+void AMyGameStateBase::turnTimeUp() 
+{
+	nextTurn();
+}
+
+void AMyGameStateBase::activeCompleteDishTimer(int index)
+{
+	GetWorldTimerManager().ClearTimer(actionTimer);
+
+	FTimerDelegate TimerDel = FTimerDelegate::CreateUObject(this, &AMyGameStateBase::reactionTimeUpWithCompleteDish, index);
+	GetWorldTimerManager().SetTimer(actionTimer, TimerDel, 1, false, 10);
+	
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->activeReactionTimer();
+	}
+}
+
+void AMyGameStateBase::activeMoveItemInPotTimer(int index, int potIndex)
+{
+	GetWorldTimerManager().ClearTimer(actionTimer);
+
+	FTimerDelegate TimerDel = FTimerDelegate::CreateUObject(this, &AMyGameStateBase::reactionTimeUpWithMoveItemInPot, index, potIndex);
+	GetWorldTimerManager().SetTimer(actionTimer, TimerDel, 1, false, 30);
+}
+
+void AMyGameStateBase::reactionTimeUpWithCompleteDish(int index)
+{
+	GetWorldTimerManager().ClearTimer(actionTimer);
+
+	if (succussAction) 
+	{
+		castRecipeCardEffect(index);
+
+		removeRecipeCardInGame(index);
+		addRecipeCardInGame(index);
+	}
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setReaction(false);
+		Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->destroyReactionTimer();
+		Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->clearUI();
+	}
+
+	GetWorldTimerManager().UnPauseTimer(turnTimer);
+}
+
+void AMyGameStateBase::reactionTimeUpWithMoveItemInPot(int index, int potIndex)
+{
+	GetWorldTimerManager().ClearTimer(actionTimer);
 }

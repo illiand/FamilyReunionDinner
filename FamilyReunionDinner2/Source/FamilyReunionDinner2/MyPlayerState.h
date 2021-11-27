@@ -31,8 +31,27 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	bool hintShowed = false;
 
+	UPROPERTY(BlueprintReadOnly)
+	bool inReaction = false;
+
+	bool reactionComplete = true;
+
+	UPROPERTY(BlueprintReadOnly)
+	FString inTurnPlayerName;
+
+	UPROPERTY(BlueprintReadOnly)
+	int actionPoint = 3;
+
+	FTimerHandle turnTimer;
+	FTimerHandle reactionTimer;
+private:
+	float turnTimeRemaining = 0;
+	float actionTimerRemaining = 0;
+
 public:
 	void setCardRotationBasedOnPlayerLocation(AActor* card);
+	void turnTimerRun();
+	void reactionTimerRun();
 
 public:
 	UFUNCTION(Reliable, Client)
@@ -66,4 +85,24 @@ public:
 	UFUNCTION(Reliable, Client)
 	void setTurn(bool ifTurn);
 	void setTurn_Implementation(bool ifTurn);
+
+	UFUNCTION(Reliable, Client)
+	void setReaction(bool ifReaction);
+	void setReaction_Implementation(bool ifReaction);
+
+	UFUNCTION(Reliable, Client)
+	void setReactionComplete(bool ifReactionComplete);
+	void setReactionComplete_Implementation(bool ifReactionComplete);
+
+	UFUNCTION(Reliable, Client)
+	void activeTurnTimer();
+	void activeTurnTimer_Implementation();
+
+	UFUNCTION(Reliable, Client)
+	void activeReactionTimer();
+	void activeReactionTimer_Implementation();
+
+	UFUNCTION(Reliable, Client)
+	void destroyReactionTimer();
+	void destroyReactionTimer_Implementation();
 };
