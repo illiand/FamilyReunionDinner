@@ -5,6 +5,16 @@
 #include "FamilyReunionDinner2Character.h"
 #include "Net/UnrealNetwork.h"
 
+void AMyPlayerState::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (GetLocalRole() != 3 && GetOwner() != NULL)
+	{
+		this->requestUserID();
+	}
+}
+
 void AMyPlayerState::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -60,6 +70,19 @@ void AMyPlayerState::destroyRecipeCard_Implementation(int index)
 	recipeCards.RemoveAt(index);
 }
 
+void AMyPlayerState::removePotItem_Implementation(int index, int potIndex)
+{
+	if (index <= recipeCards[potIndex]->data.addedCookingCards.Num() - 1)
+	{
+		recipeCards[potIndex]->data.addedCookingCards.RemoveAt(index);
+	}
+	else
+	{
+		int trueIndex = index - recipeCards[potIndex]->data.addedCookingCards.Num();
+		recipeCards[potIndex]->data.addedIngredientCards.RemoveAt(trueIndex);
+	}
+}
+
 void AMyPlayerState::setCardRotationBasedOnPlayerLocation(AActor* card) 
 {
 	if (GetPawn()->GetActorLocation().Y == 60) 
@@ -87,15 +110,24 @@ void AMyPlayerState::setTurn_Implementation(bool ifTurn)
 	}
 }
 
+void AMyPlayerState::setInTurnPlayerName_Implementation(const FString& name)
+{
+	inTurnPlayerName = name;
+}
+
 void AMyPlayerState::setReaction_Implementation(bool ifReaction)
 {
 	inReaction = ifReaction;
 }
 
-
 void AMyPlayerState::setReactionComplete_Implementation(bool ifReactionComplete)
 {
 	reactionComplete = ifReactionComplete;
+}
+
+void AMyPlayerState::setPreReaction_Implementation(bool ifPreReaction)
+{
+	preReaction = ifPreReaction;
 }
 
 void AMyPlayerState::turnTimerRun()
@@ -142,5 +174,30 @@ void AMyPlayerState::destroyReactionTimer_Implementation()
 	GetWorldTimerManager().ClearTimer(reactionTimer);
 	GetWorldTimerManager().UnPauseTimer(turnTimer);
 
-	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setWaitingText(inTurnPlayerName.Append(TEXT("'s Turn")));
+	if (inTurn) 
+	{
+		Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setWaitingText("Your Turn");
+	}
+	else
+	{
+		FString nameText = inTurnPlayerName;
+		nameText.Append(TEXT("'s Turn"));
+		Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setWaitingText(nameText);
+	}
+}
+
+void AMyPlayerState::showWorldMessage_Implementation(const FString& text, const FVector& color)
+{
+	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->playWorldMessageText(text, color);
+}
+
+void AMyPlayerState::requestUserID_Implementation()
+{
+	FamilyReunionDinner2PlayerID = FString::FromInt(FMath::RandRange(10000000, 99999999));
+	sendUserID(FamilyReunionDinner2PlayerID);
+}
+
+void AMyPlayerState::sendUserID_Implementation(const FString& id)
+{
+	FamilyReunionDinner2PlayerID = id;
 }

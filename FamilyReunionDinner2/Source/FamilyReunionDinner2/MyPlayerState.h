@@ -16,7 +16,10 @@ UCLASS()
 class FAMILYREUNIONDINNER2_API AMyPlayerState : public APlayerState
 {
 	GENERATED_BODY()
-	
+
+public:
+	virtual void BeginPlay();
+
 public:
 	//not actually exist on server
 	TArray<AIngredientCard*> ingredientCards = TArray<AIngredientCard*>();
@@ -34,6 +37,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	bool inReaction = false;
 
+	UPROPERTY(BlueprintReadOnly)
+	bool preReaction = false;
+
 	bool reactionComplete = true;
 
 	UPROPERTY(BlueprintReadOnly)
@@ -41,6 +47,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	int actionPoint = 3;
+
+	UPROPERTY(BlueprintReadOnly)
+	FString FamilyReunionDinner2PlayerID;
 
 	FTimerHandle turnTimer;
 	FTimerHandle reactionTimer;
@@ -79,6 +88,10 @@ public:
 	void destroyRecipeCard_Implementation(int index);
 
 	UFUNCTION(Reliable, Client)
+	void removePotItem(int index, int potIndex);
+	void removePotItem_Implementation(int index, int potIndex);
+
+	UFUNCTION(Reliable, Client)
 	void setMonsterPreferenceUI(const FString& path);
 	void setMonsterPreferenceUI_Implementation(const FString& path);
 
@@ -86,13 +99,21 @@ public:
 	void setTurn(bool ifTurn);
 	void setTurn_Implementation(bool ifTurn);
 
-	UFUNCTION(Reliable, Client)
+	UFUNCTION(Reliable, NetMulticast)
+	void setInTurnPlayerName(const FString& name);
+	void setInTurnPlayerName_Implementation(const FString& name);
+
+	UFUNCTION(Reliable, NetMulticast)
 	void setReaction(bool ifReaction);
 	void setReaction_Implementation(bool ifReaction);
 
-	UFUNCTION(Reliable, Client)
+	UFUNCTION(Reliable, NetMulticast)
 	void setReactionComplete(bool ifReactionComplete);
 	void setReactionComplete_Implementation(bool ifReactionComplete);
+
+	UFUNCTION(Reliable, NetMulticast)
+	void setPreReaction(bool ifPreReaction);
+	void setPreReaction_Implementation(bool ifPreReaction);
 
 	UFUNCTION(Reliable, Client)
 	void activeTurnTimer();
@@ -105,4 +126,16 @@ public:
 	UFUNCTION(Reliable, Client)
 	void destroyReactionTimer();
 	void destroyReactionTimer_Implementation();
+
+	UFUNCTION(Reliable, Client)
+	void showWorldMessage(const FString& text, const FVector& color);
+	void showWorldMessage_Implementation(const FString& text, const FVector& color);
+
+	UFUNCTION(Reliable, Server)
+	void requestUserID();
+	void requestUserID_Implementation();
+
+	UFUNCTION(Reliable, Client)
+	void sendUserID(const FString& id);
+	void sendUserID_Implementation(const FString& id);
 };

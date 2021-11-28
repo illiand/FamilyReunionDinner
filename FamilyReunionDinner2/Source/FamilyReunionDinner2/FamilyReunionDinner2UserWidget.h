@@ -37,4 +37,6 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void setWaitingText(const FString& text);
+	UFUNCTION(BlueprintImplementableEvent)
+	void playWorldMessageText(const FString& text, const FVector& color);
 };

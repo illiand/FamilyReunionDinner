@@ -65,8 +65,11 @@ public:
 
 	void activeCompleteDishTimer(int index);
 	void reactionTimeUpWithCompleteDish(int index);
-	void activeMoveItemInPotTimer(int index, int potIndex);
-	void reactionTimeUpWithMoveItemInPot(int index, int potIndex);
+	void getDishActionResult(int index);
+
+	void activeRemoveItemInPotTimer(int index, int potIndex);
+	void reactionTimeUpWithRemoveItemInPot(int index, int potIndex);
+	void getRemoveItemActionResult(int index, int potIndex);
 private:
 	int currentTurnIndex = 0;
 };

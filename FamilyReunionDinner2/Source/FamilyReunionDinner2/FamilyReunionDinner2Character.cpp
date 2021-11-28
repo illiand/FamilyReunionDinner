@@ -439,29 +439,192 @@ void AFamilyReunionDinner2Character::addIngredientCardToPot_Implementation(int i
 	gameState->addIngredientCardInGame(ingredientCardIndex);
 }
 
+void AFamilyReunionDinner2Character::setObservingPotItemIndex_Implementation(int index) 
+{
+	observingItemInPotIndex = index;
+}
+
+void AFamilyReunionDinner2Character::removePotItemRequest_Implementation(int potIndex, int index)
+{
+	clearUI();
+
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex = potIndex;
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotItemIndex = index;
+	setObservingPotItemIndex(-1);
+
+	Cast<AMyPlayerState>(GetPlayerState())->setReaction(true);
+	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);
+
+	FString potItemPath;
+
+	if (index <= Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[potIndex].addedCookingCards.Num() - 1) 
+	{
+		potItemPath = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[potIndex].addedCookingCards[index].path;
+	}
+	else 
+	{
+		int trueIndex = index - Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[potIndex].addedCookingCards.Num();
+		potItemPath = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[potIndex].addedIngredientCards[trueIndex].path;
+	}
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (GetPlayerState() != GetWorld()->GetGameState()->PlayerArray[i])
+		{
+			Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->sendReactionRequest(potIndex, potItemPath, TEXT("Stop->Remove Item"), FVector(1, 0, 0));
+			Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->setObservingPotItemIndex(index);
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setReaction(true);
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setReactionComplete(false);
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setPreReaction(false);
+
+			FString message = TEXT("Player ");
+			message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+			message.Append(TEXT(" Want to Remove Item in Pot..."));
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
+		}
+	}
+
+	GetWorldTimerManager().PauseTimer(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->turnTimer);
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction = true;
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->activeRemoveItemInPotTimer(index, potIndex);
+}
+
+void AFamilyReunionDinner2Character::replyRemovePotItemAction_Implementation() 
+{
+	clearUI();
+
+	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);
+	setObservingPotItemIndex(-1);
+
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction = !Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction;
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->activeRemoveItemInPotTimer(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex, Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotItemIndex);
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (!Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete)
+		{
+			break;
+		}
+
+		if (i == GetWorld()->GetGameState()->PlayerArray.Num() - 1)
+		{
+			Cast<AMyGameStateBase>(GetWorld()->GetGameState())->getRemoveItemActionResult(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex, Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotItemIndex);
+
+			for (int j = 0; j < GetWorld()->GetGameState()->PlayerArray.Num(); j += 1)
+			{
+				if (Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction)
+				{
+					FString message = TEXT("Player ");
+					message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+					message.Append(TEXT(" Countered Stopping Removing Item Action\nRecipe Finished: No One is Able to Use More Action"));
+					Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[j])->showWorldMessage(message, FVector(0, 1, 0));
+				}
+				else
+				{
+					FString message = TEXT("Player ");
+					message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+					message.Append(TEXT(" Stopped Removing Item Action\nRecipe Rejected: No One is Able to Use More Action"));
+					Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[j])->showWorldMessage(message, FVector(1, 0, 0));
+				}
+			}
+
+			return;
+		}
+	}
+
+	FString potItemPath;
+	int index = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotItemIndex;
+	int potIndex = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex;
+
+	if (index <= Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[potIndex].addedCookingCards.Num() - 1)
+	{
+		potItemPath = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[potIndex].addedCookingCards[index].path;
+	}
+	else
+	{
+		int trueIndex = index - Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[potIndex].addedCookingCards.Num();
+		potItemPath = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[potIndex].addedIngredientCards[trueIndex].path;
+	}
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (GetPlayerState() != GetWorld()->GetGameState()->PlayerArray[i])
+		{
+			if (Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction)
+			{
+				FString message = TEXT("Player ");
+				message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+				message.Append(TEXT(" Countered Stopping Removing Item Action"));
+				Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
+			}
+			else
+			{
+				FString message = TEXT("Player ");
+				message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+				message.Append(TEXT(" Stopped Removing Item Action"));
+				Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(1, 0, 0));
+			}
+		}
+
+		if (!Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete)
+		{
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setPreReaction(false);
+
+			if (Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction)
+			{
+				Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->sendReactionRequest(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex, potItemPath, TEXT("Stop->Removing Dish Item"), FVector(1, 0, 0));
+			}
+			else
+			{
+				Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->sendReactionRequest(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex, potItemPath, TEXT("Counter->Removing Dish Item"), FVector(1, 0, 0));
+			}
+		}
+	}
+}
+
+void AFamilyReunionDinner2Character::giveUpInRemovingItem_Implementation() 
+{
+	clearUI();
+	Cast<AMyPlayerState>(GetPlayerState())->setPreReaction(true);
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (!Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete && !Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->preReaction)
+		{
+			break;
+		}
+
+		if (i == GetWorld()->GetGameState()->PlayerArray.Num() - 1)
+		{
+			Cast<AMyGameStateBase>(GetWorld()->GetGameState())->reactionTimeUpWithRemoveItemInPot(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotItemIndex, Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex);
+		}
+	}
+}
+
 void AFamilyReunionDinner2Character::finishRecipeCardRequest_Implementation(int index)
 {
 	clearUI();
 
-	Cast<AMyPlayerState>(GetPlayerState())->inReaction = true;
-	Cast<AMyPlayerState>(GetPlayerState())->reactionComplete = true;
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex = index;
 
 	Cast<AMyPlayerState>(GetPlayerState())->setReaction(true);
 	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);
 
 	FRecipeCardStruct data = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[index];
-	TArray<int> parameters = calculateParameter(data);
 
 	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1) 
 	{
 		if (GetPlayerState() != GetWorld()->GetGameState()->PlayerArray[i])
 		{
-			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->inReaction = true;
-			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete = false;
-
 			Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->sendReactionRequest(index, data.path, TEXT("Stop->Finishing Dish"), FVector(1, 0, 0));
 			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setReaction(true);
 			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setReactionComplete(false);
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setPreReaction(false);
+
+			FString message = TEXT("Player ");
+			message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+			message.Append(TEXT(" Want to Finish Recipe..."));
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
 		}
 	}
 
@@ -474,31 +637,71 @@ void AFamilyReunionDinner2Character::replyRecipeFinishAction_Implementation()
 {
 	clearUI();
 
-	Cast<AMyPlayerState>(GetPlayerState())->reactionComplete = true;
 	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);
+
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction = !Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction;
+	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->activeCompleteDishTimer(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex);
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (!Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete)
+		{
+			break;
+		}
+
+		if (i == GetWorld()->GetGameState()->PlayerArray.Num() - 1)
+		{
+			Cast<AMyGameStateBase>(GetWorld()->GetGameState())->getDishActionResult(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex);
+
+			for (int j = 0; j < GetWorld()->GetGameState()->PlayerArray.Num(); j += 1)
+			{
+				if (Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction)
+				{
+					FString message = TEXT("Player ");
+					message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+					message.Append(TEXT(" Countered Stopping Finising Recipe Action\nRecipe Finished: No One is Able to Use More Action"));
+					Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[j])->showWorldMessage(message, FVector(0, 1, 0));
+				}
+				else
+				{
+					FString message = TEXT("Player ");
+					message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+					message.Append(TEXT(" Stopped Finising Recipe Action\nRecipe Rejected: No One is Able to Use More Action"));
+					Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[j])->showWorldMessage(message, FVector(1, 0, 0));
+				}
+			}
+
+			return;
+		}
+	}
 
 	FRecipeCardStruct data = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex];
 	TArray<int> parameters = calculateParameter(data);
 
 	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
 	{
-		if (!Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete) 
+		if (GetPlayerState() != GetWorld()->GetGameState()->PlayerArray[i])
 		{
-			break;
+			if (Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction)
+			{
+				FString message = TEXT("Player ");
+				message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+				message.Append(TEXT(" Countered Stopping Finising Recipe Action"));
+				Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
+			}
+			else 
+			{
+				FString message = TEXT("Player ");
+				message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+				message.Append(TEXT(" Stopped Finising Recipe Action"));
+				Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(1, 0, 0));
+			}
 		}
 
-		if (i == GetWorld()->GetGameState()->PlayerArray.Num() - 1) 
-		{
-			Cast<AMyGameStateBase>(GetWorld()->GetGameState())->reactionTimeUpWithCompleteDish(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex);
-
-			return;
-		}
-	}
-
-	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
-	{
 		if (!Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete)
 		{			
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setPreReaction(false);
+
 			if (Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction)
 			{
 				Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->sendReactionRequest(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex, data.path, TEXT("Stop->Finishing Dish"), FVector(1, 0, 0));
@@ -509,10 +712,25 @@ void AFamilyReunionDinner2Character::replyRecipeFinishAction_Implementation()
 			}
 		}
 	}
+}
 
-	GetWorldTimerManager().PauseTimer(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->turnTimer);
-	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction = !Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction;
-	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->activeCompleteDishTimer(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex);
+void AFamilyReunionDinner2Character::giveUpReactionInRecipeFinish_Implementation() 
+{
+	clearUI();
+	Cast<AMyPlayerState>(GetPlayerState())->setPreReaction(true);
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (!Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->reactionComplete && !Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->preReaction)
+		{
+			break;
+		}
+
+		if (i == GetWorld()->GetGameState()->PlayerArray.Num() - 1)
+		{
+			Cast<AMyGameStateBase>(GetWorld()->GetGameState())->reactionTimeUpWithCompleteDish(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex);
+		}
+	}
 }
 
 void AFamilyReunionDinner2Character::sendReactionRequest_Implementation(int potIndex, const FString& actionPath, const FString& actionDes, FVector actionColor)

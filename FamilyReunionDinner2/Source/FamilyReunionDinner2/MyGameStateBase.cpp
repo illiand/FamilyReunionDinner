@@ -60,6 +60,19 @@ void AMyGameStateBase::initGame()
 	for (int i = 0; i < PlayerArray.Num(); i += 1)
 	{
 		Cast<AMyPlayerState>(PlayerArray[i])->activeTurnTimer();
+		Cast<AMyPlayerState>(PlayerArray[i])->setInTurnPlayerName(Cast<AMyPlayerState>(PlayerArray[0])->FamilyReunionDinner2PlayerID);
+
+		if (i != currentTurnIndex)
+		{
+			FString message = TEXT("Player ");
+			message.Append(Cast<AMyPlayerState>(PlayerArray[0])->FamilyReunionDinner2PlayerID);
+			message.Append(TEXT("'s Turn"));
+			Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->setWaitingTextUI(message);
+		}
+		else
+		{
+			Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->setWaitingTextUI(TEXT("Your Turn"));
+		}
 	}
 }
 
@@ -84,10 +97,14 @@ void AMyGameStateBase::nextTurn()
 	for (int i = 0; i < PlayerArray.Num(); i += 1)
 	{
 		Cast<AMyPlayerState>(PlayerArray[i])->activeTurnTimer();
+		Cast<AMyPlayerState>(PlayerArray[i])->setInTurnPlayerName(Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->FamilyReunionDinner2PlayerID);
 
 		if (i != currentTurnIndex) 
 		{
-			Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->setWaitingTextUI(TEXT("Other's Turn"));
+			FString message = TEXT("Player ");
+			message.Append(Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->FamilyReunionDinner2PlayerID);
+			message.Append(TEXT("'s Turn"));
+			Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->setWaitingTextUI(message);
 		}
 		else 
 		{
@@ -223,19 +240,44 @@ void AMyGameStateBase::activeCompleteDishTimer(int index)
 	}
 }
 
-void AMyGameStateBase::activeMoveItemInPotTimer(int index, int potIndex)
+void AMyGameStateBase::activeRemoveItemInPotTimer(int index, int potIndex)
 {
 	GetWorldTimerManager().ClearTimer(actionTimer);
 
-	FTimerDelegate TimerDel = FTimerDelegate::CreateUObject(this, &AMyGameStateBase::reactionTimeUpWithMoveItemInPot, index, potIndex);
-	GetWorldTimerManager().SetTimer(actionTimer, TimerDel, 1, false, 30);
+	FTimerDelegate TimerDel = FTimerDelegate::CreateUObject(this, &AMyGameStateBase::reactionTimeUpWithRemoveItemInPot, index, potIndex);
+	GetWorldTimerManager().SetTimer(actionTimer, TimerDel, 1, false, 10);
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->activeReactionTimer();
+	}
 }
 
 void AMyGameStateBase::reactionTimeUpWithCompleteDish(int index)
 {
+	getDishActionResult(index);
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (succussAction)
+		{
+			FString message = TEXT("Finish Recipe Action Completed");
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
+		}
+		else
+		{
+			FString message = TEXT("Finish Recipe Action Rejected");
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(1, 0, 0));
+		}
+	}
+
+}
+
+void AMyGameStateBase::getDishActionResult(int index) 
+{
 	GetWorldTimerManager().ClearTimer(actionTimer);
 
-	if (succussAction) 
+	if (succussAction)
 	{
 		castRecipeCardEffect(index);
 
@@ -243,17 +285,65 @@ void AMyGameStateBase::reactionTimeUpWithCompleteDish(int index)
 		addRecipeCardInGame(index);
 	}
 
-	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
 	{
-		Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->setReaction(false);
-		Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->destroyReactionTimer();
-		Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->clearUI();
+		Cast<AMyPlayerState>(PlayerArray[i])->setReaction(false);
+		Cast<AMyPlayerState>(PlayerArray[i])->destroyReactionTimer();
+		Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->clearUI();
 	}
 
 	GetWorldTimerManager().UnPauseTimer(turnTimer);
 }
 
-void AMyGameStateBase::reactionTimeUpWithMoveItemInPot(int index, int potIndex)
+void AMyGameStateBase::reactionTimeUpWithRemoveItemInPot(int index, int potIndex)
 {
 	GetWorldTimerManager().ClearTimer(actionTimer);
+
+	getRemoveItemActionResult(index, potIndex);
+
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		if (succussAction)
+		{
+			FString message = TEXT("Remove Item in Pot Action Completed");
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
+		}
+		else
+		{
+			FString message = TEXT("Remove Item in Pot Action Rejected");
+			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(1, 0, 0));
+		}
+	}
+}
+void AMyGameStateBase::getRemoveItemActionResult(int index, int potIndex) 
+{
+	GetWorldTimerManager().ClearTimer(actionTimer);
+
+	if (succussAction)
+	{
+		if (index <= recipeCardOnTableFileData[potIndex].addedCookingCards.Num() - 1) 
+		{
+			recipeCardOnTableFileData[potIndex].addedCookingCards.RemoveAt(index);
+		}
+		else 
+		{
+			int trueIndex = index - recipeCardOnTableFileData[potIndex].addedCookingCards.Num();
+			recipeCardOnTableFileData[potIndex].addedIngredientCards.RemoveAt(trueIndex);
+		}
+
+		for (int i = 0; i < PlayerArray.Num(); i += 1)
+		{
+			Cast<AMyPlayerState>(PlayerArray[i])->removePotItem(index, potIndex);
+		}
+	}
+
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->setReaction(false);
+		Cast<AMyPlayerState>(PlayerArray[i])->destroyReactionTimer();
+		Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->setObservingPotItemIndex(-1);
+		Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->clearUI();
+	}
+
+	GetWorldTimerManager().UnPauseTimer(turnTimer);
 }

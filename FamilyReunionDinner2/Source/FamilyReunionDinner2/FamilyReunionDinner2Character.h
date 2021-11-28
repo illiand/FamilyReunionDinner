@@ -90,6 +90,14 @@ public:
 	void finishRecipeCardRequest(int index);
 	void finishRecipeCardRequest_Implementation(int index);
 
+	UFUNCTION(Reliable, Server, BlueprintCallable)
+	void removePotItemRequest(int potIndex, int index);
+	void removePotItemRequest_Implementation(int potIndex, int index);
+
+	UFUNCTION(Reliable, NetMulticast, BlueprintCallable)
+	void setObservingPotItemIndex(int index);
+	void setObservingPotItemIndex_Implementation(int index);
+
 	UFUNCTION(Reliable, Server)
 	void requestCertainHandInfo(ACookingCard* card);
 	void requestCertainHandInfo_Implementation(ACookingCard* card);
@@ -118,6 +126,18 @@ public:
 	void replyRecipeFinishAction();
 	void replyRecipeFinishAction_Implementation();
 
+	UFUNCTION(Reliable, Server, BlueprintCallable)
+	void replyRemovePotItemAction();
+	void replyRemovePotItemAction_Implementation();
+
+	UFUNCTION(Reliable, Server, BlueprintCallable)
+	void giveUpReactionInRecipeFinish();
+	void giveUpReactionInRecipeFinish_Implementation();
+
+	UFUNCTION(Reliable, Server, BlueprintCallable)
+	void giveUpInRemovingItem();
+	void giveUpInRemovingItem_Implementation();
+
 	UFUNCTION(Reliable, Client)
 	void setWaitingTextUI(const FString& text);
 	void setWaitingTextUI_Implementation(const FString& text);
@@ -138,6 +158,8 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	int observingPotIndex = 0;
 
+	UPROPERTY(BlueprintReadWrite)
+	int observingItemInPotIndex = -1;
 	/*
 		@return data
 		0: curFlavor
