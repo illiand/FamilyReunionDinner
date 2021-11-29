@@ -42,6 +42,52 @@ void AFamilyReunionDinner2Character::BeginPlay()
 void AFamilyReunionDinner2Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (GetPlayerState() == NULL) 
+	{
+		return;
+	}
+
+	if (Cast<AMyPlayerState>(GetPlayerState())->inDragging) 
+	{
+		AActor* curTarget = pickFromEye();
+
+		if (curTarget != NULL && curTarget->Tags.Num() != 0) 
+		{
+			if (curTarget->Tags[0] == TEXT("pot") || curTarget->Tags[0] == TEXT("potCard"))
+			{
+				//show UI of pot
+				ARecipeCard* card = NULL;
+
+				if (curTarget->Tags[0] == TEXT("pot"))
+				{
+					//TODO
+				}
+				else
+				{
+					card = Cast<ARecipeCard>(curTarget);
+				}
+
+				int curPotIndex = -1;
+
+				for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards.Num(); i += 1)
+				{
+					if (card->data.name == Cast<AMyPlayerState>(GetPlayerState())->recipeCards[i]->data.name)
+					{
+						curPotIndex = i;
+
+						break;
+					}
+				}
+
+				sendReactionRequest_Implementation(curPotIndex, card->data.path, TEXT(""), FVector(0, 0, 0));
+			}
+		}
+		else 
+		{
+			MainUI->clearPotReviewOnScreen();
+		}
+	}
 }
 
 void AFamilyReunionDinner2Character::setLocationByIndex(int index)
@@ -100,19 +146,7 @@ void AFamilyReunionDinner2Character::endTurn_Implementation()
 
 AActor* AFamilyReunionDinner2Character::pickFromEye()
 {
-	//FVector CameraLoc = GetFirstPersonCameraComponent()->GetComponentLocation();
-	//FRotator CameraRot = GetFirstPersonCameraComponent()->GetComponentRotation();
-
-	//FVector Start = CameraLoc;
-	//FVector End = CameraLoc + CameraRot.Vector() * 2000;
-	
 	FHitResult hit(ForceInit);
-	//FCollisionObjectQueryParams objectParams;
-	//FCollisionQueryParams params;
-	//params.AddIgnoredActor(this);
-	//
-	//GetWorld()->LineTraceSingleByObjectType(hit, Start, End, objectParams, params);
-
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, true, hit);
 	
 	return hit.GetActor();
@@ -161,9 +195,23 @@ void AFamilyReunionDinner2Character::pickingItem()
 			}
 			else 
 			{
+				FString picPath;
+
+				if (curTarget->IsA(ACookingCard::StaticClass()))
+				{
+					picPath = Cast<ACookingCard>(curTarget)->data.path;
+				}
+				else
+				{
+					picPath = Cast<AIngredientCard>(curTarget)->data.path;
+				}
+
+				MainUI->draggingCardPreviewOnScreen(picPath);
+
 				if (Cast<AMyPlayerState>(GetPlayerState())->inTurn) 
 				{
 					holdingItem = curTarget;
+					Cast<AMyPlayerState>(GetPlayerState())->inDragging = true;
 				}
 				
 				//show highlight of the position that can put the card
@@ -174,6 +222,7 @@ void AFamilyReunionDinner2Character::pickingItem()
 		{
 			//show UI of pot
 			ARecipeCard* card = NULL;
+			UIOn = true;
 
 			if (curTarget->Tags[0] == TEXT("pot"))
 			{
@@ -204,6 +253,12 @@ void AFamilyReunionDinner2Character::puttingItem()
 	if (Cast<AMyPlayerState>(GetPlayerState())->inReaction)
 	{
 		return;
+	}
+
+	if (Cast<AMyPlayerState>(GetPlayerState())->inDragging)
+	{
+		Cast<AMyPlayerState>(GetPlayerState())->inDragging = false;
+		clearUI_Implementation();
 	}
 
 	if (holdingItem == NULL) 
@@ -273,7 +328,7 @@ void AFamilyReunionDinner2Character::giveTypeHint_Implementation(ACookingCard* c
 			{
 				for (int k = 0; k < curCards.Num(); k += 1) 
 				{
-					if (curCards[k]->data.type == card->data.type) 
+					if (curCards[k]->data.type == card->data.type && !curCards[k]->data.typeHinted)
 					{
 						curCards[k]->data.typeHinted = true;
 
@@ -284,6 +339,18 @@ void AFamilyReunionDinner2Character::giveTypeHint_Implementation(ACookingCard* c
 						curCards[k]->border = cardBorder;
 						cardBorder->setBorderColor(0, 1, 0, 1);
 					}
+				}
+
+				for (int k = 0; k < Cast<AMyGameStateBase>(GetWorld()->GetGameState())->PlayerArray.Num(); k += 1)
+				{
+					FString message = "Player ";
+					message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+					message.Append(" Gived a Type Hint to ");
+					message.Append(card->data.name);
+					message.Append(" to ");
+					message.Append(Cast<AMyPlayerState>(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->PlayerArray[i])->FamilyReunionDinner2PlayerID);
+
+					Cast<AMyPlayerState>(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->PlayerArray[k])->showWorldMessage(message, FVector(0, 1, 0));
 				}
 
 				clearUI();
@@ -307,11 +374,23 @@ void AFamilyReunionDinner2Character::giveDegreeHint_Implementation(ACookingCard*
 			{
 				for (int k = 0; k < curCards.Num(); k += 1)
 				{
-					if (curCards[k]->data.degree == card->data.degree)
+					if (curCards[k]->data.degree == card->data.degree && !curCards[k]->data.degreeHinted)
 					{
 						curCards[k]->data.degreeHinted = true;
 						curCards[k]->changeDegreeHintStatus(1, 0, 0, 1);
 					}
+				}
+
+				for (int k = 0; k < Cast<AMyGameStateBase>(GetWorld()->GetGameState())->PlayerArray.Num(); k += 1)
+				{
+					FString message = "Player ";
+					message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
+					message.Append(" Gived a Degree Hint to ");
+					message.Append(card->data.name);
+					message.Append(" to ");
+					message.Append(Cast<AMyPlayerState>(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->PlayerArray[i])->FamilyReunionDinner2PlayerID);
+
+					Cast<AMyPlayerState>(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->PlayerArray[k])->showWorldMessage(message, FVector(0, 1, 0));
 				}
 
 				clearUI();
@@ -332,46 +411,6 @@ void AFamilyReunionDinner2Character::clearUI_Implementation()
 {
 	MainUI->clearUI();
 	UIOn = false;
-}
-
-TArray<int> AFamilyReunionDinner2Character::calculateParameter(FRecipeCardStruct data)
-{
-	TArray<int> parameters;
-
-	int flavor = 0;
-	int heat = 0;
-	int point = 0;
-	int size = 0;
-
-	for (int i = 0; i < data.addedCookingCards.Num(); i += 1) 
-	{
-		if (data.addedCookingCards[i].type == "heat")
-		{
-			heat += FCString::Atoi(*data.addedCookingCards[i].degree);
-		}
-		else 
-		{
-			flavor += FCString::Atoi(*data.addedCookingCards[i].degree);
-		}
-	}
-
-	for (int i = 0; i < data.addedIngredientCards.Num(); i += 1)
-	{
-		//TODO calculate bonus point
-		size += FCString::Atoi(*data.addedIngredientCards[i].size);
-	}
-
-	parameters.Add(flavor);
-	parameters.Add(heat);
-	parameters.Add(point);
-	parameters.Add(size);
-
-	return parameters;
-}
-
-void AFamilyReunionDinner2Character::drawItemHint() 
-{
-
 }
 
 void AFamilyReunionDinner2Character::requestCertainHandInfo_Implementation(ACookingCard* card)
@@ -446,7 +485,10 @@ void AFamilyReunionDinner2Character::setObservingPotItemIndex_Implementation(int
 
 void AFamilyReunionDinner2Character::removePotItemRequest_Implementation(int potIndex, int index)
 {
-	clearUI();
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->clearUI();
+	}
 
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex = potIndex;
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotItemIndex = index;
@@ -603,7 +645,10 @@ void AFamilyReunionDinner2Character::giveUpInRemovingItem_Implementation()
 
 void AFamilyReunionDinner2Character::finishRecipeCardRequest_Implementation(int index)
 {
-	clearUI();
+	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	{
+		Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->clearUI();
+	}
 
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex = index;
 
@@ -676,7 +721,7 @@ void AFamilyReunionDinner2Character::replyRecipeFinishAction_Implementation()
 	}
 
 	FRecipeCardStruct data = Cast<AMyGameStateBase>(GetWorld()->GetGameState())->recipeCardOnTableFileData[Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex];
-	TArray<int> parameters = calculateParameter(data);
+	TArray<int> parameters = Cast<AMyPlayerState>(GetPlayerState())->calculateParameter(data);
 
 	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
 	{
@@ -736,17 +781,17 @@ void AFamilyReunionDinner2Character::giveUpReactionInRecipeFinish_Implementation
 void AFamilyReunionDinner2Character::sendReactionRequest_Implementation(int potIndex, const FString& actionPath, const FString& actionDes, FVector actionColor)
 {
 	FRecipeCardStruct data = Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data;
-	TArray<int> parameters = calculateParameter(data);
+	TArray<int> parameters = Cast<AMyPlayerState>(GetPlayerState())->calculateParameter(data);
 
 	TArray<FString> addedItemPath;
 
-	for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data.addedCookingCards.Num(); i += 1)
+	for (int i = 0; i < data.addedCookingCards.Num(); i += 1)
 	{
-		addedItemPath.Add(Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data.addedCookingCards[i].path);
+		addedItemPath.Add(data.addedCookingCards[i].path);
 	}
 	for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data.addedIngredientCards.Num(); i += 1)
 	{
-		addedItemPath.Add(Cast<AMyPlayerState>(GetPlayerState())->recipeCards[potIndex]->data.addedIngredientCards[i].path);
+		addedItemPath.Add(data.addedIngredientCards[i].path);
 	}
 
 	MainUI->showPotInfo(data.path, parameters[0], parameters[1], parameters[2], parameters[3], FCString::Atoi(*data.size), addedItemPath, actionPath, actionDes, actionColor);

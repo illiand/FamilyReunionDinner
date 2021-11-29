@@ -39,4 +39,12 @@ public:
 	void setWaitingText(const FString& text);
 	UFUNCTION(BlueprintImplementableEvent)
 	void playWorldMessageText(const FString& text, const FVector& color);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void addToCompletedRecipeUI(const FString& path, int32 flavor, int32 heat, int32 point, bool failed, const FString& failedReason);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void draggingCardPreviewOnScreen(const FString& path);
+	UFUNCTION(BlueprintImplementableEvent)
+	void clearPotReviewOnScreen();
 };

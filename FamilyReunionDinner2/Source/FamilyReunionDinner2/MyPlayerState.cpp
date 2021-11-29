@@ -201,3 +201,183 @@ void AMyPlayerState::sendUserID_Implementation(const FString& id)
 {
 	FamilyReunionDinner2PlayerID = id;
 }
+
+void AMyPlayerState::addToCompletedRecipeUI_Implementation(const FString& path, int flavor, int heat, int point, bool failed, const FString& failedReason)
+{
+	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->addToCompletedRecipeUI(path, flavor, heat, point, failed, failedReason);
+}
+
+TArray<int> AMyPlayerState::calculateParameter(FRecipeCardStruct data)
+{
+	TArray<int> parameters;
+
+	int flavor = 0;
+	int size = 0;
+
+	for (int i = 0; i < data.addedCookingCards.Num(); i += 1)
+	{
+		if (data.addedCookingCards[i].type != "heat")
+		{
+			flavor += FCString::Atoi(*data.addedCookingCards[i].degree);
+		}
+	}
+
+	for (int i = 0; i < data.addedIngredientCards.Num(); i += 1)
+	{
+		size += FCString::Atoi(*data.addedIngredientCards[i].size);
+	}
+
+	parameters.Add(flavor);
+	parameters.Add(calculateHeat(data));
+	parameters.Add(calculateBonusPoint(data));
+	parameters.Add(size);
+
+	return parameters;
+}
+
+int AMyPlayerState::calculateBonusPoint(FRecipeCardStruct data)
+{
+	int total = FCString::Atoi(*data.point);
+
+	for (int i = 0; i < data.addedIngredientCards.Num(); i += 1)
+	{
+		FIngredientCardStruct curData = data.addedIngredientCards[i];
+
+		if (curData.name == "Chicken")
+		{
+			total += 3;
+		}
+		else if (curData.name == "Mutton")
+		{
+			if (potHasType("Seafoods", data)) 
+			{
+				total += 5;
+			}
+			else 
+			{
+				total += 3;
+			}
+		}
+		else if (curData.name == "Pork")
+		{
+			if (curData.type == "Salty" || curData.type == "Spicy")
+			{
+				total += 6;
+			}
+			else 
+			{
+				total += 2;
+			}
+		}
+		else if (curData.name == "Chicken Beast")
+		{
+			total += 2;
+		}
+		else if (curData.name == "Tomatoes")
+		{
+			total += 1;
+		}
+		else if (curData.name == "Potatoes")
+		{
+			total += 2;
+		}
+		else if (curData.name == "Cabbage")
+		{
+			if (potHasType("Meat", data))
+			{
+				total += 3;
+			}
+			else
+			{
+				total += 1;
+			}
+		}
+		else if (curData.name == "Onion")
+		{
+			total += 2;
+		}
+		else if (curData.name == "Broccoli")
+		{
+			total += 3;
+		}
+		else if (curData.name == "Shrimps")
+		{
+			total += 4;
+		}
+		else if (curData.name == "Seafish")
+		{
+			if (potHasType("Seafoods", data))
+			{
+				total += 1;
+			}
+			else if (potHasType("Vegetables", data))
+			{
+				total += 2;
+			}
+			else 
+			{
+				total += 4;
+			}
+		}
+		else if (curData.name == "Lobster")
+		{
+			if (calculateHeat(data) < 4)
+			{
+				total += 0;
+			}
+			else 
+			{
+				total += 5;
+			}
+		}
+		else if (curData.name == "Crab")
+		{
+			if (calculateHeat(data) < 3)
+			{
+				total += 1;
+			}
+			else
+			{
+				total += 3;
+			}
+		}
+	}
+
+	return total;
+}
+
+bool AMyPlayerState::potHasType(FString type, FRecipeCardStruct data)
+{
+	for (int i = 0; i < data.addedIngredientCards.Num(); i += 1)
+	{
+		if (data.addedIngredientCards[i].type == type)
+		{
+			return true;
+		}
+	}
+
+	for (int i = 0; i < data.addedCookingCards.Num(); i += 1)
+	{
+		if (data.addedCookingCards[i].type == type)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+int AMyPlayerState::calculateHeat(FRecipeCardStruct data) 
+{
+	int heat = 0;
+
+	for (int i = 0; i < data.addedCookingCards.Num(); i += 1)
+	{
+		if (data.addedCookingCards[i].type == "heat")
+		{
+			heat += FCString::Atoi(*data.addedCookingCards[i].degree);
+		}
+	}
+
+	return heat;
+}

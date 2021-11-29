@@ -200,11 +200,18 @@ void AMyGameStateBase::castIngredientCardEffect(int cardIndex, int potIndex)
 	for (int i = 0; i < PlayerArray.Num(); i += 1)
 	{
 		Cast<AMyPlayerState>(PlayerArray[i])->addIngredientCardToPot(ingredientCardOnTableFileData[cardIndex], potIndex);
+
+		FString message = "Player ";
+		message.Append(Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->FamilyReunionDinner2PlayerID);
+		message.Append(" Added ");
+		message.Append(ingredientCardOnTableFileData[cardIndex].name);
+		message.Append(" to ");
+		message.Append(recipeCardOnTableFileData[potIndex].name);
+
+		Cast<AMyPlayerState>(PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
 	}
 
 	recipeCardOnTableFileData[potIndex].addedIngredientCards.Add(ingredientCardOnTableFileData[cardIndex]);
-
-	//TODO PARSE EFFECT
 }
 
 void AMyGameStateBase::castCookingCardEffect(ACookingCard* card, int potIndex)
@@ -212,6 +219,15 @@ void AMyGameStateBase::castCookingCardEffect(ACookingCard* card, int potIndex)
 	for (int i = 0; i < PlayerArray.Num(); i += 1)
 	{
 		Cast<AMyPlayerState>(PlayerArray[i])->addCookingCardToPot(card->data, potIndex);
+
+		FString message = "Player ";
+		message.Append(Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->FamilyReunionDinner2PlayerID);
+		message.Append(" Added ");
+		message.Append(card->data.name);
+		message.Append(" to ");
+		message.Append(recipeCardOnTableFileData[potIndex].name);
+
+		Cast<AMyPlayerState>(PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
 	}
 
 	recipeCardOnTableFileData[potIndex].addedCookingCards.Add(card->data);
@@ -280,6 +296,13 @@ void AMyGameStateBase::getDishActionResult(int index)
 	if (succussAction)
 	{
 		castRecipeCardEffect(index);
+
+		TArray<int> parameters = Cast<AMyPlayerState>(PlayerArray[0])->calculateParameter(recipeCardOnTableFileData[index]);
+
+		for (int i = 0; i < PlayerArray.Num(); i += 1)
+		{
+			Cast<AMyPlayerState>(PlayerArray[i])->addToCompletedRecipeUI(recipeCardOnTableFileData[index].path, parameters[0], parameters[1], parameters[2], false, TEXT(""));
+		}
 
 		removeRecipeCardInGame(index);
 		addRecipeCardInGame(index);

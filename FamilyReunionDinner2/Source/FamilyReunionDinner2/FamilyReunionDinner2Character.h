@@ -160,14 +160,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 	int observingItemInPotIndex = -1;
-	/*
-		@return data
-		0: curFlavor
-		1: curHeat
-		2: curPoint
-		3: curSize
-	*/
-	TArray<int> calculateParameter(FRecipeCardStruct data);
+
 private:
 	AActor* holdingItem;
 	bool UIOn = false;
@@ -177,8 +170,6 @@ private:
 	void releaseItem();
 	void pickingItem();
 	void puttingItem();
-
-	void drawItemHint();
 
 	UFUNCTION(BlueprintCallable)
 	void showFlavorHintPreview(int index);

@@ -32,6 +32,9 @@ public:
 	bool inTurn = false;
 
 	UPROPERTY(BlueprintReadOnly)
+	bool inDragging = false;
+
+	UPROPERTY(BlueprintReadOnly)
 	bool hintShowed = false;
 
 	UPROPERTY(BlueprintReadOnly)
@@ -62,6 +65,17 @@ public:
 	void turnTimerRun();
 	void reactionTimerRun();
 
+	/*
+	@return data
+	0: curFlavor
+	1: curHeat
+	2: curPoint
+	3: curSize
+	*/
+	TArray<int> calculateParameter(FRecipeCardStruct data);
+	int calculateBonusPoint(FRecipeCardStruct data);
+	bool potHasType(FString type, FRecipeCardStruct data);
+	int calculateHeat(FRecipeCardStruct data);
 public:
 	UFUNCTION(Reliable, Client)
 	void createIngredientCard(FIngredientCardStruct data, int positionIndex);
@@ -138,4 +152,8 @@ public:
 	UFUNCTION(Reliable, Client)
 	void sendUserID(const FString& id);
 	void sendUserID_Implementation(const FString& id);
+
+	UFUNCTION(Reliable, Client)
+	void addToCompletedRecipeUI(const FString& path, int flavor, int heat, int point, bool failed, const FString& failedReason);
+	void addToCompletedRecipeUI_Implementation(const FString& path, int flavor, int heat, int point, bool failed, const FString& failedReason);
 };
