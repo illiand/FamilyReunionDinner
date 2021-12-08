@@ -61,7 +61,7 @@ void AFamilyReunionDinner2Character::Tick(float DeltaTime)
 
 				if (curTarget->Tags[0] == TEXT("pot"))
 				{
-					//TODO
+					card = Cast<ARecipeCard>(Cast<APot>(curTarget)->associatedCard);
 				}
 				else
 				{
@@ -226,7 +226,7 @@ void AFamilyReunionDinner2Character::pickingItem()
 
 			if (curTarget->Tags[0] == TEXT("pot"))
 			{
-				//TODO
+				card = Cast<ARecipeCard>(Cast<APot>(curTarget)->associatedCard);
 			}
 			else 
 			{
@@ -276,7 +276,7 @@ void AFamilyReunionDinner2Character::puttingItem()
 
 			if (curTarget->Tags[0] == TEXT("pot"))
 			{
-				//TODO
+				card = Cast<ARecipeCard>(Cast<APot>(curTarget)->associatedCard);
 			}
 			else
 			{
@@ -488,11 +488,11 @@ void AFamilyReunionDinner2Character::removePotItemRequest_Implementation(int pot
 	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
 	{
 		Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->clearUI();
+		Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->setObservingPotItemIndex(index);
 	}
 
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex = potIndex;
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotItemIndex = index;
-	setObservingPotItemIndex(-1);
 
 	Cast<AMyPlayerState>(GetPlayerState())->setReaction(true);
 	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);
@@ -536,7 +536,6 @@ void AFamilyReunionDinner2Character::replyRemovePotItemAction_Implementation()
 	clearUI();
 
 	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);
-	setObservingPotItemIndex(-1);
 
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction = !Cast<AMyGameStateBase>(GetWorld()->GetGameState())->succussAction;
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->activeRemoveItemInPotTimer(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotIndex, Cast<AMyGameStateBase>(GetWorld()->GetGameState())->inActionPotItemIndex);
@@ -797,27 +796,6 @@ void AFamilyReunionDinner2Character::sendReactionRequest_Implementation(int potI
 	MainUI->showPotInfo(data.path, parameters[0], parameters[1], parameters[2], parameters[3], FCString::Atoi(*data.size), addedItemPath, actionPath, actionDes, actionColor);
 }
 
-void AFamilyReunionDinner2Character::moveToDeck_Implementation(AActor* hitActor) 
-{
-	UE_LOG(LogTemp, Warning, TEXT("find: %d %d"), hitActor, true);
-
-	if (true)return;
-
-	if (hitActor->Tags.Num() > 0 && hitActor->Tags[0] == TEXT("card"))
-	{
-		ARecipeCard* curCard = Cast<ARecipeCard>(hitActor);
-
-		if (curCard->GetActorLocation().Z == 53.5)
-		{
-			curCard->SetActorLocation(FVector(curCard->GetActorLocation().X, curCard->GetActorLocation().Y, 75));
-		}
-		else
-		{
-			curCard->SetActorLocation(FVector(curCard->GetActorLocation().X, curCard->GetActorLocation().Y, 53.5));
-		}
-	}
-}
-
 void AFamilyReunionDinner2Character::startGame_Implementation() 
 {
 	Cast<AMyGameStateBase>(GetWorld()->GetGameState())->initGame();
@@ -859,6 +837,56 @@ void AFamilyReunionDinner2Character::showDegreeHintPreview(int index)
 void AFamilyReunionDinner2Character::setWaitingTextUI_Implementation(const FString& text)
 {
 	MainUI->setWaitingText(text);
+}
+
+void AFamilyReunionDinner2Character::requestGameOver_Implementation()
+{
+	FString result = "WIN!";
+	TArray<FCompletedRecipeInfo> recipeData;
+	TArray<FCompletedPreferenceInfo> preferenceData;
+	TArray<FString> playersID;
+
+	AMyGameStateBase* gameState = Cast<AMyGameStateBase>(GetWorld()->GetGameState());
+
+	for (int i = 0; i < gameState->completedDishFileData.Num(); i++)
+	{
+		FCompletedRecipeInfo cur;
+		cur.path = gameState->completedDishFileData[i].path;
+
+		TArray<int> parameters = Cast<AMyPlayerState>(GetPlayerState())->calculateParameter(gameState->completedDishFileData[i]);
+		cur.flavor = parameters[0];
+		cur.heat = parameters[1];
+		cur.point = parameters[2];
+		cur.failed = !gameState->checkRecipeSuccuss(gameState->completedDishFileData[i], cur.failedReason);
+
+		if (cur.failed) 
+		{
+			result = "LOSE!";
+		}
+
+		recipeData.Add(cur);
+	}
+
+	for (int i = 0; i < gameState->monsterPreferenceInGame.Num(); i++) 
+	{
+		FCompletedPreferenceInfo cur;
+		cur.path = gameState->monsterPreferenceInGame[i].path;
+		cur.failed = !gameState->checkPreferenceSuccuss(gameState->monsterPreferenceInGame[i], cur.failedReason);
+		
+		if (cur.failed)
+		{
+			result = "LOSE!";
+		}
+
+		preferenceData.Add(cur);
+
+		playersID.Add(Cast<AMyPlayerState>(gameState->PlayerArray[i])->FamilyReunionDinner2PlayerID);
+	}
+
+	for (int i = 0; i < gameState->PlayerArray.Num(); i++)
+	{
+		Cast<AMyPlayerState>(gameState->PlayerArray[i])->sendGameOverData(result, recipeData, preferenceData, playersID);
+	}
 }
 
 void AFamilyReunionDinner2Character::TurnAtRate(float Rate)

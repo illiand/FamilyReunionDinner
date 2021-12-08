@@ -8,8 +8,7 @@
 
 TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards() 
 {
-	FString dataString =
-		"Name Type Flavor_Range Heat_Range Utensil_Size Points\nSpicy_Potatoes Spicy 1-2 3 2 2\nSpicy_Tofu_Bowl Spicy 2-3 2-3 2 2\nSpicy_Fries Spicy 3 1-2 2 3\nThai_Curry Spicy 3-4 3 3 3\nSpicy_Hot_Pot Spicy 4-5 3-4 5 7\n\nDonuts Sweet 2-3 1-2 1 2\n\nSandwich Salty 3 1-2 2 3\n\nSour_Fish Sour 3-4 2-3 3 5\n";
+	FString dataString = "Name Type Flavor_Range Heat_Range Utensil_Size Points\nSpicy_Potatoes Spicy 1-2 3 2 2\nSpicy_Tofu_Bowl Spicy 2-3 2-3 2 2\nSpicy_Fries Spicy 3 1-2 2 3\nThai_Curry Spicy/Sour 3-4 3 3 3\nSpicy_Hot_Pot Spicy 4-5 3-4 5 4\nFruit_Bowl Sweet 1-2 0 2 2\nDonuts Sweet 2-3 1-2 1 2\nYogurt_Bowl Sweet 2-3 2-3 2 3\nCreamy_Mac Sweet 3-4 3-5 4 5\nCheese_Pizza Sweet/Salty 4-5 5 6 4\nEight_TreasureCongee Sweet 2-3 3-4 4 3\nMiso_Soup Salty 1-2 2-3 5 0\nTacco Salty 2-3 2 2 3\nSandwich Salty 3 1-2 2 3\nBorscht Salty/Spicy 2-4 3-5 3 3\nStew Salty 3-4 5 5 4\nSourdough_Bread Sour 1-2 2-3 1 2\nSalad Sour/Sweet 2-4 1 4 1\nSour_Fish Sour 3-4 2-3 2 4\nHot_Sour_Noodels Sour 4 3-4 3 4\nKimiji_Fried_Rice Sour 4-5 4 4 4\nDolma Sour/Spicy 3-4 3-4 3 4\n";
 	TArray<TSharedPtr<FJsonObject>> data = FStringToJson(dataString);
 
 	TArray<FRecipeCardStruct> arr;

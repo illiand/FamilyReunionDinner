@@ -70,6 +70,11 @@ public:
 	void activeRemoveItemInPotTimer(int index, int potIndex);
 	void reactionTimeUpWithRemoveItemInPot(int index, int potIndex);
 	void getRemoveItemActionResult(int index, int potIndex);
+
+	bool checkRecipeSuccuss(FRecipeCardStruct toCheck, FString& failedReason);
+	bool checkPreferenceSuccuss(FMonsterPreferenceStruct toCheck, FString& failedReason);
+
+	bool hasPot(FString type);
 private:
 	int currentTurnIndex = 0;
 };

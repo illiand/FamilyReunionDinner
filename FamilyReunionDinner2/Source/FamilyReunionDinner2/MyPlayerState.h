@@ -6,7 +6,10 @@
 #include "GameFramework/PlayerState.h"
 #include "IngredientCard.h"
 #include "RecipeCard.h"
+#include "Pot.h"
 #include "CookingCard.h"
+#include "CompletedRecipeInfo.h"
+#include "CompletedPreferenceInfo.h"
 #include "MyPlayerState.generated.h"
 
 /**
@@ -24,6 +27,7 @@ public:
 	//not actually exist on server
 	TArray<AIngredientCard*> ingredientCards = TArray<AIngredientCard*>();
 	TArray<ARecipeCard*> recipeCards = TArray<ARecipeCard*>();
+	TArray<APot*> recipePots = TArray<APot*>();
 
 	UPROPERTY(Replicated)
 	TArray<ACookingCard*> cookingCards = TArray<ACookingCard*>();
@@ -53,6 +57,18 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	FString FamilyReunionDinner2PlayerID;
+
+	UPROPERTY(BlueprintReadOnly)
+	FString gameResult;
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FString> playersID;
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FCompletedPreferenceInfo> preferenceResult;
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FCompletedRecipeInfo> recipeResult;
 
 	FTimerHandle turnTimer;
 	FTimerHandle reactionTimer;
@@ -156,4 +172,8 @@ public:
 	UFUNCTION(Reliable, Client)
 	void addToCompletedRecipeUI(const FString& path, int flavor, int heat, int point, bool failed, const FString& failedReason);
 	void addToCompletedRecipeUI_Implementation(const FString& path, int flavor, int heat, int point, bool failed, const FString& failedReason);
+
+	UFUNCTION(Reliable, Client)
+	void sendGameOverData(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, const TArray<FString>& playersIDData);
+	void sendGameOverData_Implementation(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, const TArray<FString>& playersIDData);
 };

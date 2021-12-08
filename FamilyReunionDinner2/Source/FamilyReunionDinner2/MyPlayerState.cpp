@@ -46,6 +46,13 @@ void AMyPlayerState::createRecipeCard_Implementation(FRecipeCardStruct data, int
 
 	recipeCards.Insert(card, positionIndex);
 	setCardRotationBasedOnPlayerLocation(card);
+
+	TSubclassOf<APot> recipePot = LoadClass<APot>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyPot.MyPot_C'"));
+	APot* pot = GetWorld()->SpawnActor<APot>(recipePot, position, FRotator(0, 0, 0), FActorSpawnParameters());
+	pot->associatedCard = card;
+
+	recipePots.Insert(pot, positionIndex);
+	setCardRotationBasedOnPlayerLocation(pot);
 }
 
 void AMyPlayerState::addIngredientCardToPot_Implementation(FIngredientCardStruct data, int index) 
@@ -56,6 +63,17 @@ void AMyPlayerState::addIngredientCardToPot_Implementation(FIngredientCardStruct
 void AMyPlayerState::addCookingCardToPot_Implementation(FCookingCardStruct data, int index)
 {
 	recipeCards[index]->data.addedCookingCards.Add(data);
+
+	TArray<int> parameters = calculateParameter(recipeCards[index]->data);
+
+	if (data.type == "Heat") 
+	{
+		recipePots[index]->setPotHeatDegree(parameters[1]);
+	}
+	else 
+	{
+		recipePots[index]->setPotFlavorDegree(parameters[0]);
+	}
 }
 
 void AMyPlayerState::destroyIngredientCard_Implementation(int index)
@@ -218,7 +236,13 @@ TArray<int> AMyPlayerState::calculateParameter(FRecipeCardStruct data)
 	{
 		if (data.addedCookingCards[i].type != "heat")
 		{
-			flavor += FCString::Atoi(*data.addedCookingCards[i].degree);
+			TArray<FString> recipeTypeArray;
+			data.type.ParseIntoArray(recipeTypeArray, TEXT("/"));
+
+			if (recipeTypeArray.Contains(data.addedCookingCards[i].type))
+			{
+				flavor += FCString::Atoi(*data.addedCookingCards[i].degree);
+			}
 		}
 	}
 
@@ -380,4 +404,15 @@ int AMyPlayerState::calculateHeat(FRecipeCardStruct data)
 	}
 
 	return heat;
+}
+
+void AMyPlayerState::sendGameOverData_Implementation(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, const TArray<FString>& playersIDData)
+{
+	gameResult = result;
+	playersID = playersIDData;
+	preferenceResult = preferenceData;
+	recipeResult = recipeData;
+
+	inReaction = true;
+	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->drawGameResultOnScreen();
 }

@@ -324,17 +324,17 @@ void AMyGameStateBase::reactionTimeUpWithRemoveItemInPot(int index, int potIndex
 
 	getRemoveItemActionResult(index, potIndex);
 
-	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
 	{
 		if (succussAction)
 		{
 			FString message = TEXT("Remove Item in Pot Action Completed");
-			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
+			Cast<AMyPlayerState>(PlayerArray[i])->showWorldMessage(message, FVector(0, 1, 0));
 		}
 		else
 		{
 			FString message = TEXT("Remove Item in Pot Action Rejected");
-			Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[i])->showWorldMessage(message, FVector(1, 0, 0));
+			Cast<AMyPlayerState>(PlayerArray[i])->showWorldMessage(message, FVector(1, 0, 0));
 		}
 	}
 }
@@ -369,4 +369,162 @@ void AMyGameStateBase::getRemoveItemActionResult(int index, int potIndex)
 	}
 
 	GetWorldTimerManager().UnPauseTimer(turnTimer);
+}
+
+bool AMyGameStateBase::checkRecipeSuccuss(FRecipeCardStruct toCheck, FString& failedReason) 
+{
+	bool isok = true;
+
+	TArray<FString> flavorRange;
+	toCheck.flavorRange.ParseIntoArray(flavorRange, TEXT("-"));
+
+	TArray<FString> heatRange;
+	toCheck.heatRange.ParseIntoArray(heatRange, TEXT("-"));
+
+	if (flavorRange.Num() != 2)
+	{
+		FString max = flavorRange[0];
+		flavorRange.Add(max);
+	}
+
+	if (heatRange.Num() != 2)
+	{
+		FString max = heatRange[0];
+		heatRange.Add(max);
+	}
+
+	//special effect
+	for (int i = 0; i < monsterPreferenceInGame.Num(); i += 1)
+	{
+		if (monsterPreferenceInGame[i].name == "Mouth Ulcer")
+		{
+			if (toCheck.type == "Spicy" || toCheck.type == "Sour") 
+			{
+				flavorRange[0] = FString::FromInt(FCString::Atoi(*flavorRange[0]) - 1);
+				flavorRange[1] = FString::FromInt(FCString::Atoi(*flavorRange[1]) - 1);
+			}
+		}
+		else if (monsterPreferenceInGame[i].name == "Spitfire Mouth")
+		{
+			heatRange[0] = FString::FromInt(FCString::Atoi(*heatRange[0]) + 1);
+			heatRange[1] = FString::FromInt(FCString::Atoi(*heatRange[1]) + 1);
+		}
+		else if (monsterPreferenceInGame[i].name == "Raw is healthy")
+		{
+			heatRange[0] = FString::FromInt(FCString::Atoi(*heatRange[0]) - 1);
+			heatRange[1] = FString::FromInt(FCString::Atoi(*heatRange[1]) - 1);
+		}
+		else if (monsterPreferenceInGame[i].name == "Go on a diet")
+		{
+			if (toCheck.type == "Salty" || toCheck.type == "Sweet")
+			{
+				flavorRange[0] = FString::FromInt(FCString::Atoi(*flavorRange[0]) - 1);
+				flavorRange[1] = FString::FromInt(FCString::Atoi(*flavorRange[1]) - 1);
+			}
+		}
+	}
+
+	//check basic element
+	TArray<int> parameter = Cast<AMyPlayerState>(PlayerArray[0])->calculateParameter(toCheck);
+	
+	if (parameter[0] < FCString::Atoi(*flavorRange[0]))
+	{
+		failedReason.Append(TEXT("! Flavor Too Low !\n"));
+		isok = false;
+	}
+
+	if (parameter[0] > FCString::Atoi(*flavorRange[0]))
+	{
+		failedReason.Append(TEXT("! Flavor Too High !\n"));
+		isok = false;
+	}
+
+	if (parameter[1] < FCString::Atoi(*heatRange[0]))
+	{
+		failedReason.Append(TEXT("! Heat Too Low !\n"));
+		isok = false;
+	}
+
+	if (parameter[1] > FCString::Atoi(*heatRange[1]))
+	{
+		failedReason.Append(TEXT("! Heat Too High !\n"));
+		isok = false;
+	}
+
+	//attribute
+	for (int i = 0; i < monsterPreferenceInGame.Num(); i += 1) 
+	{
+		if (monsterPreferenceInGame[i].name == "Vegetarian")
+		{
+			if (toCheck.type == "Meat") 
+			{
+				failedReason.Append(TEXT("! Contain Meat !\n"));
+				isok = false;
+			}
+		}
+		else if (monsterPreferenceInGame[i].name == "Seafood_Allergy")
+		{
+			if (toCheck.type == "Seafood")
+			{
+				failedReason.Append("! Contain Seafood !\n");
+				isok = false;
+			}
+		}
+
+	}
+
+	return isok;
+}
+
+bool AMyGameStateBase::checkPreferenceSuccuss(FMonsterPreferenceStruct toCheck, FString& failedReason)
+{
+	bool isok = true;
+
+	if (toCheck.name == "ÐÁµ³[¤«¤é¤È¤¦]") 
+	{
+		if (!hasPot(TEXT("Spicy"))) 
+		{
+			failedReason.Append(TEXT("! No Spicy Dish !\n"));
+			isok = false;
+		}
+	}
+	else if (toCheck.name == "Lemon Squeezer") 
+	{
+		if (!hasPot(TEXT("Sour")))
+		{
+			failedReason.Append(TEXT("! No Sour Dish !\n"));
+			isok = false;
+		}
+	}
+	else if (toCheck.name == "¸Êµ³[¤¢¤Þ¤È¤¦]")
+	{
+		if (!hasPot(TEXT("Sweet")))
+		{
+			failedReason.Append(TEXT("! No Sweet Dish !\n"));
+			isok = false;
+		}
+	}
+	else if (toCheck.name == "Supertaster !\n")
+	{
+		if (!hasPot(TEXT("Salty")))
+		{
+			failedReason.Append(TEXT("! No Salty Dish"));
+			isok = false;
+		}
+	}
+
+	return isok;
+}
+
+bool AMyGameStateBase::hasPot(FString type)
+{
+	for (int i = 0; i < completedDishFileData.Num(); i += 1) 
+	{
+		if (completedDishFileData[i].type == type) 
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

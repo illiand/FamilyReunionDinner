@@ -13,7 +13,12 @@ struct FMonsterPreferenceStruct
 {
 	GENERATED_USTRUCT_BODY();
 
+	UPROPERTY(BlueprintReadOnly)
 	FString name;
+
+	UPROPERTY(BlueprintReadOnly)
 	FString effect;
+
+	UPROPERTY(BlueprintReadOnly)
 	FString path;
 };

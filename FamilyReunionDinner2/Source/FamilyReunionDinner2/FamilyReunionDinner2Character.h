@@ -75,10 +75,6 @@ public:
 	void endTurn_Implementation();
 
 	UFUNCTION(Reliable, Server)
-	void moveToDeck(AActor* hitActor);
-	void moveToDeck_Implementation(AActor* hitActor);
-
-	UFUNCTION(Reliable, Server)
 	void addCookingCardToPot(ACookingCard* card, int index);
 	void addCookingCardToPot_Implementation(ACookingCard* card, int index);
 
@@ -145,6 +141,10 @@ public:
 	UFUNCTION(Reliable, Client)
 	void clearUI();
 	void clearUI_Implementation();
+
+	UFUNCTION(Reliable, Server, BlueprintCallable)
+	void requestGameOver();
+	void requestGameOver_Implementation();
 
 public:
 	UPROPERTY(BlueprintReadWrite)

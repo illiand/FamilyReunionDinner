@@ -47,4 +47,7 @@ public:
 	void draggingCardPreviewOnScreen(const FString& path);
 	UFUNCTION(BlueprintImplementableEvent)
 	void clearPotReviewOnScreen();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void drawGameResultOnScreen();
 };
