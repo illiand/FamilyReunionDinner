@@ -3,6 +3,7 @@
 
 #include "Pot.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
+#include "Components/TextRenderComponent.h"
 
 // Sets default values
 APot::APot()
@@ -49,4 +50,9 @@ void APot::setPotHeatDegree(int degree)
 {
 	heatMaterial->SetScalarParameterValue(TEXT("Degree"), degree);
 	Cast<UParticleSystemComponent>(GetDefaultSubobjectByName(TEXT("Fire")))->SetIntParameter(FName("HeatStrength"), degree * 25);
+}
+
+void APot::setPotBonusPoint(int curPoint) 
+{
+	Cast<UTextRenderComponent>(GetDefaultSubobjectByName(TEXT("bonusPoint")))->SetText(FString::FromInt(curPoint));
 }

@@ -5,6 +5,7 @@
 #include "APIClass.h"
 #include "CardBorderActor.h"
 #include "FamilyReunionDinner2Character.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "MyPlayerState.h"
 
 void AMyGameStateBase::initGame()
@@ -17,26 +18,27 @@ void AMyGameStateBase::initGame()
 	TSubclassOf<ACookingCard> cookingCard = LoadClass<ACookingCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyCookingCard.MyCookingCard_C'"));
 	monsterPreferenceFileData = UAPIClass::makeMonsterPreference();
 
-	int cookingCardCount = 3;
+	int cookingCardCount = 2;
 	// cookingCardCount = 7 if PlayerArray.Num() = 3/4
 
 	//randomly create replicatable cooking cards
-	for (int j = 0; j < PlayerArray.Num(); j += 1)
-	{//create cards for each player
-		FVector playerLocation = PlayerArray[j]->GetPawn()->GetActorLocation();
-		
-		for (int i = 0; i < cookingCardCount; i += 1) {
-			float y = 30 + i / 5 * 27;
-			float x = playerLocation.X - 20 + (i % 5 * 16.5);
-			if (j % 2 != 0){
-				y = -(30 + (i / 5 * 27));
-			}
-			
-			ACookingCard* card = GetWorld()->SpawnActor<ACookingCard>(cookingCard, FVector(x,y, 64.5), FRotator(0, (j-1)*180, 90), FActorSpawnParameters());
-			int curCardIndex = FMath::RandRange(0, cookingCardFileData.Num() - 1);
-			card->data = cookingCardFileData[curCardIndex];
-			cookingCardFileData.RemoveAt(curCardIndex);
-			Cast<AMyPlayerState>(PlayerArray[j])->cookingCards.Add(card);
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		for (int j = 0; j < cookingCardCount; j += 1)
+		{
+			FRotator rotation = FRotator(0, Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->originalZRotation, 0);
+			FVector direction = UKismetMathLibrary::GetForwardVector(rotation);
+			direction.Normalize();
+
+			FVector position = direction * 30 + Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->GetActorLocation();
+			FVector offset = direction * (-15.0 * ((cookingCardCount - 1) / 2.0) + j * 15.0);
+
+			position += offset.RotateAngleAxis(90, FVector(0, 0, 1));
+			position.Z = -25;
+
+			rotation.Add(0, -90, 90);
+
+			addCookingCardInGame(PlayerArray[i], position, rotation, j);
 		}
 	}
 

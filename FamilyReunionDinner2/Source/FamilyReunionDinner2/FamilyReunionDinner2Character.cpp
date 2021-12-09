@@ -12,6 +12,7 @@
 #include "GameFramework/InputSettings.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 #include "MotionControllerComponent.h"
 #include "XRMotionControllerBase.h" // for FXRMotionControllerBase::RightHandSourceId
 
@@ -50,6 +51,13 @@ void AFamilyReunionDinner2Character::Tick(float DeltaTime)
 
 	if (Cast<AMyPlayerState>(GetPlayerState())->inDragging) 
 	{
+		FVector startPos = holdingItem->GetActorLocation();
+
+		FHitResult hit(ForceInit);
+		UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, true, hit);
+
+		UE_LOG(LogTemp, Warning, TEXT("%f %f %f"), hit.Location.X, hit.Location.Y, hit.Location.Z);
+		DrawDebugDirectionalArrow(GetWorld(), startPos, hit.Location, 5, FColor::Magenta, false, -1.0f, 0, 0.5f);
 		AActor* curTarget = pickFromEye();
 
 		if (curTarget != NULL && curTarget->Tags.Num() != 0) 
@@ -68,48 +76,86 @@ void AFamilyReunionDinner2Character::Tick(float DeltaTime)
 					card = Cast<ARecipeCard>(curTarget);
 				}
 
-				int curPotIndex = -1;
-
-				for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->recipeCards.Num(); i += 1)
+				if (pointingArrowHelper == NULL) 
 				{
-					if (card->data.name == Cast<AMyPlayerState>(GetPlayerState())->recipeCards[i]->data.name)
-					{
-						curPotIndex = i;
-
-						break;
-					}
+					pointingArrowHelper = GetWorld()->SpawnActor<APointingArrow>(APointingArrow::StaticClass(), FVector(0, 0, 0), FRotator(0, 0, 0), FActorSpawnParameters());
+					pointingArrowHelper->targetLocation = FVector(curTarget->GetActorLocation());
+					pointingArrowHelper->targetLocation.Z += 50;
 				}
-
-				sendReactionRequest_Implementation(curPotIndex, card->data.path, TEXT(""), FVector(0, 0, 0));
 			}
 		}
 		else 
 		{
-			MainUI->clearPotReviewOnScreen();
+			if (pointingArrowHelper != NULL) 
+			{
+				pointingArrowHelper->Destroy();
+				pointingArrowHelper = NULL;
+			}
 		}
 	}
 }
 
 void AFamilyReunionDinner2Character::setLocationByIndex(int index)
 {
+	float z = -35.049309f;
+
 	switch (index)
 	{
 	case 1:
-		SetActorLocation(FVector(60, 60, 40));
+		SetActorLocation(FVector(-322.28421, -164.444977, z));
+		setZRotation(90);
+
+		originalZRotation = 90;
+		setZRotationValue(90);
+
 		break;
 
 	case 2:
-		SetActorLocation(FVector(60, -90, 40));
+		SetActorLocation(FVector(-426.462799, 1.346313, z));
+		setZRotation(-112.874084 + 90);
+
+		originalZRotation = -112.874084 + 90;
+		setZRotationValue(-112.874084 + 90);
+
 		break;
 
 	case 3:
-		SetActorLocation(FVector(180, -90, 40));
+		SetActorLocation(FVector(-215.042343, 1.346313, z));
+		setZRotation(112.958496 + 90);
+
+		originalZRotation = 112.958496 + 90;
+		setZRotationValue(112.958496 + 90);
+
 		break;
-	
+
 	case 4:
-		SetActorLocation(FVector(180, 60, 40));
+		SetActorLocation(FVector(-420.9422, -106.940002, z));
+		setZRotation(-54.066353 + 90);
+
+		originalZRotation = -54.066353 + 90;
+		setZRotationValue(-54.066353 + 90);
+
+		break;
+
+	case 5:
+		SetActorLocation(FVector(-224.810547, -104.113152, z));
+		setZRotation(57.664375 + 90);
+
+		originalZRotation = 57.664375 + 90;
+		setZRotationValue(57.664375 + 90);
+
 		break;
 	}
+}
+
+void AFamilyReunionDinner2Character::setZRotation_Implementation(float val)
+{
+	AddControllerYawInput(val / 2.5f);
+}
+
+void AFamilyReunionDinner2Character::setZRotationValue_Implementation(float val)
+{
+	originalZRotation = val;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -195,27 +241,12 @@ void AFamilyReunionDinner2Character::pickingItem()
 			}
 			else 
 			{
-				FString picPath;
+				GetWorld()->GetGameViewport()->GetMousePosition(mousePos);
 
-				if (curTarget->IsA(ACookingCard::StaticClass()))
-				{
-					picPath = Cast<ACookingCard>(curTarget)->data.path;
-				}
-				else
-				{
-					picPath = Cast<AIngredientCard>(curTarget)->data.path;
-				}
-
-				MainUI->draggingCardPreviewOnScreen(picPath);
-
-				if (Cast<AMyPlayerState>(GetPlayerState())->inTurn) 
-				{
-					holdingItem = curTarget;
-					Cast<AMyPlayerState>(GetPlayerState())->inDragging = true;
-				}
-				
-				//show highlight of the position that can put the card
-				//draw Arrow?
+				mouseDown = true;
+				GetWorldTimerManager().ClearTimer(previewTimer);
+				FTimerDelegate TimerDel = FTimerDelegate::CreateUObject(this, &AFamilyReunionDinner2Character::showItemPreview, curTarget);
+				GetWorldTimerManager().SetTimer(previewTimer, TimerDel, 0.0167, true, 0);
 			}
 		}
 		else if (curTarget->Tags[0] == TEXT("pot") || curTarget->Tags[0] == TEXT("potCard")) 
@@ -255,6 +286,8 @@ void AFamilyReunionDinner2Character::puttingItem()
 		return;
 	}
 
+	mouseDown = false;
+
 	if (Cast<AMyPlayerState>(GetPlayerState())->inDragging)
 	{
 		Cast<AMyPlayerState>(GetPlayerState())->inDragging = false;
@@ -272,6 +305,9 @@ void AFamilyReunionDinner2Character::puttingItem()
 	{
 		if (curTarget->Tags[0] == TEXT("pot") || curTarget->Tags[0] == TEXT("potCard")) 
 		{
+			pointingArrowHelper->Destroy();
+			pointingArrowHelper = NULL;
+
 			ARecipeCard* card = NULL;
 
 			if (curTarget->Tags[0] == TEXT("pot"))
@@ -314,6 +350,80 @@ void AFamilyReunionDinner2Character::puttingItem()
 			}
 		}
 	}
+}
+
+void AFamilyReunionDinner2Character::showItemPreview(AActor* item)
+{
+	FVector2D curMousePos;
+	GetWorld()->GetGameViewport()->GetMousePosition(curMousePos);
+
+	if (mousePos != curMousePos) 
+	{
+		if (Cast<AMyPlayerState>(GetPlayerState())->inTurn)
+		{
+			holdingItem = item;
+			Cast<AMyPlayerState>(GetPlayerState())->inDragging = true;
+		}
+
+		//show highlight of the position that can put the card
+		//draw Arrow?
+
+		GetWorldTimerManager().ClearTimer(previewTimer);
+
+		MainUI->clearUI();
+		previewTimerCount = 0;
+
+		return;
+	}
+
+	if (!mouseDown) 
+	{
+		GetWorldTimerManager().ClearTimer(previewTimer);
+
+		previewTimerCount = 0;
+		MainUI->clearUI();
+
+		return;
+	}
+
+	if (previewTimerCount >= 0.5f) 
+	{
+		FString picPath;
+
+		if (item->IsA(ACookingCard::StaticClass()))
+		{
+			picPath = Cast<ACookingCard>(item)->data.path;
+		}
+		else
+		{
+			picPath = Cast<AIngredientCard>(item)->data.path;
+		}
+
+		FVector2D screenSize;
+		GetWorld()->GetGameViewport()->GetViewportSize(screenSize);
+
+		FVector2D canvasPreMultiplier(screenSize.X / 1920.0f, screenSize.Y / 1080.0f);
+		float targetX = 0;
+		float targetY = 0;
+
+		if (mousePos.X < 375 * canvasPreMultiplier.X)
+		{
+			targetX = mousePos.X + 50 * canvasPreMultiplier.X;
+		}
+		else 
+		{
+			targetX = mousePos.X - 375 * canvasPreMultiplier.X;
+		}
+
+		targetY = FMath::Clamp(mousePos.Y - 315.0f * canvasPreMultiplier.Y, 0.0f, screenSize.Y - 630.0f * canvasPreMultiplier.Y);
+
+		MainUI->draggingCardPreviewOnScreen(picPath, targetX / screenSize.X * 1920.0f, targetY / screenSize.Y * 1080.0f);
+		previewTimerCount = -8753;
+
+		return;
+	}
+
+	previewTimerCount += GetWorldTimerManager().GetTimerRate(previewTimer);
 }
 
 void AFamilyReunionDinner2Character::giveTypeHint_Implementation(ACookingCard* card)

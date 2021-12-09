@@ -44,7 +44,7 @@ public:
 	void addToCompletedRecipeUI(const FString& path, int32 flavor, int32 heat, int32 point, bool failed, const FString& failedReason);
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void draggingCardPreviewOnScreen(const FString& path);
+	void draggingCardPreviewOnScreen(const FString& path, float x, float y);
 	UFUNCTION(BlueprintImplementableEvent)
 	void clearPotReviewOnScreen();
 

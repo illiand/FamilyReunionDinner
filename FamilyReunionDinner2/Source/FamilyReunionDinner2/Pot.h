@@ -32,4 +32,5 @@ public:
 
 	void setPotFlavorDegree(int degree);
 	void setPotHeatDegree(int degree);
+	void setPotBonusPoint(int curPoint);
 };

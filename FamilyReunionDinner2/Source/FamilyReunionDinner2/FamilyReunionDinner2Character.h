@@ -4,6 +4,7 @@
 #include "GameFramework/Character.h"
 #include "RecipeCard.h"
 #include "FamilyReunionDinner2UserWidget.h"
+#include "PointingArrow.h"
 #include "FamilyReunionDinner2Character.generated.h"
 
 class UInputComponent;
@@ -39,6 +40,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseLookUpRate;
 
+	float originalZRotation;
+
 protected:
 	/**
 	 * Called via input to turn at a given rate.
@@ -69,6 +72,14 @@ public:
 	UFUNCTION(Reliable, Server)
 	void startGame();
 	void startGame_Implementation();
+
+	UFUNCTION(Reliable, Client)
+	void setZRotation(float val);
+	void setZRotation_Implementation(float val);
+
+	UFUNCTION(Reliable, Client)
+	void setZRotationValue(float val);
+	void setZRotationValue_Implementation(float val);
 
 	UFUNCTION(Reliable, Server, BlueprintCallable)
 	void endTurn();
@@ -165,11 +176,21 @@ private:
 	AActor* holdingItem;
 	bool UIOn = false;
 
+	FVector2D mousePos;
+	bool mouseDown = false;
+
+	float previewTimerCount = 0;
+	FTimerHandle previewTimer;
+
+	APointingArrow* pointingArrowHelper;
+
 private:
 	AActor* pickFromEye();
 	void releaseItem();
 	void pickingItem();
 	void puttingItem();
+
+	void showItemPreview(AActor* item);
 
 	UFUNCTION(BlueprintCallable)
 	void showFlavorHintPreview(int index);

@@ -26,7 +26,7 @@ void AFamilyReunionDinner2GameMode::PostLogin(APlayerController* NewPlayer)
 	int currentPlayerCount = GameState->PlayerArray.Num();
 	Cast<AFamilyReunionDinner2Character>(NewPlayer->GetPawn())->setLocationByIndex(currentPlayerCount);
 
-	if (currentPlayerCount == 1) 
+	if (currentPlayerCount == 1)
 	{
 		Cast<AMyPlayerState>(GameState->PlayerArray[0])->inTurn = true;
 		Cast<AMyPlayerState>(GameState->PlayerArray[0])->hintShowed = false;

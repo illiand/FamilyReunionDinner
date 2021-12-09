@@ -4,6 +4,7 @@
 #include "MyPlayerState.h"
 #include "FamilyReunionDinner2Character.h"
 #include "Net/UnrealNetwork.h"
+#include "Kismet/KismetMathLibrary.h"
 
 void AMyPlayerState::BeginPlay()
 {
@@ -25,39 +26,95 @@ void AMyPlayerState::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & Ou
 void AMyPlayerState::createIngredientCard_Implementation(FIngredientCardStruct data, int positionIndex)
 {
 	TSubclassOf<AIngredientCard> recipeCard = LoadClass<AIngredientCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyIngredientCard.MyIngredientCard_C'"));
-	FVector position = FVector(95 + positionIndex % 5 * 16.5, -28 + positionIndex / 5 * 27 + 25, 53.5);
+	FRotator rotation = FRotator(0, Cast<AFamilyReunionDinner2Character>(GetPawn())->originalZRotation, 0);
+	FVector direction = UKismetMathLibrary::GetForwardVector(rotation);
+	direction.Normalize();
 
-	AIngredientCard* card = GetWorld()->SpawnActor<AIngredientCard>(recipeCard, position, FRotator(0, 0, 0), FActorSpawnParameters());
+	FVector position;
+	FVector offset;
+
+	if (positionIndex <= 1) 
+	{
+		position = direction * 80 + GetPawn()->GetActorLocation();
+		offset = direction * (-12.5 + positionIndex * 25.0);
+	}
+	else 
+	{
+		position = direction * 50 + GetPawn()->GetActorLocation();
+		offset = direction * (-12.5 + (positionIndex - 2) * 25.0);
+	}
+
+	AIngredientCard* card = GetWorld()->SpawnActor<AIngredientCard>(recipeCard, position, rotation, FActorSpawnParameters());
+	card->AddActorWorldOffset(offset.RotateAngleAxis(90, FVector(0, 0, 1)));
+	card->AddActorWorldRotation(FRotator(0, 90, 0));
 	card->data = data;
 	card->assignInfo();
 
 	ingredientCards.Insert(card, positionIndex);
-	setCardRotationBasedOnPlayerLocation(card);
 }
 
 void AMyPlayerState::createRecipeCard_Implementation(FRecipeCardStruct data, int positionIndex)
 {
 	TSubclassOf<ARecipeCard> recipeCard = LoadClass<ARecipeCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyRecipeCard.MyRecipeCard_C'"));
-	FVector position = FVector(95 + positionIndex % 5 * 16.5, -28 + positionIndex / 5 * 27, 53.5);
+	FRotator rotation = FRotator(0, Cast<AFamilyReunionDinner2Character>(GetPawn())->originalZRotation, 0);
+	
+	FVector position;
+	FVector direction;
+	
+	if (positionIndex == 0) 
+	{
+		direction = rotation.RotateVector(FVector(20, -11.5, 0));
+		direction.Normalize();
 
-	ARecipeCard* card = GetWorld()->SpawnActor<ARecipeCard>(recipeCard, position, FRotator(0, 0, 0), FActorSpawnParameters());
+		position = direction * 90 + GetPawn()->GetActorLocation();
+	}
+	else if (positionIndex == 1)
+	{
+		direction = rotation.RotateVector(FVector(20, -5, 0));
+		direction.Normalize();
+
+		position = direction * 120 + GetPawn()->GetActorLocation();
+	}
+	else if (positionIndex == 2)
+	{
+		direction = rotation.RotateVector(FVector(20, 5, 0));
+		direction.Normalize();
+
+		position = direction * 120 + GetPawn()->GetActorLocation();
+	}
+	else 
+	{
+		direction = rotation.RotateVector(FVector(20, 11.5, 0));
+		direction.Normalize();
+
+		position = direction * 90 + GetPawn()->GetActorLocation();
+	}
+
+	position.Z = -35.049339f;
+
+	FVector cardOffset = position - UKismetMathLibrary::GetForwardVector(rotation) * 15;
+	cardOffset.Z = -12.5;
+
+	ARecipeCard* card = GetWorld()->SpawnActor<ARecipeCard>(recipeCard, cardOffset, rotation.Add(0, 90, 90), FActorSpawnParameters());
+	card->SetActorScale3D(FVector(1, 1, 1));
 	card->data = data;
 	card->assignInfo();
 
 	recipeCards.Insert(card, positionIndex);
-	setCardRotationBasedOnPlayerLocation(card);
 
 	TSubclassOf<APot> recipePot = LoadClass<APot>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyPot.MyPot_C'"));
-	APot* pot = GetWorld()->SpawnActor<APot>(recipePot, position, FRotator(0, 0, 0), FActorSpawnParameters());
+	APot* pot = GetWorld()->SpawnActor<APot>(recipePot, position, rotation.Add(0, 0, -90), FActorSpawnParameters());
 	pot->associatedCard = card;
+	pot->setPotBonusPoint(FCString::Atoi(*card->data.point));
 
 	recipePots.Insert(pot, positionIndex);
-	setCardRotationBasedOnPlayerLocation(pot);
+	//setCardRotationBasedOnPlayerLocation(pot);
 }
 
 void AMyPlayerState::addIngredientCardToPot_Implementation(FIngredientCardStruct data, int index) 
 {
 	recipeCards[index]->data.addedIngredientCards.Add(data);
+	recipePots[index]->setPotBonusPoint(calculateBonusPoint(recipeCards[index]->data));
 }
 
 void AMyPlayerState::addCookingCardToPot_Implementation(FCookingCardStruct data, int index)
@@ -86,6 +143,9 @@ void AMyPlayerState::destroyRecipeCard_Implementation(int index)
 {
 	recipeCards[index]->Destroy();
 	recipeCards.RemoveAt(index);
+
+	recipePots[index]->Destroy();
+	recipePots.RemoveAt(index);
 }
 
 void AMyPlayerState::removePotItem_Implementation(int index, int potIndex)
