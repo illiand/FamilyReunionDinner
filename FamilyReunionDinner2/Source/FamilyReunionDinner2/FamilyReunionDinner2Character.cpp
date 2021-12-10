@@ -12,7 +12,7 @@
 #include "GameFramework/InputSettings.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
-#include "DrawDebugHelpers.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "MotionControllerComponent.h"
 #include "XRMotionControllerBase.h" // for FXRMotionControllerBase::RightHandSourceId
 
@@ -56,8 +56,14 @@ void AFamilyReunionDinner2Character::Tick(float DeltaTime)
 		FHitResult hit(ForceInit);
 		UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, true, hit);
 
-		UE_LOG(LogTemp, Warning, TEXT("%f %f %f"), hit.Location.X, hit.Location.Y, hit.Location.Z);
-		DrawDebugDirectionalArrow(GetWorld(), startPos, hit.Location, 5, FColor::Magenta, false, -1.0f, 0, 0.5f);
+		if (toPotArrowHelper == NULL) 
+		{
+			TSubclassOf<AToPotArrow> toPotArrowClass = LoadClass<AToPotArrow>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyToPotArrow.MyToPotArrow_C'"));
+			toPotArrowHelper = GetWorld()->SpawnActor<AToPotArrow>(toPotArrowClass, FVector(0, 0, 0), FRotator(0, 0, 0), FActorSpawnParameters());
+		}
+
+		toPotArrowHelper->arrowInit(startPos, hit.Location);
+
 		AActor* curTarget = pickFromEye();
 
 		if (curTarget != NULL && curTarget->Tags.Num() != 0) 
@@ -76,20 +82,23 @@ void AFamilyReunionDinner2Character::Tick(float DeltaTime)
 					card = Cast<ARecipeCard>(curTarget);
 				}
 
-				if (pointingArrowHelper == NULL) 
+				FRotator rotation = FRotator(0, originalZRotation, 0);
+				FVector direction = UKismetMathLibrary::GetForwardVector(rotation);
+
+				if (potBorder == NULL)
 				{
-					pointingArrowHelper = GetWorld()->SpawnActor<APointingArrow>(APointingArrow::StaticClass(), FVector(0, 0, 0), FRotator(0, 0, 0), FActorSpawnParameters());
-					pointingArrowHelper->targetLocation = FVector(curTarget->GetActorLocation());
-					pointingArrowHelper->targetLocation.Z += 50;
+					potBorder = GetWorld()->SpawnActor<APotBorder>(APotBorder::StaticClass(), curTarget->GetActorLocation(), rotation.Add(0, -90, 0), FActorSpawnParameters());
 				}
+				
+				potBorder->SetActorLocation(curTarget->GetActorLocation() - direction * 7);
 			}
 		}
 		else 
 		{
-			if (pointingArrowHelper != NULL) 
+			if (potBorder != NULL) 
 			{
-				pointingArrowHelper->Destroy();
-				pointingArrowHelper = NULL;
+				potBorder->Destroy();
+				potBorder = NULL;
 			}
 		}
 	}
@@ -294,6 +303,12 @@ void AFamilyReunionDinner2Character::puttingItem()
 		clearUI_Implementation();
 	}
 
+	if (toPotArrowHelper != NULL)
+	{
+		toPotArrowHelper->Destroy();
+		toPotArrowHelper = NULL;
+	}
+
 	if (holdingItem == NULL) 
 	{
 		return;
@@ -305,8 +320,11 @@ void AFamilyReunionDinner2Character::puttingItem()
 	{
 		if (curTarget->Tags[0] == TEXT("pot") || curTarget->Tags[0] == TEXT("potCard")) 
 		{
-			pointingArrowHelper->Destroy();
-			pointingArrowHelper = NULL;
+			if (potBorder != NULL)
+			{
+				potBorder->Destroy();
+				potBorder = NULL;
+			}
 
 			ARecipeCard* card = NULL;
 

@@ -4,7 +4,8 @@
 #include "GameFramework/Character.h"
 #include "RecipeCard.h"
 #include "FamilyReunionDinner2UserWidget.h"
-#include "PointingArrow.h"
+#include "PotBorder.h"
+#include "ToPotArrow.h"
 #include "FamilyReunionDinner2Character.generated.h"
 
 class UInputComponent;
@@ -182,7 +183,8 @@ private:
 	float previewTimerCount = 0;
 	FTimerHandle previewTimer;
 
-	APointingArrow* pointingArrowHelper;
+	APotBorder* potBorder;
+	AToPotArrow* toPotArrowHelper;
 
 private:
 	AActor* pickFromEye();

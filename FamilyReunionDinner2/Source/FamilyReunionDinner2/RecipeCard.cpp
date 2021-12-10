@@ -15,8 +15,6 @@ ARecipeCard::ARecipeCard()
 void ARecipeCard::BeginPlay()
 {
 	Super::BeginPlay();
-
-	assignInfo();
 }
 
 // Called every frame
@@ -64,6 +62,18 @@ void ARecipeCard::assignInfo()
 		{
 			attributes[i]->SetText(data.point);
 		}
+	}
+
+	UStaticMeshComponent* mesh = Cast<UStaticMeshComponent>(GetDefaultSubobjectByName(TEXT("Plane")));
+
+	if (mesh != NULL)
+	{
+		UTexture2D* texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, *(data.path)));
+
+		material = UMaterialInstanceDynamic::Create(mesh->GetMaterial(0), NULL);
+
+		material->SetTextureParameterValue(TEXT("CardDiffuse"), texture);
+		mesh->SetMaterial(0, material);
 	}
 }
 

@@ -14,6 +14,9 @@ class FAMILYREUNIONDINNER2_API AIngredientCard : public AActor
 {
 	GENERATED_BODY()
 
+private:
+	UMaterialInstanceDynamic* material;
+
 public:
 	// Sets default values for this actor's properties
 	AIngredientCard();
@@ -30,8 +33,4 @@ public:
 	AActor* border;
 
 	void assignInfo();
-	
-	UFUNCTION(Reliable, NetMulticast, BlueprintCallable)
-	void castEffect(const FString& name);
-	void castEffect_Implementation(const FString& name);
 };

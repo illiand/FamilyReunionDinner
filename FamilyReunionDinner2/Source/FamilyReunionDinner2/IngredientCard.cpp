@@ -25,37 +25,15 @@ void AIngredientCard::Tick(float DeltaTime)
 
 void AIngredientCard::assignInfo()
 {
-	TArray<UTextRenderComponent*> attributes;
-	GetComponents(attributes);
+	UStaticMeshComponent* mesh = Cast<UStaticMeshComponent>(GetDefaultSubobjectByName(TEXT("Plane")));
 
-	for (int i = 0; i < attributes.Num(); i++)
+	if (mesh != NULL)
 	{
-		if (attributes[i]->GetName().Equals("cardName"))
-		{
-			attributes[i]->SetText(data.name);
-		}
+		UTexture2D* texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, *(data.path)));
 
-		if (attributes[i]->GetName().Equals("curType"))
-		{
-			attributes[i]->SetText(data.type);
-		}
-		if (attributes[i]->GetName().Equals("Size"))
-		{
-			FString prefix = "Size: ";
-			attributes[i]->SetText(prefix.Append(data.size));
-		}
+		material = UMaterialInstanceDynamic::Create(mesh->GetMaterial(0), NULL);
 
-		if (attributes[i]->GetName().Equals("bonusPoint"))
-		{
-			attributes[i]->SetText(data.point);
-		}
-	}
-}
-
-void AIngredientCard::castEffect_Implementation(const FString& name)
-{
-	if (name.Compare("Mutton") == 0) 
-	{
-
+		material->SetTextureParameterValue(TEXT("CardDiffuse"), texture);
+		mesh->SetMaterial(0, material);
 	}
 }

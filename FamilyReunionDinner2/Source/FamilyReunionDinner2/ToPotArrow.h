@@ -4,13 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/SplineComponent.h"
+#include "Components/SplineMeshComponent.h"
 #include "ToPotArrow.generated.h"
 
 UCLASS()
 class FAMILYREUNIONDINNER2_API AToPotArrow : public AActor
 {
 	GENERATED_BODY()
-	
+
+private:
+	UStaticMeshComponent* body;
+	UStaticMeshComponent* head;
+	UMaterialInstanceDynamic* material;
+
+	FVector startPos;
+	FVector endPos;
+
 public:	
 	// Sets default values for this actor's properties
 	AToPotArrow();
@@ -23,4 +33,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void arrowInit(FVector start, FVector end);
 };

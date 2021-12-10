@@ -355,6 +355,10 @@ int AMyPlayerState::calculateBonusPoint(FRecipeCardStruct data)
 		}
 		else if (curData.name == "Chicken Beast")
 		{
+			total += 1;
+		}
+		else if (curData.name == "Chicken Wings")
+		{
 			total += 2;
 		}
 		else if (curData.name == "Tomatoes")
@@ -381,6 +385,10 @@ int AMyPlayerState::calculateBonusPoint(FRecipeCardStruct data)
 			total += 2;
 		}
 		else if (curData.name == "Broccoli")
+		{
+			total += 3;
+		}
+		else if (curData.name == "Cauliflower")
 		{
 			total += 3;
 		}
@@ -418,11 +426,33 @@ int AMyPlayerState::calculateBonusPoint(FRecipeCardStruct data)
 		{
 			if (calculateHeat(data) < 3)
 			{
+				total += 0;
+			}
+			else
+			{
+				total += 4;
+			}
+		}
+		else if (curData.name == "Clams") 
+		{
+			if (calculateHeat(data) < 3)
+			{
 				total += 1;
 			}
 			else
 			{
 				total += 3;
+			}
+		}
+		else if (curData.name == "Eggplants")
+		{
+			if (calculateHeat(data) <= 3)
+			{
+				total += 2;
+			}
+			else
+			{
+				total += 0;
 			}
 		}
 	}

@@ -8,7 +8,8 @@
 
 TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards() 
 {
-	FString dataString = "Name Type Flavor_Range Heat_Range Utensil_Size Points\nSpicy_Potatoes Spicy 1-2 3 2 2\nSpicy_Tofu_Bowl Spicy 2-3 2-3 2 2\nSpicy_Fries Spicy 3 1-2 2 3\nThai_Curry Spicy/Sour 3-4 3 3 3\nSpicy_Hot_Pot Spicy 4-5 3-4 5 4\nFruit_Bowl Sweet 1-2 0 2 2\nDonuts Sweet 2-3 1-2 1 2\nYogurt_Bowl Sweet 2-3 2-3 2 3\nCreamy_Mac Sweet 3-4 3-5 4 5\nCheese_Pizza Sweet/Salty 4-5 5 6 4\nEight_TreasureCongee Sweet 2-3 3-4 4 3\nMiso_Soup Salty 1-2 2-3 5 0\nTacco Salty 2-3 2 2 3\nSandwich Salty 3 1-2 2 3\nBorscht Salty/Spicy 2-4 3-5 3 3\nStew Salty 3-4 5 5 4\nSourdough_Bread Sour 1-2 2-3 1 2\nSalad Sour/Sweet 2-4 1 4 1\nSour_Fish Sour 3-4 2-3 2 4\nHot_Sour_Noodels Sour 4 3-4 3 4\nKimiji_Fried_Rice Sour 4-5 4 4 4\nDolma Sour/Spicy 3-4 3-4 3 4\n";
+	FString dataString = 
+		"Name Type Flavor_Range Heat_Range Utensil_Size Points Path\nSpicy_Potatoes Spicy 1-2 3 2 2 Spicy_Potatoes.png\nSpicy_Tofu_Bowl Spicy 2-3 2-3 2 2 Spicy_Tofu_Bowl.png\nSpicy_Fries Spicy 3 1-2 2 3 Spicy_Fries.png\nThai_Curry Spicy/Sour 3-4 3 3 3 Thai_Curry.png\nSpicy_Hot_Pot Spicy 4-5 3-4 5 4 Spicy_Hot_Pot.png\nFruit_Bowl Sweet 1-2 0 2 2 Fruit_Bowl.PNG\nDonuts Sweet 2-3 1-2 1 2 Donuts.png\nYogurt_Bowl Sweet 2-3 2-3 2 3 Yogurt_Bowl.png\nCreamy_Mac Sweet 3-4 3-5 4 5 Creamy_Mac.png\nCheese_Pizza Sweet/Salty 4-5 5 6 4 Cheese_Pizza.png\nEight_TreasureCongee Sweet 2-3 3-4 4 3 Eight_TreasureCongee.png\nMiso_Soup Salty 1-2 2-3 5 0 Miso_Soup.png\nTacco Salty 2-3 2 2 3 Tacco.png\nSandwich Salty 3 1-2 2 3 Sandwich.png\nBorscht Salty/Spicy 2-4 3-5 3 3 Borscht.png\nStew Salty 3-4 5 5 4 Stew.png\nSourdough_Bread Sour 1-2 2-3 1 2 Sourdough_Bread.PNG\nSalad Sour/Sweet 2-4 1 4 1 Salad.png\nSour_Fish Sour 3-4 2-3 2 4 Sour_Fish.png\nHot_Sour_Noodels Sour 4 3-4 3 4 Hot_Sour_Noodels.png\nKimiji_Fried_Rice Sour 4-5 4 4 4 Kimiji_Fried_Rice.PNG\nDolma Sour/Spicy 3-4 3-4 3 4 Dolma.png\n";
 	TArray<TSharedPtr<FJsonObject>> data = FStringToJson(dataString);
 
 	TArray<FRecipeCardStruct> arr;
@@ -23,7 +24,13 @@ TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards()
 		curData.heatRange = data[i]->GetStringField(TEXT("Heat_Range"));
 		curData.size = data[i]->GetStringField(TEXT("Utensil_Size"));
 		curData.point = data[i]->GetStringField(TEXT("Points"));
-		curData.path = TEXT("Texture2D'/Game/Assets/Texture/uv.uv'");
+
+		FString path = TEXT("Texture2D'/Game/Assets/CardAssets/RecipeCards/");
+		path.Append(data[i]->GetStringField(TEXT("Path")));
+		path.Append(".");
+		path.Append(data[i]->GetStringField(TEXT("Path")));
+		path.Append("'");
+		curData.path = path;
 
 		arr.Add(curData);
 	}
@@ -32,7 +39,7 @@ TArray<FRecipeCardStruct> UAPIClass::makeRecipeCards()
 TArray<FIngredientCardStruct> UAPIClass::makeIngredientCards()
 {
 	FString dataString =
-		"Name Type Size Points\nChicken M 2 3\nBeef M 3 4\nMutton M 3 Get_2_extra_points_when_cooked_with_seafoods\nTomatoes V 1 1\nPotatoes V 2 2\nCabbage V 2 Get_2_extra_points_when_cooked_with_meat\nShrimps S 3 4\nSeafish S 2 Get_4_points_when_cooked_with_meat\nLobster S 3 The_dish_must_be_heated_over_4_or_the_bonus_point_is_zero";
+		"Name Type Size Path\nChicken Meat 2 Chicken.jpg\nBeef Meat 3 Beef.jpg\nMutton Meat 3 Mutton.jpg\nPork Meat 3 Pork.png\nChicken_Beast Meat 1 Chicken_Beast.png\nChicken_Wings Meat 1 Chicken_Wings.png\nTomatoes Vegetables 1 Tomatoes.jpg\nPotatoes Vegetables 2 Potatoes.jpg\nCabbage Vegetables 2 Cabbage.jpg\nOnion Vegetables 1 Onion.png\nBroccoli Vegetables 3 Broccoli.png\nCauliflower Vegetables 2 Cauliflower.png\nShrimps Seafoods 3 Shrimps.jpg\nSeafish Seafoods 2 Seafish.jpg\nLobster Seafoods 3 Lobster.jpg\nCrab Seafoods 2 Crab.png\nClams Seafoords 2 clams.png\nEggPlants Vegetables 2 EggPlants.png\n";
 	TArray<TSharedPtr<FJsonObject>> data = FStringToJson(dataString);
 
 	TArray<FIngredientCardStruct> arr;
@@ -44,9 +51,14 @@ TArray<FIngredientCardStruct> UAPIClass::makeIngredientCards()
 		curData.name = data[i]->GetStringField(TEXT("Name"));
 		curData.type = data[i]->GetStringField(TEXT("Type"));
 		curData.size = data[i]->GetStringField(TEXT("Size"));
-		curData.point = data[i]->GetStringField(TEXT("Points"));
-		curData.path = TEXT("Texture2D'/Game/Assets/Texture/uv.uv'");
 
+		FString path = TEXT("Texture2D'/Game/Assets/CardAssets/IngredientCards/");
+		path.Append(data[i]->GetStringField(TEXT("Path")));
+		path.Append(".");
+		path.Append(data[i]->GetStringField(TEXT("Path")));
+		path.Append("'");
+		curData.path = path;
+		//UE_LOG(LogTemp, Warning, TEXT("p %s "), *path);
 		arr.Add(curData);
 	}
 	return arr;
@@ -138,7 +150,14 @@ TArray<TSharedPtr<FJsonObject>> UAPIClass::FStringToJson(FString data)
 
 		for (int j = 0; j < types.Num(); j++)
 		{
-			curLineString[j] = curLineString[j].Replace(TEXT("_"), TEXT(" "));
+			if (types[j] != "Path") 
+			{
+				curLineString[j] = curLineString[j].Replace(TEXT("_"), TEXT(" "));
+			}
+			else 
+			{
+				curLineString[j] = curLineString[j].Left(curLineString[j].Len() - 4);
+			}
 
 			curData->SetStringField(types[j], curLineString[j]);
 		}

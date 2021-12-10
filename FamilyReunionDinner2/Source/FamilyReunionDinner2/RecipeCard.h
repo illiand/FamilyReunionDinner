@@ -14,6 +14,9 @@ class FAMILYREUNIONDINNER2_API ARecipeCard : public AActor
 {
 	GENERATED_BODY()
 	
+private:
+	UMaterialInstanceDynamic* material;
+
 public:	
 	// Sets default values for this actor's properties
 	ARecipeCard();
