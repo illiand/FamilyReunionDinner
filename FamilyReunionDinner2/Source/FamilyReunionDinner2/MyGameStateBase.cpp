@@ -18,8 +18,21 @@ void AMyGameStateBase::initGame()
 	TSubclassOf<ACookingCard> cookingCard = LoadClass<ACookingCard>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyCookingCard.MyCookingCard_C'"));
 	monsterPreferenceFileData = UAPIClass::makeMonsterPreference();
 
-	int cookingCardCount = 2;
-	// cookingCardCount = 7 if PlayerArray.Num() = 3/4
+	maxRound = FMath::CeilToInt(32 / (float)PlayerArray.Num());
+	int cookingCardCount;
+
+	if (PlayerArray.Num() == 2) 
+	{
+		cookingCardCount = 8;
+	}
+	else if (PlayerArray.Num() == 3 || PlayerArray.Num() == 4)
+	{
+		cookingCardCount = 7;
+	}
+	else 
+	{
+		cookingCardCount = 6;
+	}
 
 	//randomly create replicatable cooking cards
 	for (int i = 0; i < PlayerArray.Num(); i += 1)
@@ -63,6 +76,7 @@ void AMyGameStateBase::initGame()
 	{
 		Cast<AMyPlayerState>(PlayerArray[i])->activeTurnTimer();
 		Cast<AMyPlayerState>(PlayerArray[i])->setInTurnPlayerName(Cast<AMyPlayerState>(PlayerArray[0])->FamilyReunionDinner2PlayerID);
+		Cast<AMyPlayerState>(PlayerArray[i])->setRound(curRound, maxRound);
 
 		if (i != currentTurnIndex)
 		{
@@ -76,6 +90,8 @@ void AMyGameStateBase::initGame()
 			Cast<AFamilyReunionDinner2Character>(PlayerArray[i]->GetPawn())->setWaitingTextUI(TEXT("Your Turn"));
 		}
 	}
+
+	monsterNameInGame = TEXT("Nian");
 }
 
 void AMyGameStateBase::nextTurn() 
@@ -87,6 +103,7 @@ void AMyGameStateBase::nextTurn()
 	if (currentTurnIndex == PlayerArray.Num()) 
 	{
 		currentTurnIndex = 0;
+		curRound += 1;
 	}
 
 	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->inTurn = true;
@@ -100,6 +117,7 @@ void AMyGameStateBase::nextTurn()
 	{
 		Cast<AMyPlayerState>(PlayerArray[i])->activeTurnTimer();
 		Cast<AMyPlayerState>(PlayerArray[i])->setInTurnPlayerName(Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->FamilyReunionDinner2PlayerID);
+		Cast<AMyPlayerState>(PlayerArray[i])->setRound(curRound, maxRound);
 
 		if (i != currentTurnIndex) 
 		{
@@ -308,6 +326,8 @@ void AMyGameStateBase::getDishActionResult(int index)
 
 		removeRecipeCardInGame(index);
 		addRecipeCardInGame(index);
+
+		Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->setActionPoint(Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->actionPoint + 1);
 	}
 
 	for (int i = 0; i < PlayerArray.Num(); i += 1)
@@ -531,4 +551,34 @@ bool AMyGameStateBase::hasPot(FString type)
 	}
 
 	return false;
+}
+
+bool AMyGameStateBase::checkCanGameOver(FString& errorMessage)
+{
+	bool isok = true;
+	int totalPoints = 0;
+
+	for (int i = 0; i < completedDishFileData.Num(); i += 1) 
+	{
+		totalPoints += Cast<AMyPlayerState>(PlayerArray[0])->calculateParameter(completedDishFileData[i])[2];
+	}
+
+	if (monsterNameInGame == "Nian") 
+	{
+		if (totalPoints < 15)
+		{
+			errorMessage += "! Point is not Enough !\n";
+
+			isok = false;
+		}
+		
+		if (!hasPot("Sweet")) 
+		{
+			errorMessage += "! No Sweet Food !\n";
+
+			isok = false;
+		}
+	}
+
+	return isok;
 }

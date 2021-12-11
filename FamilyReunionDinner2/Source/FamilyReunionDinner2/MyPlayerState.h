@@ -53,7 +53,7 @@ public:
 	FString inTurnPlayerName;
 
 	UPROPERTY(BlueprintReadOnly)
-	int actionPoint = 1;
+	int actionPoint = 3;
 
 	UPROPERTY(BlueprintReadOnly)
 	FString FamilyReunionDinner2PlayerID;
@@ -180,4 +180,8 @@ public:
 	UFUNCTION(Reliable, Client)
 	void sendGameOverData(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, const TArray<FString>& playersIDData);
 	void sendGameOverData_Implementation(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, const TArray<FString>& playersIDData);
+
+	UFUNCTION(Reliable, Client)
+	void setRound(int curRound, int maxRound);
+	void setRound_Implementation(int curRound, int maxRound);
 };

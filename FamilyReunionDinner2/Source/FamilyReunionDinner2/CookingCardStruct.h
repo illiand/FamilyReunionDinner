@@ -13,6 +13,9 @@ struct FCookingCardStruct
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(BlueprintReadOnly)
+	int cardID;
+
+	UPROPERTY(BlueprintReadOnly)
 	FString name;
 	UPROPERTY(BlueprintReadOnly)
 	FString type;

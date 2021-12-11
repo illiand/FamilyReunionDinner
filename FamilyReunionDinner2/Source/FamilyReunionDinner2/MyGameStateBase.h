@@ -37,6 +37,8 @@ public:
 
 	TArray<FMonsterPreferenceStruct> monsterPreferenceInGame = TArray<FMonsterPreferenceStruct>();
 
+	FString monsterNameInGame;
+
 public:
 	FTimerHandle turnTimer;
 	FTimerHandle actionTimer;
@@ -44,6 +46,9 @@ public:
 	int inActionPotIndex = 0;
 	int inActionPotItemIndex = -1;
 	bool succussAction = false;
+
+	int curRound = 1;
+	int maxRound = 8;
 
 public:
 	void initGame();
@@ -75,6 +80,9 @@ public:
 	bool checkPreferenceSuccuss(FMonsterPreferenceStruct toCheck, FString& failedReason);
 
 	bool hasPot(FString type);
+
+	bool checkCanGameOver(FString& errorMessage);
+
 private:
 	int currentTurnIndex = 0;
 };

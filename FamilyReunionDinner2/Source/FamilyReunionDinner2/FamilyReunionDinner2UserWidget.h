@@ -50,4 +50,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void drawGameResultOnScreen();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void setRoundText(int curRound, int maxRound);
 };

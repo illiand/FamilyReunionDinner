@@ -515,3 +515,8 @@ void AMyPlayerState::sendGameOverData_Implementation(const FString& result, cons
 	inReaction = true;
 	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->drawGameResultOnScreen();
 }
+
+void AMyPlayerState::setRound_Implementation(int curRound, int maxRound)
+{
+	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setRoundText(curRound, maxRound);
+}

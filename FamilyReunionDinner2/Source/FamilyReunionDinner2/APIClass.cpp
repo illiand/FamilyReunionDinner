@@ -75,6 +75,7 @@ TArray<FCookingCardStruct> UAPIClass::makeCookingCards()
 	{
 		FCookingCardStruct curData;
 
+		curData.cardID = i;
 		curData.name = data[i]->GetStringField(TEXT("Name"));
 		curData.type = data[i]->GetStringField(TEXT("Type"));
 		curData.degree = data[i]->GetStringField(TEXT("Degree"));
@@ -96,7 +97,8 @@ TArray<FCookingCardStruct> UAPIClass::makeCookingCards()
 
 TArray<FMonsterPreferenceStruct> UAPIClass::makeMonsterPreference()
 {
-	FString dataString = "Card_Name Card_Information\nVegetarian No_meat\nSeafood_Allergy No_seafood\nÐÁµ³[¤«¤é¤È¤¦] At_least_finish_1_spicy_dish\nLemon_Squeezer At_least_finish_1_sour_dish\n¸Êµ³[¤¢¤Þ¤È¤¦] At_least_finish_1_sweet_dish\nSupertaster At_least_finish_1_salty_dish\nMouth_Ulcer If_the_dish_is_spicy or sour,_reduce_the_degree_of_flavour_with_1.\nSpitfire_Mouth All dishes¡¯ heat requirement increases by 1 degree.\nRaw_is_healthy All dishes¡¯ heat requirement decreases by 1 degree.\nGo_on_a_diet If_the_dish_is_sweet or salty_reduce_the_degree_of_flavour_with_1.\n";
+	FString dataString =
+		"Card_Name Path\nVegetarian Vegetarian.png\nSeafood_Allergy Seafood_Allergy.png\nSpicy Spicy.png\nLemon_Squeezer Lemon_Squeezer.png\nSweet Sweet.png\nSupertaster Supertaster.png\nMouth_Ulcer Mouth_Ulcer.png\nSpitfire_Mouth Spitfire_Mouth.png\nRaw_is_healthy Raw_is_healthy.png\nGo_on_a_diet Go_on_a_diet.png\nmonster_2 monster_2.png\nmonster_3 monster_3.png\nmonster_4 monster_4.png\n";
 	TArray<TSharedPtr<FJsonObject>> data = FStringToJson(dataString);
 
 	TArray<FMonsterPreferenceStruct> arr;
@@ -106,8 +108,15 @@ TArray<FMonsterPreferenceStruct> UAPIClass::makeMonsterPreference()
 		FMonsterPreferenceStruct curData;
 
 		curData.name = data[i]->GetStringField(TEXT("Card_Name"));
-		curData.effect = data[i]->GetStringField(TEXT("Card_Information"));
-		curData.path = TEXT("Texture2D'/Game/Assets/Texture/uv.uv'");
+		curData.effect = "";
+
+		FString path = TEXT("Texture2D'/Game/Assets/CardAssets/MonsterPreferenceCards/");
+		path.Append(data[i]->GetStringField(TEXT("Path")));
+		path.Append(".");
+		path.Append(data[i]->GetStringField(TEXT("Path")));
+		path.Append("'");
+		curData.path = path;
+
 		arr.Add(curData);
 	}
 

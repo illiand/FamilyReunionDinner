@@ -452,7 +452,7 @@ void AFamilyReunionDinner2Character::giveTypeHint_Implementation(ACookingCard* c
 
 		for (int j = 0; j < curCards.Num(); j += 1)
 		{
-			if (curCards[j]->data.name == card->data.name)
+			if (curCards[j]->GetUniqueID() == card->GetUniqueID())
 			{
 				for (int k = 0; k < curCards.Num(); k += 1) 
 				{
@@ -525,7 +525,7 @@ void AFamilyReunionDinner2Character::giveDegreeHint_Implementation(ACookingCard*
 
 		for (int j = 0; j < curCards.Num(); j += 1)
 		{
-			if (curCards[j]->data.name == card->data.name)
+			if (curCards[j]->GetUniqueID() == card->GetUniqueID())
 			{
 				for (int k = 0; k < curCards.Num(); k += 1)
 				{
@@ -577,7 +577,7 @@ void AFamilyReunionDinner2Character::requestCertainHandInfo_Implementation(ACook
 
 		for (int j = 0; j < curCards.Num(); j += 1)
 		{
-			if (curCards[j]->data.name == card->data.name) 
+			if (curCards[j]->GetUniqueID() == card->GetUniqueID())
 			{
 				sendCertainHandInfo(curCards, j);
 
@@ -611,13 +611,15 @@ void AFamilyReunionDinner2Character::addCookingCardToPot_Implementation(ACooking
 
 	for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->cookingCards.Num(); i += 1) 
 	{
-		if (card->data.name == Cast<AMyPlayerState>(GetPlayerState())->cookingCards[i]->data.name) 
+		if (card->GetUniqueID() == Cast<AMyPlayerState>(GetPlayerState())->cookingCards[i]->GetUniqueID())
 		{
 			FVector targetPosition = card->GetActorLocation();
 			FRotator targetRotation = card->GetActorRotation();
 
 			gameState->removeCookingCardInGame(GetPlayerState(), i);
 			gameState->addCookingCardInGame(GetPlayerState(), targetPosition, targetRotation, i);
+
+			gameState->nextTurn();
 
 			return;
 		}
@@ -647,6 +649,8 @@ void AFamilyReunionDinner2Character::removePotItemRequest_Implementation(int pot
 	{
 		FString message = TEXT("! Action Point is Insuffient !");
 		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(message, FVector(1, 0, 0));
+
+		return;
 	}
 
 	Cast<AMyPlayerState>(GetPlayerState())->setActionPoint(Cast<AMyPlayerState>(GetPlayerState())->actionPoint - 1);
@@ -703,6 +707,8 @@ void AFamilyReunionDinner2Character::replyRemovePotItemAction_Implementation()
 	{
 		FString message = TEXT("! Action Point is Insuffient !");
 		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(message, FVector(1, 0, 0));
+
+		return;
 	}
 
 	Cast<AMyPlayerState>(GetPlayerState())->setActionPoint(Cast<AMyPlayerState>(GetPlayerState())->actionPoint - 1);
@@ -822,6 +828,8 @@ void AFamilyReunionDinner2Character::finishRecipeCardRequest_Implementation(int 
 	{
 		FString message = TEXT("! Action Point is Insuffient !");
 		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(message, FVector(1, 0, 0));
+
+		return;
 	}
 
 	Cast<AMyPlayerState>(GetPlayerState())->setActionPoint(Cast<AMyPlayerState>(GetPlayerState())->actionPoint - 1);
@@ -865,6 +873,8 @@ void AFamilyReunionDinner2Character::replyRecipeFinishAction_Implementation()
 	{
 		FString message = TEXT("! Action Point is Insuffient !");
 		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(message, FVector(1, 0, 0));
+
+		return;
 	}
 
 	Cast<AMyPlayerState>(GetPlayerState())->setActionPoint(Cast<AMyPlayerState>(GetPlayerState())->actionPoint - 1);
@@ -1031,12 +1041,20 @@ void AFamilyReunionDinner2Character::setWaitingTextUI_Implementation(const FStri
 
 void AFamilyReunionDinner2Character::requestGameOver_Implementation()
 {
+	AMyGameStateBase* gameState = Cast<AMyGameStateBase>(GetWorld()->GetGameState());
+	FString errorMessage;
+
+	if (!gameState->checkCanGameOver(errorMessage) && gameState->curRound < gameState->maxRound) 
+	{
+		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(errorMessage, FVector(1, 0, 0));
+
+		return;
+	}
+
 	FString result = "WIN!";
 	TArray<FCompletedRecipeInfo> recipeData;
 	TArray<FCompletedPreferenceInfo> preferenceData;
 	TArray<FString> playersID;
-
-	AMyGameStateBase* gameState = Cast<AMyGameStateBase>(GetWorld()->GetGameState());
 
 	for (int i = 0; i < gameState->completedDishFileData.Num(); i++)
 	{
