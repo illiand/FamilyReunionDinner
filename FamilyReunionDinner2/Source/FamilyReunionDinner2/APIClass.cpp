@@ -58,7 +58,7 @@ TArray<FIngredientCardStruct> UAPIClass::makeIngredientCards()
 		path.Append(data[i]->GetStringField(TEXT("Path")));
 		path.Append("'");
 		curData.path = path;
-		//UE_LOG(LogTemp, Warning, TEXT("p %s "), *path);
+
 		arr.Add(curData);
 	}
 	return arr;
@@ -66,7 +66,7 @@ TArray<FIngredientCardStruct> UAPIClass::makeIngredientCards()
 TArray<FCookingCardStruct> UAPIClass::makeCookingCards()
 {
 	FString dataString =
-		"Name Type Degree\nSpicy+1 Spicy 1\nSpicy+2 Spicy 2\nSpicy+3 Spicy 3\nSalty+1 Salty 1\nSalty+2 Salty 2\nSalty+3 Salty 3\nSour+1 Sour 1\nSour+2 Sour 2\nSour+3 Sour 3\nSweet+1 Sweet 1\nSweet+2 Sweet 2\nSweet+3 Sweet 3\nheat+1 heat 1\nheat+2 heat 2\nheat+3 heat 3";
+		"Name Type Degree Path\nSpicy_+_1 Spicy 1 Spicy1.png\nSpicy_+_1 Spicy 1 Spicy1.png\nSpicy_+_1 Spicy 1 Spicy1.png\nSpicy_+_1 Spicy 1 Spicy1.png\nSpicy_+_1 Spicy 1 Spicy1.png\nSpicy_+_2 Spicy 2 Spicy2.png\nSpicy_+_2 Spicy 2 Spicy2.png\nSpicy_+_2 Spicy 2 Spicy2.png\nSpicy_+_2 Spicy 2 Spicy2.png\nSpicy_+_3 Spicy 3 Spicy3.png\nSpicy_+_3 Spicy 3 Spicy3.png\nSpicy_+_3 Spicy 3 Spicy3.png\nSalty_+_1 Salty 1 Salty1.png\nSalty_+_1 Salty 1 Salty1.png\nSalty_+_1 Salty 1 Salty1.png\nSalty_+_1 Salty 1 Salty1.png\nSalty_+_1 Salty 1 Salty1.png\nSalty_+_2 Salty 2 Salty2.png\nSalty_+_2 Salty 2 Salty2.png\nSalty_+_2 Salty 2 Salty2.png\nSalty_+_2 Salty 2 Salty2.png\nSalty_+_3 Salty 3 Salty3.png\nSalty_+_3 Salty 3 Salty3.png\nSalty_+_3 Salty 3 Salty3.png\nSweet_+_1 Sweet 1 Sweet1.png\nSweet_+_1 Sweet 1 Sweet1.png\nSweet_+_1 Sweet 1 Sweet1.png\nSweet_+_1 Sweet 1 Sweet1.png\nSweet_+_1 Sweet 1 Sweet1.png\nSweet_+_2 Sweet 2 Sweet2.png\nSweet_+_2 Sweet 2 Sweet2.png\nSweet_+_2 Sweet 2 Sweet2.png\nSweet_+_2 Sweet 2 Sweet2.png\nSweet_+_3 Sweet 3 Sweet3.png\nSweet_+_3 Sweet 3 Sweet3.png\nSweet_+_3 Sweet 3 Sweet3.png\nSour_+_1 Sour 1 Sour1.png\nSour_+_1 Sour 1 Sour1.png\nSour_+_1 Sour 1 Sour1.png\nSour_+_1 Sour 1 Sour1.png\nSour_+_1 Sour 1 Sour1.png\nSour_+_2 Sour 2 Sour2.png\nSour_+_2 Sour 2 Sour2.png\nSour_+_2 Sour 2 Sour2.png\nSour_+_2 Sour 2 Sour2.png\nSour_+_3 Sour 3 Sour3.png\nSour_+_3 Sour 3 Sour3.png\nSour_+_3 Sour 3 Sour3.png\nHeat_+_1 Heat 1 Heat1.png\nHeat_+_1 Heat 1 Heat1.png\nHeat_+_1 Heat 1 Heat1.png\nHeat_+_1 Heat 1 Heat1.png\nHeat_+_1 Heat 1 Heat1.png\nHeat_+_1 Heat 1 Heat1.png\nHeat_+_1 Heat 1 Heat1.png\nHeat_+_2 Heat 2 Heat2.png\nHeat_+_2 Heat 2 Heat2.png\nHeat_+_2 Heat 2 Heat2.png\nHeat_+_2 Heat 2 Heat2.png\nHeat_+_2 Heat 2 Heat2.png\nHeat_+_2 Heat 2 Heat2.png\nHeat_+_3 Heat 3 Heat3.png\nHeat_+_3 Heat 3 Heat3.png\nHeat_+_3 Heat 3 Heat3.png\nHeat_+_3 Heat 3 Heat3.png\nHeat_+_3 Heat 3 Heat3.png\n";
 	TArray<TSharedPtr<FJsonObject>> data = FStringToJson(dataString);
 
 	TArray<FCookingCardStruct> arr;
@@ -78,9 +78,16 @@ TArray<FCookingCardStruct> UAPIClass::makeCookingCards()
 		curData.name = data[i]->GetStringField(TEXT("Name"));
 		curData.type = data[i]->GetStringField(TEXT("Type"));
 		curData.degree = data[i]->GetStringField(TEXT("Degree"));
-		curData.path = TEXT("Texture2D'/Game/Assets/Texture/uv.uv'");
+
 		curData.typeHinted = false;
 		curData.degreeHinted = false;
+
+		FString path = TEXT("Texture2D'/Game/Assets/CardAssets/CookingCards/");
+		path.Append(data[i]->GetStringField(TEXT("Path")));
+		path.Append(".");
+		path.Append(data[i]->GetStringField(TEXT("Path")));
+		path.Append("'");
+		curData.path = path;
 
 		arr.Add(curData);
 	}

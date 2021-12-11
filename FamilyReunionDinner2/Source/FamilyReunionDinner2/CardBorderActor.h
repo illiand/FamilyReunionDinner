@@ -29,5 +29,7 @@ public:
 	UPROPERTY(Replicated)
 	AActor* parent;
 
+	UFUNCTION(Reliable, NetMulticast)
 	void setBorderColor(float r, float g, float b, float a);
+	void setBorderColor_Implementation(float r, float g, float b, float a);
 };

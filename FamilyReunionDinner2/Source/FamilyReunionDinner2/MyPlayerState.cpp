@@ -159,6 +159,10 @@ void AMyPlayerState::removePotItem_Implementation(int index, int potIndex)
 		int trueIndex = index - recipeCards[potIndex]->data.addedCookingCards.Num();
 		recipeCards[potIndex]->data.addedIngredientCards.RemoveAt(trueIndex);
 	}
+
+	TArray<int> parameters = calculateParameter(recipeCards[potIndex]->data);
+	recipePots[potIndex]->setPotFlavorDegree(parameters[0]);
+	recipePots[potIndex]->setPotHeatDegree(parameters[1]);
 }
 
 void AMyPlayerState::setCardRotationBasedOnPlayerLocation(AActor* card) 
@@ -206,6 +210,11 @@ void AMyPlayerState::setReactionComplete_Implementation(bool ifReactionComplete)
 void AMyPlayerState::setPreReaction_Implementation(bool ifPreReaction)
 {
 	preReaction = ifPreReaction;
+}
+
+void AMyPlayerState::setActionPoint_Implementation(int curPoint) 
+{
+	actionPoint = curPoint;
 }
 
 void AMyPlayerState::turnTimerRun()
@@ -294,7 +303,7 @@ TArray<int> AMyPlayerState::calculateParameter(FRecipeCardStruct data)
 
 	for (int i = 0; i < data.addedCookingCards.Num(); i += 1)
 	{
-		if (data.addedCookingCards[i].type != "heat")
+		if (data.addedCookingCards[i].type != "Heat")
 		{
 			TArray<FString> recipeTypeArray;
 			data.type.ParseIntoArray(recipeTypeArray, TEXT("/"));
@@ -487,7 +496,7 @@ int AMyPlayerState::calculateHeat(FRecipeCardStruct data)
 
 	for (int i = 0; i < data.addedCookingCards.Num(); i += 1)
 	{
-		if (data.addedCookingCards[i].type == "heat")
+		if (data.addedCookingCards[i].type == "Heat")
 		{
 			heat += FCString::Atoi(*data.addedCookingCards[i].degree);
 		}

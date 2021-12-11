@@ -465,7 +465,33 @@ void AFamilyReunionDinner2Character::giveTypeHint_Implementation(ACookingCard* c
 
 						cardBorder->parent = curCards[k];
 						curCards[k]->border = cardBorder;
-						cardBorder->setBorderColor(0, 1, 0, 1);
+
+						FLinearColor color;
+
+						if (curCards[k]->data.type == "Spicy")
+						{
+							color = FLinearColor::Red;
+						}
+						else if (curCards[k]->data.type == "Sour")
+						{
+							color = FLinearColor::Yellow;
+						}
+						else if (curCards[k]->data.type == "Sweet")
+						{
+							color.R = 1.f;
+							color.G = 0.412f;
+							color.B = 0.706f;
+						}
+						else if (curCards[k]->data.type == "Salty")
+						{
+							color = FLinearColor::Blue;
+						}
+						else if (curCards[k]->data.type == "Heat")
+						{
+							color = FLinearColor::White;
+						}
+
+						cardBorder->setBorderColor(color.R, color.G, color.B, 1);
 					}
 				}
 
@@ -483,6 +509,7 @@ void AFamilyReunionDinner2Character::giveTypeHint_Implementation(ACookingCard* c
 
 				clearUI();
 				setHintShowed(true);
+				Cast<AMyGameStateBase>(GetWorld()->GetGameState())->nextTurn();
 
 				return;
 			}
@@ -505,7 +532,7 @@ void AFamilyReunionDinner2Character::giveDegreeHint_Implementation(ACookingCard*
 					if (curCards[k]->data.degree == card->data.degree && !curCards[k]->data.degreeHinted)
 					{
 						curCards[k]->data.degreeHinted = true;
-						curCards[k]->changeDegreeHintStatus(1, 0, 0, 1);
+						curCards[k]->changeDegreeHintStatus(true);
 					}
 				}
 
@@ -523,6 +550,7 @@ void AFamilyReunionDinner2Character::giveDegreeHint_Implementation(ACookingCard*
 
 				clearUI();
 				setHintShowed(true);
+				Cast<AMyGameStateBase>(GetWorld()->GetGameState())->nextTurn();
 
 				return;
 			}
@@ -563,14 +591,14 @@ void AFamilyReunionDinner2Character::sendCertainHandInfo_Implementation(const TA
 {
 	observingCards = data;
 
-	TArray<FString> pathes;
+	TArray<FString> path;
 
 	for (int i = 0; i < data.Num(); i += 1) 
 	{
-		pathes.Add(data[i]->data.path);
+		path.Add(data[i]->data.path);
 	}
 
-	MainUI->showHintLayout(pathes);
+	MainUI->showHintLayout(path);
 	showFlavorHintPreview(focusIndex);
 	showDegreeHintPreview(focusIndex);
 }
@@ -604,6 +632,8 @@ void AFamilyReunionDinner2Character::addIngredientCardToPot_Implementation(int i
 
 	gameState->removeIngredientCardInGame(ingredientCardIndex);
 	gameState->addIngredientCardInGame(ingredientCardIndex);
+
+	gameState->nextTurn();
 }
 
 void AFamilyReunionDinner2Character::setObservingPotItemIndex_Implementation(int index) 
@@ -613,6 +643,14 @@ void AFamilyReunionDinner2Character::setObservingPotItemIndex_Implementation(int
 
 void AFamilyReunionDinner2Character::removePotItemRequest_Implementation(int potIndex, int index)
 {
+	if (Cast<AMyPlayerState>(GetPlayerState())->actionPoint == 0)
+	{
+		FString message = TEXT("! Action Point is Insuffient !");
+		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(message, FVector(1, 0, 0));
+	}
+
+	Cast<AMyPlayerState>(GetPlayerState())->setActionPoint(Cast<AMyPlayerState>(GetPlayerState())->actionPoint - 1);
+
 	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
 	{
 		Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->clearUI();
@@ -661,6 +699,14 @@ void AFamilyReunionDinner2Character::removePotItemRequest_Implementation(int pot
 
 void AFamilyReunionDinner2Character::replyRemovePotItemAction_Implementation() 
 {
+	if (Cast<AMyPlayerState>(GetPlayerState())->actionPoint == 0) 
+	{
+		FString message = TEXT("! Action Point is Insuffient !");
+		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(message, FVector(1, 0, 0));
+	}
+
+	Cast<AMyPlayerState>(GetPlayerState())->setActionPoint(Cast<AMyPlayerState>(GetPlayerState())->actionPoint - 1);
+
 	clearUI();
 
 	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);
@@ -772,6 +818,14 @@ void AFamilyReunionDinner2Character::giveUpInRemovingItem_Implementation()
 
 void AFamilyReunionDinner2Character::finishRecipeCardRequest_Implementation(int index)
 {
+	if (Cast<AMyPlayerState>(GetPlayerState())->actionPoint == 0)
+	{
+		FString message = TEXT("! Action Point is Insuffient !");
+		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(message, FVector(1, 0, 0));
+	}
+
+	Cast<AMyPlayerState>(GetPlayerState())->setActionPoint(Cast<AMyPlayerState>(GetPlayerState())->actionPoint - 1);
+
 	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1)
 	{
 		Cast<AFamilyReunionDinner2Character>(GetWorld()->GetGameState()->PlayerArray[i]->GetPawn())->clearUI();
@@ -807,6 +861,14 @@ void AFamilyReunionDinner2Character::finishRecipeCardRequest_Implementation(int 
 
 void AFamilyReunionDinner2Character::replyRecipeFinishAction_Implementation()
 {
+	if (Cast<AMyPlayerState>(GetPlayerState())->actionPoint == 0)
+	{
+		FString message = TEXT("! Action Point is Insuffient !");
+		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(message, FVector(1, 0, 0));
+	}
+
+	Cast<AMyPlayerState>(GetPlayerState())->setActionPoint(Cast<AMyPlayerState>(GetPlayerState())->actionPoint - 1);
+
 	clearUI();
 
 	Cast<AMyPlayerState>(GetPlayerState())->setReactionComplete(true);

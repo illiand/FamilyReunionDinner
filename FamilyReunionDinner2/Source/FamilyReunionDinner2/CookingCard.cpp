@@ -35,56 +35,88 @@ void ACookingCard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutL
 
 void ACookingCard::assignInfo_Implementation()
 {
+	//mesh
+	UStaticMeshComponent* mesh = Cast<UStaticMeshComponent>(GetDefaultSubobjectByName(TEXT("Plane")));
+	FLinearColor color;
+
+	if (data.type == "Spicy")
+	{
+		color = FLinearColor::Red;
+	}
+	else if (data.type == "Sour")
+	{
+		color = FLinearColor::Yellow;
+	}
+	else if (data.type == "Sweet")
+	{
+		color.R = 1.f;
+		color.G = 0.412f;
+		color.B = 0.706f;
+	}
+	else if (data.type == "Salty")
+	{
+		color = FLinearColor::Blue;
+	}
+	else if (data.type == "Heat")
+	{
+		color = FLinearColor::White;
+	}
+
+	material = UMaterialInstanceDynamic::Create(mesh->GetMaterial(0), NULL);
+	material->SetVectorParameterValue(TEXT("CardDiffuse"), color);
+	mesh->SetMaterial(0, material);
+
+	//text on mesh
 	TArray<UTextRenderComponent*> attributes;
 	GetComponents(attributes);
 
 	for (int i = 0; i < attributes.Num(); i++)
 	{
-		if (attributes[i]->GetName().Equals("cardName"))
+		if (attributes[i]->GetName().Equals("degreeHint"))
 		{
-			attributes[i]->SetText(data.name.Append(" + ").Append(data.degree));
+			hintTextMaterial = UMaterialInstanceDynamic::Create(attributes[i]->GetMaterial(0), 0);
+			attributes[i]->SetMaterial(0, hintTextMaterial);
+			attributes[i]->SetText(data.degree);
 		}
-
-		if (attributes[i]->GetName().Equals("cardType"))
+		else if (attributes[i]->GetName().Equals("degreeHintFront"))
 		{
-			attributes[i]->SetText(data.type);
+			hintFrontTextMaterial = UMaterialInstanceDynamic::Create(attributes[i]->GetMaterial(0), 0);
+
+			FLinearColor curColor;
+
+			if (data.type != "Heat")
+			{
+				curColor = FLinearColor::White;
+			}
+			else
+			{
+				curColor = FLinearColor::Red;
+			}
+
+			hintFrontTextMaterial = UMaterialInstanceDynamic::Create(attributes[i]->GetMaterial(0), 0);
+			hintFrontTextMaterial->SetVectorParameterValue(TEXT("Color"), curColor);
+
+			attributes[i]->SetMaterial(0, hintFrontTextMaterial);
+			attributes[i]->SetText(data.degree);
 		}
 	}
 }
 
-void ACookingCard::changeDegreeHintStatus_Implementation(float r, float g, float b, float a)
+void ACookingCard::changeDegreeHintStatus_Implementation(bool isOn)
 {
-	if (hintTextMaterial == NULL)
+	if (isOn) 
 	{
-		TArray<UTextRenderComponent*> attributes;
-		GetComponents(attributes);
+		hintFrontTextMaterial->SetScalarParameterValue(TEXT("Strength"), 25);
+		hintTextMaterial->SetVectorParameterValue(TEXT("Color"), FLinearColor::Green);
+	}
+	else 
+	{
+		FLinearColor color = FLinearColor::Black;
+		color.A = 0.f;
 
-		for (int i = 0; i < attributes.Num(); i++)
-		{
-			if (attributes[i]->GetName().Equals("degreeHint"))
-			{
-				hintTextMaterial = UMaterialInstanceDynamic::Create(attributes[i]->GetMaterial(0), 0);
-
-				attributes[i]->SetMaterial(0, hintTextMaterial);
-				attributes[i]->SetText(data.degree);
-			}
-		}
-		for (int i = 0; i < attributes.Num(); i++)
-		{
-			if (attributes[i]->GetName().Equals("degreeHintFront"))
-			{
-				attributes[i]->SetMaterial(0, hintTextMaterial);
-				attributes[i]->SetText(data.degree);
-			}
-		}
+		hintFrontTextMaterial->SetScalarParameterValue(TEXT("Strength"), 1);
+		hintTextMaterial->SetVectorParameterValue(TEXT("Color"), color);
 	}
 
-	FLinearColor curColor;
-	curColor.R = r;
-	curColor.G = g;
-	curColor.B = b;
-	curColor.A = a;
-
-	hintTextMaterial->SetVectorParameterValue(TEXT("color"), curColor);
 }
 

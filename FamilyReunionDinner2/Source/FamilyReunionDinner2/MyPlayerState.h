@@ -53,7 +53,7 @@ public:
 	FString inTurnPlayerName;
 
 	UPROPERTY(BlueprintReadOnly)
-	int actionPoint = 3;
+	int actionPoint = 1;
 
 	UPROPERTY(BlueprintReadOnly)
 	FString FamilyReunionDinner2PlayerID;
@@ -144,6 +144,10 @@ public:
 	UFUNCTION(Reliable, NetMulticast)
 	void setPreReaction(bool ifPreReaction);
 	void setPreReaction_Implementation(bool ifPreReaction);
+
+	UFUNCTION(Reliable, NetMulticast)
+	void setActionPoint(int curPoint);
+	void setActionPoint_Implementation(int curPoint);
 
 	UFUNCTION(Reliable, Client)
 	void activeTurnTimer();

@@ -25,45 +25,6 @@ void ARecipeCard::Tick(float DeltaTime)
 
 void ARecipeCard::assignInfo()
 {
-	TArray<UTextRenderComponent*> attributes;
-	GetComponents(attributes);
-
-	for (int i = 0; i < attributes.Num(); i++)
-	{
-		if (attributes[i]->GetName().Equals("cardName"))
-		{
-			attributes[i]->SetText(data.name);
-		}
-
-		if (attributes[i]->GetName().Equals("curType"))
-		{
-			attributes[i]->SetText(data.type);
-		}
-
-		if (attributes[i]->GetName().Equals("flavorRange"))
-		{
-			FString prefix = "Flavor: ";
-			attributes[i]->SetText(prefix.Append(data.flavorRange));
-		}
-
-		if (attributes[i]->GetName().Equals("heatRange"))
-		{
-			FString prefix = "Heat: ";
-			attributes[i]->SetText(prefix.Append(data.heatRange));
-		}
-
-		if (attributes[i]->GetName().Equals("utensilSize"))
-		{
-			FString prefix = "Size: ";
-			attributes[i]->SetText(prefix.Append(data.size));
-		}
-
-		if (attributes[i]->GetName().Equals("bonusPoint"))
-		{
-			attributes[i]->SetText(data.point);
-		}
-	}
-
 	UStaticMeshComponent* mesh = Cast<UStaticMeshComponent>(GetDefaultSubobjectByName(TEXT("Plane")));
 
 	if (mesh != NULL)

@@ -318,6 +318,7 @@ void AMyGameStateBase::getDishActionResult(int index)
 	}
 
 	GetWorldTimerManager().UnPauseTimer(turnTimer);
+	nextTurn();
 }
 
 void AMyGameStateBase::reactionTimeUpWithRemoveItemInPot(int index, int potIndex)
@@ -371,6 +372,7 @@ void AMyGameStateBase::getRemoveItemActionResult(int index, int potIndex)
 	}
 
 	GetWorldTimerManager().UnPauseTimer(turnTimer);
+	nextTurn();
 }
 
 bool AMyGameStateBase::checkRecipeSuccuss(FRecipeCardStruct toCheck, FString& failedReason) 

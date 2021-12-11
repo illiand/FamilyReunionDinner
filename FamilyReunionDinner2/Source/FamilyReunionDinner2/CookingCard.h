@@ -14,6 +14,9 @@ class FAMILYREUNIONDINNER2_API ACookingCard : public AActor
 {
 	GENERATED_BODY()
 
+private:
+	UMaterialInstanceDynamic* material;
+
 public:
 	// Sets default values for this actor's properties
 	ACookingCard();
@@ -37,9 +40,10 @@ public:
 	void assignInfo_Implementation();
 
 	UFUNCTION(NetMulticast, Reliable)
-	void changeDegreeHintStatus(float r, float g, float b, float a);
-	void changeDegreeHintStatus_Implementation(float r, float g, float b, float a);
+	void changeDegreeHintStatus(bool isOn);
+	void changeDegreeHintStatus_Implementation(bool isOn);
 
 private:
+	UMaterialInstanceDynamic* hintFrontTextMaterial;
 	UMaterialInstanceDynamic* hintTextMaterial;
 };

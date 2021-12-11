@@ -38,7 +38,7 @@ void ACardBorderActor::Tick(float DeltaTime)
 	}
 }
 
-void ACardBorderActor::setBorderColor(float r, float g, float b, float a) 
+void ACardBorderActor::setBorderColor_Implementation(float r, float g, float b, float a)
 {
 	FLinearColor newColor;
 
@@ -47,7 +47,7 @@ void ACardBorderActor::setBorderColor(float r, float g, float b, float a)
 	newColor.B = b;
 	newColor.A = a;
 
-	material->SetVectorParameterValue(TEXT("color"), newColor);
+	material->SetVectorParameterValue(TEXT("Color"), newColor);
 }
 
 void ACardBorderActor::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
