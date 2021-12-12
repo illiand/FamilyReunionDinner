@@ -110,9 +110,21 @@ public:
 	void requestCertainHandInfo(ACookingCard* card);
 	void requestCertainHandInfo_Implementation(ACookingCard* card);
 
+	UFUNCTION(Reliable, Server)
+	void requestCertainHandInfoWithIndex(int playerIndex);
+	void requestCertainHandInfoWithIndex_Implementation(int playerIndex);
+
 	UFUNCTION(Reliable, Client)
 	void sendCertainHandInfo(const TArray<ACookingCard*>& cards, int focusIndex);
 	void sendCertainHandInfo_Implementation(const TArray<ACookingCard*>& cards, int focusIndex);
+
+	UFUNCTION(Reliable, Server)
+	void requestMonsterInfo();
+	void requestMonsterInfo_Implementation();
+
+	UFUNCTION(Reliable, Client)
+	void sendMonsterInfo(const FString& path);
+	void sendMonsterInfo_Implementation(const FString& path);
 
 	UFUNCTION(Reliable, Server, BlueprintCallable)
 	void giveTypeHint(ACookingCard* card);

@@ -505,12 +505,13 @@ int AMyPlayerState::calculateHeat(FRecipeCardStruct data)
 	return heat;
 }
 
-void AMyPlayerState::sendGameOverData_Implementation(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, const TArray<FString>& playersIDData)
+void AMyPlayerState::sendGameOverData_Implementation(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, FCompletedPreferenceInfo monsterData, const TArray<FString>& playersIDData)
 {
 	gameResult = result;
 	playersID = playersIDData;
 	preferenceResult = preferenceData;
 	recipeResult = recipeData;
+	monsterResult = monsterData;
 
 	inReaction = true;
 	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->drawGameResultOnScreen();
@@ -519,4 +520,57 @@ void AMyPlayerState::sendGameOverData_Implementation(const FString& result, cons
 void AMyPlayerState::setRound_Implementation(int curRound, int maxRound)
 {
 	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->setRoundText(curRound, maxRound);
+}
+
+void AMyPlayerState::assignCharacter_Implementation(int playerNum)
+{
+	TArray<FVector> locations;
+	TArray<FRotator> rotations;
+
+	locations.Add(FVector(-319.310883, -159.780991, -117.812973));
+	locations.Add(FVector(-423.562103, 1.799612, -115.030746));
+	locations.Add(FVector(-212.21489, 3.538411, -117.195656));
+	locations.Add(FVector(-419.172058, -102.801369, -112.442551));
+	locations.Add(FVector(-220.642563, -107.072357, -110.333519));
+
+	rotations.Add(FRotator(0, 0, 0));
+	rotations.Add(FRotator(0, -117.26046, 0));
+	rotations.Add(FRotator(0, 116.173782, 0));
+	rotations.Add(FRotator(0, -54.182487, 0));
+	rotations.Add(FRotator(0, 56.875412, 0));
+
+	locations.Insert(FVector(-312.833923, 120.357101, -103.92588), playerNum);
+	rotations.Insert(FRotator(0, 180, 0), playerNum);
+
+	for (int i = 0; i < playerNum + 1; i += 1)
+	{
+		APlayerHolder* character = GetWorld()->SpawnActor<APlayerHolder>(APlayerHolder::StaticClass(), locations[i], rotations[i], FActorSpawnParameters());
+		FString path;
+
+		if (i < playerNum)
+		{
+			path += "StaticMesh'/Game/Assets/Character";
+			path += FString::FromInt(i + 1);
+			path += ".Character";
+			path += FString::FromInt(i + 1);
+			path += "'";
+
+			character->Tags.Add("CharacterPlaceHolder");
+			character->SetActorScale3D(FVector(0.75, 0.75, 0.75));
+
+			characterPlaceHolders.Add(character);
+		}
+		else
+		{
+			path = "StaticMesh'/Game/Assets/BossNian.BossNian'";
+
+			character->Tags.Add("MonsterPlaceHolder");
+			character->SetActorScale3D(FVector(1.1, 1.1, 1.1));
+		}
+
+		UStaticMesh* mesh = LoadObject<UStaticMesh>(NULL, *path);
+		UStaticMeshComponent* meshComponent = Cast<UStaticMeshComponent>(character->GetDefaultSubobjectByName(TEXT("VisualRepresentation")));
+
+		meshComponent->SetStaticMesh(mesh);
+	}
 }

@@ -31,4 +31,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	static FString getIPAddress();
+
+	UFUNCTION(BlueprintCallable)
+	static UTexture2D* loadTexture(const FString& path);
 };

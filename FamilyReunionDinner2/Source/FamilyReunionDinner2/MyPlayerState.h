@@ -10,6 +10,8 @@
 #include "CookingCard.h"
 #include "CompletedRecipeInfo.h"
 #include "CompletedPreferenceInfo.h"
+#include "PlayerHolder.h"
+#include "MonsterPreferenceStruct.h"
 #include "MyPlayerState.generated.h"
 
 /**
@@ -31,6 +33,8 @@ public:
 
 	UPROPERTY(Replicated)
 	TArray<ACookingCard*> cookingCards = TArray<ACookingCard*>();
+
+	TArray<APlayerHolder*> characterPlaceHolders;
 
 	UPROPERTY(BlueprintReadOnly)
 	bool inTurn = false;
@@ -63,6 +67,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<FString> playersID;
+
+	UPROPERTY(BlueprintReadOnly)
+	FCompletedPreferenceInfo monsterResult;
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<FCompletedPreferenceInfo> preferenceResult;
@@ -178,10 +185,14 @@ public:
 	void addToCompletedRecipeUI_Implementation(const FString& path, int flavor, int heat, int point, bool failed, const FString& failedReason);
 
 	UFUNCTION(Reliable, Client)
-	void sendGameOverData(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, const TArray<FString>& playersIDData);
-	void sendGameOverData_Implementation(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, const TArray<FString>& playersIDData);
+	void sendGameOverData(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, FCompletedPreferenceInfo monsterData, const TArray<FString>& playersIDData);
+	void sendGameOverData_Implementation(const FString& result, const TArray<FCompletedRecipeInfo>& recipeData, const TArray<FCompletedPreferenceInfo>& preferenceData, FCompletedPreferenceInfo monsterData, const TArray<FString>& playersIDData);
 
 	UFUNCTION(Reliable, Client)
 	void setRound(int curRound, int maxRound);
 	void setRound_Implementation(int curRound, int maxRound);
+
+	UFUNCTION(Reliable, Client)
+	void assignCharacter(int playerNum);
+	void assignCharacter_Implementation(int playerNum);
 };

@@ -212,3 +212,8 @@ FString UAPIClass::getIPAddress()
 {
 	return TEXT("127.0.0.1");
 }
+
+UTexture2D* UAPIClass::loadTexture(const FString& path)
+{
+	return Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, *path));;
+}

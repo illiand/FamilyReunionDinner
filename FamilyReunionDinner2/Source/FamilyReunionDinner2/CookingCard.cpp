@@ -104,6 +104,11 @@ void ACookingCard::assignInfo_Implementation()
 
 void ACookingCard::changeDegreeHintStatus_Implementation(bool isOn)
 {
+	if (GetLocalRole() == 3)
+	{
+		return;
+	}
+
 	if (isOn) 
 	{
 		hintFrontTextMaterial->SetScalarParameterValue(TEXT("Strength"), 25);

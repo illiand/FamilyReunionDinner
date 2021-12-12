@@ -56,6 +56,7 @@ void AFamilyReunionDinner2Character::Tick(float DeltaTime)
 		FHitResult hit(ForceInit);
 		UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, true, hit);
 
+		//init arrow
 		if (toPotArrowHelper == NULL) 
 		{
 			TSubclassOf<AToPotArrow> toPotArrowClass = LoadClass<AToPotArrow>(nullptr, TEXT("Blueprint'/Game/FirstPersonCPP/Blueprints/MyToPotArrow.MyToPotArrow_C'"));
@@ -242,7 +243,7 @@ void AFamilyReunionDinner2Character::pickingItem()
 			}
 
 			//other players' cooking card 
-			if (curTarget->GetLocalRole() != 3 && !Cast<AMyPlayerState>(GetPlayerState())->cookingCards.Contains(curTarget))
+			if (curTarget->GetLocalRole() != 3 && curTarget->IsA(ACookingCard::StaticClass()) && !Cast<AMyPlayerState>(GetPlayerState())->cookingCards.Contains(curTarget))
 			{
 				//show give a hint panal
 				UIOn = true;
@@ -284,6 +285,25 @@ void AFamilyReunionDinner2Character::pickingItem()
 			}
 
 			sendReactionRequest_Implementation(observingPotIndex, card->data.path, TEXT("Finish Dish"), FVector(0, 1, 0));
+		}
+		else if (curTarget->Tags[0] == "CharacterPlaceHolder") 
+		{
+			for (int i = 0; i < Cast<AMyPlayerState>(GetPlayerState())->characterPlaceHolders.Num(); i += 1) 
+			{
+				if (curTarget == Cast<AMyPlayerState>(GetPlayerState())->characterPlaceHolders[i]) 
+				{
+					requestCertainHandInfoWithIndex(i);
+					UIOn = true;
+
+					break;
+				}
+			}
+		}
+		else if (curTarget->Tags[0] == "MonsterPlaceHolder") 
+		{
+			requestMonsterInfo();
+
+			UIOn = true;
 		}
 	}
 }
@@ -569,6 +589,11 @@ void AFamilyReunionDinner2Character::clearUI_Implementation()
 	UIOn = false;
 }
 
+void AFamilyReunionDinner2Character::requestCertainHandInfoWithIndex_Implementation(int playerIndex)
+{
+	sendCertainHandInfo(Cast<AMyPlayerState>(GetWorld()->GetGameState()->PlayerArray[playerIndex])->cookingCards, 0);
+}
+
 void AFamilyReunionDinner2Character::requestCertainHandInfo_Implementation(ACookingCard* card)
 {
 	for (int i = 0; i < GetWorld()->GetGameState()->PlayerArray.Num(); i += 1) 
@@ -585,6 +610,35 @@ void AFamilyReunionDinner2Character::requestCertainHandInfo_Implementation(ACook
 			}
 		}
 	}
+}
+
+void AFamilyReunionDinner2Character::requestMonsterInfo_Implementation() 
+{
+	sendMonsterInfo(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->monsterPathInGame);
+}
+
+void AFamilyReunionDinner2Character::sendMonsterInfo_Implementation(const FString& path) 
+{
+	FVector2D screenSize;
+	GetWorld()->GetGameViewport()->GetMousePosition(mousePos);
+	GetWorld()->GetGameViewport()->GetViewportSize(screenSize);
+
+	FVector2D canvasPreMultiplier(screenSize.X / 1920.0f, screenSize.Y / 1080.0f);
+	float targetX = 0;
+	float targetY = 0;
+
+	if (mousePos.X < 375 * canvasPreMultiplier.X)
+	{
+		targetX = mousePos.X + 50 * canvasPreMultiplier.X;
+	}
+	else
+	{
+		targetX = mousePos.X - 375 * canvasPreMultiplier.X;
+	}
+
+	targetY = FMath::Clamp(mousePos.Y - 315.0f * canvasPreMultiplier.Y, 0.0f, screenSize.Y - 630.0f * canvasPreMultiplier.Y);
+
+	MainUI->draggingCardPreviewOnScreen(path, targetX / screenSize.X * 1920.0f, targetY / screenSize.Y * 1080.0f);
 }
 
 void AFamilyReunionDinner2Character::sendCertainHandInfo_Implementation(const TArray<ACookingCard*>& data, int focusIndex)
@@ -1091,9 +1145,18 @@ void AFamilyReunionDinner2Character::requestGameOver_Implementation()
 		playersID.Add(Cast<AMyPlayerState>(gameState->PlayerArray[i])->FamilyReunionDinner2PlayerID);
 	}
 
+	FCompletedPreferenceInfo monsterData;
+	monsterData.path = gameState->monsterPathInGame;
+	monsterData.failed = !gameState->checkMonsterSuccuss(monsterData.failedReason);
+
+	if (monsterData.failed)
+	{
+		result = "LOSE!";
+	}
+
 	for (int i = 0; i < gameState->PlayerArray.Num(); i++)
 	{
-		Cast<AMyPlayerState>(gameState->PlayerArray[i])->sendGameOverData(result, recipeData, preferenceData, playersID);
+		Cast<AMyPlayerState>(gameState->PlayerArray[i])->sendGameOverData(result, recipeData, preferenceData, monsterData, playersID);
 	}
 }
 

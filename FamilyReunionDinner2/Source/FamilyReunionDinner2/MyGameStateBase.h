@@ -38,6 +38,7 @@ public:
 	TArray<FMonsterPreferenceStruct> monsterPreferenceInGame = TArray<FMonsterPreferenceStruct>();
 
 	FString monsterNameInGame;
+	FString monsterPathInGame;
 
 public:
 	FTimerHandle turnTimer;
@@ -78,6 +79,7 @@ public:
 
 	bool checkRecipeSuccuss(FRecipeCardStruct toCheck, FString& failedReason);
 	bool checkPreferenceSuccuss(FMonsterPreferenceStruct toCheck, FString& failedReason);
+	bool checkMonsterSuccuss(FString& failedReason);
 
 	bool hasPot(FString type);
 

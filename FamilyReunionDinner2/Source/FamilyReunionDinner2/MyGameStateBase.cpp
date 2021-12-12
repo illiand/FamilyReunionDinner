@@ -91,7 +91,13 @@ void AMyGameStateBase::initGame()
 		}
 	}
 
-	monsterNameInGame = TEXT("Nian");
+	monsterNameInGame = "Nian";
+	monsterPathInGame = "Texture2D'/Game/Assets/CardAssets/Monster/Nian.Nian'";
+
+	for (int i = 0; i < PlayerArray.Num(); i += 1)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->assignCharacter(PlayerArray.Num());
+	}
 }
 
 void AMyGameStateBase::nextTurn() 
@@ -540,6 +546,36 @@ bool AMyGameStateBase::checkPreferenceSuccuss(FMonsterPreferenceStruct toCheck, 
 	return isok;
 }
 
+bool AMyGameStateBase::checkMonsterSuccuss(FString& failedReason)
+{
+	bool isok = true;
+	int totalPoints = 0;
+
+	for (int i = 0; i < completedDishFileData.Num(); i += 1)
+	{
+		totalPoints += Cast<AMyPlayerState>(PlayerArray[0])->calculateParameter(completedDishFileData[i])[2];
+	}
+
+	if (monsterNameInGame == "Nian")
+	{
+		if (totalPoints < 15)
+		{
+			failedReason += "! Insuffient Point !\n";
+
+			isok = false;
+		}
+
+		if (!hasPot("Sweet"))
+		{
+			failedReason += "! No Sweet Food !\n";
+
+			isok = false;
+		}
+	}
+
+	return isok;
+}
+
 bool AMyGameStateBase::hasPot(FString type)
 {
 	for (int i = 0; i < completedDishFileData.Num(); i += 1) 
@@ -580,5 +616,5 @@ bool AMyGameStateBase::checkCanGameOver(FString& errorMessage)
 		}
 	}
 
-	return isok;
+	return true;
 }
