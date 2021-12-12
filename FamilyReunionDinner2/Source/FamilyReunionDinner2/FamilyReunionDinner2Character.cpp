@@ -684,6 +684,13 @@ void AFamilyReunionDinner2Character::addIngredientCardToPot_Implementation(int i
 {
 	AMyGameStateBase* gameState = Cast<AMyGameStateBase>(GetWorld()->GetGameState());
 
+	if (FCString::Atoi(*gameState->ingredientCardOnTableFileData[ingredientCardIndex].size) + Cast<AMyPlayerState>(GetPlayerState())->calculateParameter(gameState->recipeCardOnTableFileData[potIndex])[3] > FCString::Atoi(*gameState->recipeCardOnTableFileData[potIndex].size))
+	{
+		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage("! Size Exceeded the Limit !", FVector(1, 0, 0));
+
+		return;
+	}
+
 	gameState->castIngredientCardEffect(ingredientCardIndex, potIndex);
 
 	gameState->removeIngredientCardInGame(ingredientCardIndex);
