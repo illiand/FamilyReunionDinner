@@ -25,5 +25,6 @@ public:
 	TArray<FServerInfoStruct> serverInfo;
 
 	TArray<FProcHandle> serverHandles;
+	TArray<int> serverPorts;
 	void openServer(int index);
 };

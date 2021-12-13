@@ -6,6 +6,7 @@
 #include "GameMenuPlayerState.h"
 #include "GameMenuGameMode.h"
 #include "GameMenuGameStateBase.h"
+#include "MySaveGame.h"
 #include "APIClass.h"
 
 
@@ -71,12 +72,32 @@ void AGameMenuCharacter::createGame_Implementation(const FString& serverName, in
 
 void AGameMenuCharacter::startGame_Implementation(int roomID) 
 {
+	if (Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[findRoomIndexByID(roomID)].currentPlayers.Num() == 1)
+	{
+		Cast<AGameMenuPlayerState>(GetPlayerState())->sendErrorMessage("! Player Number not Enough !", FVector(1, 0, 0));
+
+		return;
+	}
+
 	Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->openServer(findRoomIndexByID(roomID));
 }
 
 void AGameMenuCharacter::enterSession_Implementation(int portNum) 
 {
-	FString target = UAPIClass::getIPAddress().Append(TEXT(":")).Append(FString::FromInt(portNum));
+	FString target;
+	
+	UMySaveGame* gameData = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot("GameData1", 0));
+
+	if (gameData == NULL) 
+	{
+		target = UAPIClass::getIPAddress().Append(TEXT(":")).Append(FString::FromInt(portNum));
+	}
+	else 
+	{
+		target = gameData->IPADDRESS;
+		target += FString::FromInt(portNum);
+	}
+
 	UGameplayStatics::OpenLevel(GetWorld(), FName(*target));
 }
 
@@ -97,8 +118,16 @@ int AGameMenuCharacter::findRoomIndexByID(int roomID)
 
 void AGameMenuCharacter::joinRoomRequest_Implementation(int roomID) 
 {
-	Cast<AGameMenuPlayerState>(GetPlayerState())->playerRoomID = roomID;
 	int roomIndex = findRoomIndexByID(roomID);
+
+	if (Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].currentPlayers.Num() == Cast<AGameMenuGameMode>(GetWorld()->GetAuthGameMode())->serverInfo[roomIndex].serverInfo.maxPlayerNum)
+	{
+		Cast<AGameMenuPlayerState>(GetPlayerState())->sendErrorMessage("! Too Many People in this Room !", FVector(1, 0, 0));
+
+		return;
+	}
+
+	Cast<AGameMenuPlayerState>(GetPlayerState())->playerRoomID = roomID;
 
 	TArray<FRoomPlayerInfoStruct> curInfo;
 

@@ -110,6 +110,13 @@ void AMyGameStateBase::nextTurn()
 	{
 		currentTurnIndex = 0;
 		curRound += 1;
+
+		if (curRound == maxRound + 1) 
+		{
+			checkGameFinalStatus();
+
+			return;
+		}
 	}
 
 	Cast<AMyPlayerState>(PlayerArray[currentTurnIndex])->inTurn = true;
@@ -589,6 +596,63 @@ bool AMyGameStateBase::hasPot(FString type)
 	return false;
 }
 
+void AMyGameStateBase::checkGameFinalStatus()
+{
+	FString result = "WIN!";
+	TArray<FCompletedRecipeInfo> recipeData;
+	TArray<FCompletedPreferenceInfo> preferenceData;
+	TArray<FString> playersID;
+
+	for (int i = 0; i < completedDishFileData.Num(); i++)
+	{
+		FCompletedRecipeInfo cur;
+		cur.path = completedDishFileData[i].path;
+
+		TArray<int> parameters = Cast<AMyPlayerState>(PlayerArray[0])->calculateParameter(completedDishFileData[i]);
+		cur.flavor = parameters[0];
+		cur.heat = parameters[1];
+		cur.point = parameters[2];
+		cur.failed = !checkRecipeSuccuss(completedDishFileData[i], cur.failedReason);
+
+		if (cur.failed)
+		{
+			result = "LOSE!";
+		}
+
+		recipeData.Add(cur);
+	}
+
+	for (int i = 0; i < monsterPreferenceInGame.Num(); i++)
+	{
+		FCompletedPreferenceInfo cur;
+		cur.path = monsterPreferenceInGame[i].path;
+		cur.failed = !checkPreferenceSuccuss(monsterPreferenceInGame[i], cur.failedReason);
+
+		if (cur.failed)
+		{
+			result = "LOSE!";
+		}
+
+		preferenceData.Add(cur);
+
+		playersID.Add(Cast<AMyPlayerState>(PlayerArray[i])->FamilyReunionDinner2PlayerID);
+	}
+
+	FCompletedPreferenceInfo monsterData;
+	monsterData.path = monsterPathInGame;
+	monsterData.failed = !checkMonsterSuccuss(monsterData.failedReason);
+
+	if (monsterData.failed)
+	{
+		result = "LOSE!";
+	}
+
+	for (int i = 0; i < PlayerArray.Num(); i++)
+	{
+		Cast<AMyPlayerState>(PlayerArray[i])->sendGameOverData(result, recipeData, preferenceData, monsterData, playersID);
+	}
+}
+
 bool AMyGameStateBase::checkCanGameOver(FString& errorMessage)
 {
 	bool isok = true;
@@ -616,5 +680,5 @@ bool AMyGameStateBase::checkCanGameOver(FString& errorMessage)
 		}
 	}
 
-	return true;
+	return isok;
 }

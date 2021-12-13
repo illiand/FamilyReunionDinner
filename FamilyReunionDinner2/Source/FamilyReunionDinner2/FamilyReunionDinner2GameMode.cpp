@@ -5,6 +5,8 @@
 #include "MyPlayerState.h"
 #include "FamilyReunionDinner2HUD.h"
 #include "FamilyReunionDinner2Character.h"
+#include "Kismet/GameplayStatics.h"
+#include "MySaveGame.h"
 #include "UObject/ConstructorHelpers.h"
 
 AFamilyReunionDinner2GameMode::AFamilyReunionDinner2GameMode()
@@ -32,9 +34,30 @@ void AFamilyReunionDinner2GameMode::PostLogin(APlayerController* NewPlayer)
 		Cast<AMyPlayerState>(GameState->PlayerArray[0])->hintShowed = false;
 		Cast<AMyPlayerState>(GameState->PlayerArray[0])->setTurn(true);
 	}
+	
+	UMySaveGame* saveData = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot("SaveData0", 0));
+
+	for (int i = 0; i < saveData->pids.Num(); i += 1)
+	{
+		if (saveData->pids[i] == FPlatformProcess::GetCurrentProcessId())
+		{
+			if (saveData->playerCount[i] == currentPlayerCount)
+			{
+				FTimerHandle timerHandle;
+				GetWorldTimerManager().SetTimer(timerHandle, this, &AFamilyReunionDinner2GameMode::initGameCountDown, 1, false);
+			}
+
+			break;
+		}
+	}
 }
 
 void AFamilyReunionDinner2GameMode::Logout(AController* Exiting)
 {
 	Super::Logout(Exiting);
+}
+
+void AFamilyReunionDinner2GameMode::initGameCountDown() 
+{
+	Cast<AMyGameStateBase>(GameState)->initGame();
 }

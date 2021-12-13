@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerState.h"
 #include "ServerListInfoStruct.h"
 #include "RoomPlayerInfoStruct.h"
+#include "GameHelperStruct.h"
 #include "GameMenuPlayerState.generated.h"
 
 /**
@@ -23,11 +24,19 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	int playerRoomID = -1;
 
+	UPROPERTY(BlueprintReadWrite)
+	bool inEnteringTransforming = false;
+
 	UPROPERTY(BlueprintReadOnly)
 	int FamilyReunionDinner2PlayerID;
 
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FGameHelperStruct> gameHelpers;
+
 	UFUNCTION()
 	void call_createMainMenu();
+
+	void generateGameHelper();
 
 	UFUNCTION(Server, Reliable)
 	void requestServerInfo();
@@ -78,4 +87,12 @@ public:
 	UFUNCTION(Client, Reliable)
 	void handleServerListRoomPlayerChangedEvent(int id, int curNum, int maxNum);
 	void handleServerListRoomPlayerChangedEvent_Implementation(int id, int curNum, int maxNum);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void setTransformingStatus(bool isIn);
+	void setTransformingStatus_Implementation(bool isIn);
+
+	UFUNCTION(Reliable, Client)
+	void sendErrorMessage(const FString& text, const FVector& color);
+	void sendErrorMessage_Implementation(const FString& text, const FVector& color);
 };

@@ -39,4 +39,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void roomPlayerChangedUI(int32 curPlayerNum, int32 maxPlayerNum);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void showWorldMessage(const FString& text, const FVector& color);
 };

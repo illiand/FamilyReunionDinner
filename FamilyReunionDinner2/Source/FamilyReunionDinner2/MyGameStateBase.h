@@ -83,6 +83,7 @@ public:
 
 	bool hasPot(FString type);
 
+	void checkGameFinalStatus();
 	bool checkCanGameOver(FString& errorMessage);
 
 private:

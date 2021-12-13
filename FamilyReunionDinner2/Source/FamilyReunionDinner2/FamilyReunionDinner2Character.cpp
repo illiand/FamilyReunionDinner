@@ -192,7 +192,7 @@ void AFamilyReunionDinner2Character::SetupPlayerInputComponent(class UInputCompo
 void AFamilyReunionDinner2Character::useSpecialAction() 
 {
 	//UE_LOG(LogTemp, Warning, TEXT("name is %s"), *test[3]->GetStringField("Name"));
-	startGame();
+	//startGame();
 }
 
 void AFamilyReunionDinner2Character::endTurn_Implementation() 
@@ -519,8 +519,8 @@ void AFamilyReunionDinner2Character::giveTypeHint_Implementation(ACookingCard* c
 				{
 					FString message = "Player ";
 					message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
-					message.Append(" Gived a Type Hint to ");
-					message.Append(card->data.name);
+					message.Append(" Gived a Type Hint of ");
+					message.Append(card->data.type);
 					message.Append(" to ");
 					message.Append(Cast<AMyPlayerState>(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->PlayerArray[i])->FamilyReunionDinner2PlayerID);
 
@@ -560,8 +560,8 @@ void AFamilyReunionDinner2Character::giveDegreeHint_Implementation(ACookingCard*
 				{
 					FString message = "Player ";
 					message.Append(Cast<AMyPlayerState>(GetPlayerState())->FamilyReunionDinner2PlayerID);
-					message.Append(" Gived a Degree Hint to ");
-					message.Append(card->data.name);
+					message.Append(" Gived a Degree Hint of +");
+					message.Append(card->data.degree);
 					message.Append(" to ");
 					message.Append(Cast<AMyPlayerState>(Cast<AMyGameStateBase>(GetWorld()->GetGameState())->PlayerArray[i])->FamilyReunionDinner2PlayerID);
 
@@ -1105,66 +1105,14 @@ void AFamilyReunionDinner2Character::requestGameOver_Implementation()
 	AMyGameStateBase* gameState = Cast<AMyGameStateBase>(GetWorld()->GetGameState());
 	FString errorMessage;
 
-	if (!gameState->checkCanGameOver(errorMessage) && gameState->curRound < gameState->maxRound) 
+	if (!gameState->checkCanGameOver(errorMessage)) 
 	{
 		Cast<AMyPlayerState>(GetPlayerState())->showWorldMessage(errorMessage, FVector(1, 0, 0));
 
 		return;
 	}
 
-	FString result = "WIN!";
-	TArray<FCompletedRecipeInfo> recipeData;
-	TArray<FCompletedPreferenceInfo> preferenceData;
-	TArray<FString> playersID;
-
-	for (int i = 0; i < gameState->completedDishFileData.Num(); i++)
-	{
-		FCompletedRecipeInfo cur;
-		cur.path = gameState->completedDishFileData[i].path;
-
-		TArray<int> parameters = Cast<AMyPlayerState>(GetPlayerState())->calculateParameter(gameState->completedDishFileData[i]);
-		cur.flavor = parameters[0];
-		cur.heat = parameters[1];
-		cur.point = parameters[2];
-		cur.failed = !gameState->checkRecipeSuccuss(gameState->completedDishFileData[i], cur.failedReason);
-
-		if (cur.failed) 
-		{
-			result = "LOSE!";
-		}
-
-		recipeData.Add(cur);
-	}
-
-	for (int i = 0; i < gameState->monsterPreferenceInGame.Num(); i++) 
-	{
-		FCompletedPreferenceInfo cur;
-		cur.path = gameState->monsterPreferenceInGame[i].path;
-		cur.failed = !gameState->checkPreferenceSuccuss(gameState->monsterPreferenceInGame[i], cur.failedReason);
-		
-		if (cur.failed)
-		{
-			result = "LOSE!";
-		}
-
-		preferenceData.Add(cur);
-
-		playersID.Add(Cast<AMyPlayerState>(gameState->PlayerArray[i])->FamilyReunionDinner2PlayerID);
-	}
-
-	FCompletedPreferenceInfo monsterData;
-	monsterData.path = gameState->monsterPathInGame;
-	monsterData.failed = !gameState->checkMonsterSuccuss(monsterData.failedReason);
-
-	if (monsterData.failed)
-	{
-		result = "LOSE!";
-	}
-
-	for (int i = 0; i < gameState->PlayerArray.Num(); i++)
-	{
-		Cast<AMyPlayerState>(gameState->PlayerArray[i])->sendGameOverData(result, recipeData, preferenceData, monsterData, playersID);
-	}
+	gameState->checkGameFinalStatus();
 }
 
 void AFamilyReunionDinner2Character::TurnAtRate(float Rate)
