@@ -53,4 +53,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void setRoundText(int curRound, int maxRound);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void changeMainUIVisibility(bool isVisible);
 };

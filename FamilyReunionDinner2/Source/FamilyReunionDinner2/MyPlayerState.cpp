@@ -5,6 +5,9 @@
 #include "FamilyReunionDinner2Character.h"
 #include "Net/UnrealNetwork.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "LevelSequence.h"
+#include "LevelSequencePlayer.h"
+#include "LevelSequenceActor.h"
 
 void AMyPlayerState::BeginPlay()
 {
@@ -573,4 +576,16 @@ void AMyPlayerState::assignCharacter_Implementation(int playerNum)
 
 		meshComponent->SetStaticMesh(mesh);
 	}
+}
+
+void AMyPlayerState::playerSequence_Implementation(const FString& path) 
+{
+	ULevelSequence* sequence = LoadObject<ULevelSequence>(NULL, *path);
+	ALevelSequenceActor* sequenceActor = NULL;
+	ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), sequence, FMovieSceneSequencePlaybackSettings(), sequenceActor)->Play();
+}
+
+void AMyPlayerState::setMainUIVisibility_Implementation(bool isVisible) 
+{
+	Cast<AFamilyReunionDinner2Character>(GetPawn())->MainUI->changeMainUIVisibility(isVisible);
 }

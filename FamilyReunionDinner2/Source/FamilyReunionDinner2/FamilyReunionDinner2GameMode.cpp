@@ -34,7 +34,7 @@ void AFamilyReunionDinner2GameMode::PostLogin(APlayerController* NewPlayer)
 		Cast<AMyPlayerState>(GameState->PlayerArray[0])->hintShowed = false;
 		Cast<AMyPlayerState>(GameState->PlayerArray[0])->setTurn(true);
 	}
-	
+
 	UMySaveGame* saveData = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot("SaveData0", 0));
 
 	for (int i = 0; i < saveData->pids.Num(); i += 1)
@@ -43,8 +43,13 @@ void AFamilyReunionDinner2GameMode::PostLogin(APlayerController* NewPlayer)
 		{
 			if (saveData->playerCount[i] == currentPlayerCount)
 			{
+				for (int j = 0; j < GameState->PlayerArray.Num(); j += 1) 
+				{
+					Cast<AMyPlayerState>(GameState->PlayerArray[j])->playerSequence("LevelSequence'/Game/Assets/sequence1.sequence1'");
+				}
+				
 				FTimerHandle timerHandle;
-				GetWorldTimerManager().SetTimer(timerHandle, this, &AFamilyReunionDinner2GameMode::initGameCountDown, 1, false);
+				GetWorldTimerManager().SetTimer(timerHandle, this, &AFamilyReunionDinner2GameMode::initGameCountDown, 18.233, false);
 			}
 
 			break;

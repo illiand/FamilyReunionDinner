@@ -97,6 +97,7 @@ void AMyGameStateBase::initGame()
 	for (int i = 0; i < PlayerArray.Num(); i += 1)
 	{
 		Cast<AMyPlayerState>(PlayerArray[i])->assignCharacter(PlayerArray.Num());
+		Cast<AMyPlayerState>(PlayerArray[i])->setMainUIVisibility(true);
 	}
 }
 

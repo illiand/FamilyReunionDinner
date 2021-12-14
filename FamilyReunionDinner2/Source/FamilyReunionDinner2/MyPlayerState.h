@@ -195,4 +195,12 @@ public:
 	UFUNCTION(Reliable, Client)
 	void assignCharacter(int playerNum);
 	void assignCharacter_Implementation(int playerNum);
+
+	UFUNCTION(Reliable, Client)
+	void playerSequence(const FString& path);
+	void playerSequence_Implementation(const FString& path);
+
+	UFUNCTION(Reliable, Client)
+	void setMainUIVisibility(bool isVisible);
+	void setMainUIVisibility_Implementation(bool isVisible);
 };
